@@ -1,0 +1,39 @@
+<md-toolbar layout="row" ng-include="'views/header.html'"></md-toolbar>
+<md-content class="container-bg">
+  <div style="min-height: 20px;">
+      <md-progress-linear class="md-warn" ng-if="user.isProcessing" md-mode="indeterminate"></md-progress-linear>
+  </div>
+  <div class="overflow-auto" layout="column" layout-align="space-between center" flex>
+      <md-content class="md-whiteframe-z1 md-padding login-form-container" layout-margin>
+          <div class="md-display-1 text-center" layout-padding>Sign In</div>
+          <form name="signInForm" layout="column" novalidate>
+              <md-input-container class="remove-error-space">
+                  <md-icon class="md-primary">person</md-icon>
+                  <input name="contactEmail" type="email" ng-model="user.email" ng-minlength="5" placeholder="Email"
+                         required/>
+              </md-input-container>
+
+              <md-input-container class="remove-error-space">
+                  <md-icon class="md-primary">lock</md-icon>
+                  <input type="password" name="password" ng-model="user.password" minlength="5" placeholder="Password"
+                         required/>
+              </md-input-container>
+
+              <div layout="column" layout-align="center center">
+                  <div layout="row">
+                      <md-button type="submit" class="md-raised md-primary md-hue-2"
+                                 ng-disabled="signInForm.$invalid || user.isProcessing" ng-click="fnSignInUser(user);">
+                          Sign In
+                      </md-button>
+                  </div>
+
+                  <div layout="row">
+                      <md-button class="md-primary" ng-click="fnForgotPassword($event);">
+                          Forgot Your Password ?
+                      </md-button>
+                  </div>
+              </div>
+          </form>
+      </md-content>
+  </div>
+</md-content>

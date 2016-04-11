@@ -1,0 +1,24 @@
+<md-dialog aria-label="Idle Session Template">
+    <md-toolbar>
+        <div class="md-toolbar-tools">You're Idle Too Long...!!</div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-padding">
+        <div ng-init="countdown = 120">
+            <div ng-if="countdown <= 30">
+                You'll be logged out in {{countdown}} second(s).
+            </div>
+            <div ng-if="countdown > 30">
+                {{minRemaining}} minutes remaining.
+            </div>
+        </div>
+
+        <md-progress-linear class="md-warn margin-top-10" md-mode="determinate" ng-value="countdown">
+        </md-progress-linear>
+    </md-dialog-content>
+
+    <md-dialog-actions layout-margin>
+        <md-button class="md-raised md-accent" ng-click="extendSession();">Stay logged in</md-button>
+    </md-dialog-actions>
+
+</md-dialog>

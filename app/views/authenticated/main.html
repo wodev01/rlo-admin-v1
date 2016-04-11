@@ -1,0 +1,69 @@
+<md-toolbar class="top-header" ng-init="fnInitMain();">
+    <div class="md-toolbar-tools">
+        <md-button ng-click="fnToggleSideNav('left');" hide-gt-sm class="md-icon-button">
+            <md-icon aria-label="Menu">menu</md-icon>
+        </md-button>
+
+        <div layout="row">
+            <img class="img-responsive rlo-logo" alt="Repair Shop Marketing Tools" src="images/rlo-full-logo.png"/>
+        </div>
+
+        <md-menu md-position-mode="target-right target">
+            <md-button ng-click="$mdOpenMenu($event);">
+                <span ng-bind="userObj.name"></span><md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>
+            </md-button>
+
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button ng-click="fnStateSettings();">
+                        <div layout="row">
+                            <p flex>
+                                <md-icon md-font-set="material-icons">settings</md-icon>
+                                Settings
+                            </p>
+                        </div>
+                    </md-button>
+                </md-menu-item>
+
+                <md-menu-item>
+                    <md-button ng-click="fnLogout();">
+                        <div layout="row">
+                            <p flex>
+                                <md-icon md-font-set="material-icons">power_settings_new</md-icon>
+                                Sign out
+                            </p>
+                        </div>
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</md-toolbar>
+
+<md-content layout="row" flex>
+    <!-- Left Side Navigation : START-->
+    <md-sidenav class="left-side-nav md-sidenav-left md-whiteframe-z2"
+                layout="column"
+                md-component-id="left"
+                md-is-locked-open="$mdMedia('gt-sm')">
+        <md-button class="md-accent" ng-class="fnIsActive('/clients')"
+                   ng-click="$root.fnCloseSideNavs();" ui-sref="main.clients">
+            <md-icon md-font-set="material-icons">group</md-icon> Clients</md-button>
+
+        <md-button class="md-accent" ng-class="fnIsActive('/payments')"
+                   ng-click="$root.fnCloseSideNavs();" ui-sref="main.payments">
+            <md-icon md-font-set="material-icons">payment</md-icon> Payments</md-button>
+
+        <md-button class="md-accent" ng-class="fnIsActive('/groups')"
+                   ng-click="$root.fnCloseSideNavs();" ui-sref="main.groups">
+            <md-icon md-font-set="material-icons">group_work</md-icon> Shop Groups</md-button>
+
+        <md-button class="md-accent" ng-class="fnIsActive('/shop-locations')"
+                   ng-click="$root.fnCloseSideNavs();" ui-sref="main.shopLocations">
+            <md-icon md-font-set="material-icons">location_on</md-icon> Shop Locations</md-button>
+    </md-sidenav>
+    <!-- Left Side Navigation : END-->
+
+    <!-- Body content -->
+    <md-content id="content" class="overflow-auto" layout="column" ui-view flex></md-content>
+</md-content>
