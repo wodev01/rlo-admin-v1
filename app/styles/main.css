@@ -6,3 +6,39 @@
     max-width: 400px;
     max-height: 500px;
 }
+
+/*------------------------------ Templates Tab ------------------------------*/
+/*---------- Template > Template HTML WYSIWYG editor ----------*/
+#template-side-nav .tab-container {
+    height: 800px;
+    overflow-y: auto;
+}
+
+#template-side-nav .tab-container textarea {
+    padding: 5px;
+    resize: none;
+    border-color: #CCCCCC;
+    width: 100%;
+    height: 116vh;
+}
+
+#template-side-nav .tab-container > textarea,
+#template-side-nav .tab-container wysiwyg-edit,
+#template-side-nav .tab-container wysiwyg-edit .tinyeditor {
+    height: 100%;
+}
+
+#template-side-nav .tab-container wysiwyg-edit .tinyeditor div.sizer {
+    height: calc(100% - 106px) !important;
+}
+
+#template-side-nav .tab-container wysiwyg-edit .tinyeditor .sizer textarea{
+    height: calc(100% - -75px) !important
+}
+
+/*------------------------------ End Templates Tab ------------------------------*/
+
+.settingTabs .settingTab {
+    height: 100%;
+    min-height: 550px;
+}

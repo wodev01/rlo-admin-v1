@@ -1,0 +1,30 @@
+<md-content id="templatesTab" class="md-padding">
+    <div class="margin-bottom-10" layout="row" layout-align="space-between center">
+        <div class="md-display-1">Templates</div>
+        <md-button class="md-raised md-accent"
+                   ng-click="fnCreateTemplate();"
+                   sytle="margin-left: 0">Create Template
+        </md-button>
+    </div>
+
+    <!-- Loader -->
+    <div ng-if="!isTemplatesDataNotNull && !isTemplatesMsgShow" layout="column" layout-align="center center" layout-fill
+         flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <!-- No content message -->
+    <div ng-if="isTemplatesMsgShow" layout="row" layout-align="center center">
+        <div class="md-headline">No templates available.</div>
+    </div>
+
+    <!--ngGrid-->
+    <div ng-if="isTemplatesDataNotNull"
+         ng-style="$root.fnReturnGridHeight(templatesData.length);"
+         ui-grid="templateGridOptions"
+         ui-grid-selection ui-grid-auto-resize></div>
+
+</md-content>
+
+<!-- include swapping view-->
+<div ng-include="rightTemplateSwapView"></div>
