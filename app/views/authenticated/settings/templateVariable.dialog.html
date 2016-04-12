@@ -1,0 +1,33 @@
+<md-dialog id="template-var-dialog" aria-label="Template Variable Dialog" flex flex-gt-sm="50">
+    <md-toolbar class="md-primary">
+        <div class="md-toolbar-tools">
+            <div class="md-title">Template Variables</div>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content layout-padding>
+        <form name="templateVarForm" style="overflow: hidden;" novalidate>
+            <textarea name="templateVarJSON"
+                      rows="12"
+                      style="width: 100%; resize: none;"
+                      layout="column" ng-model="templateVarJSON" json-text>
+            </textarea>
+        </form>
+        <md-dialog-actions layout="row">
+            <div class="text-danger md-body-2"
+                 style="margin-right: 10px;"
+                 ng-if="templateVarForm.templateVarJSON.$invalid"> Invalid JSON!
+            </div>
+
+            <md-button class="md-raised md-accent"
+                       ng-disabled="templateVarForm.templateVarJSON.$invalid"
+                       ng-click="fnSetVariables(templateVarJSON);">Set
+            </md-button>
+
+            <md-button class="md-warn md-raised md-hue-2"
+                       ng-click="fnCloseDialog();">Cancel
+            </md-button>
+
+        </md-dialog-actions>
+    </md-dialog-content>
+</md-dialog>

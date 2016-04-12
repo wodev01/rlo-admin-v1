@@ -1,0 +1,55 @@
+<div class="md-padding" layout="column" ng-init="fnInitShopLocations();" flex>
+
+    <div layout="row" layout-align="space-between center">
+        <div class="md-display-1">Updates</div>
+        <md-button class="md-raised md-accent" ng-click="fnNewUpdateView();">New Update</md-button>
+    </div>
+
+    <p class="md-subhead">Below are the updates.</p>
+    <form name="searchForm">
+        <input type="text" name="searchFilter"
+               class="filterBox"
+               ng-model="searchUpdateFilter"
+               placeholder="Search..."
+               ng-change="fnFilterKeyEvent(searchUpdateFilter);"
+               ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }"
+               ng-keyup="fnCancelSearchFilter($event, this);"/>
+    </form>
+    <!-- Grid Section -->
+    <div layout="row" layout-xs="column" layout-align="space-between center">
+        <md-input-container>
+            <md-select aria-label="Select Update Page Size" ng-model="paginationOptions.pageSize"
+                       ng-change="fnUpdatesPageSizeChange(paginationOptions);">
+                <md-option ng-repeat="pageSize in pagingOptions" ng-value="pageSize">
+                    {{pageSize}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+        <div ng-bind="'Current Page : ' + paginationOptions.pageNumber"></div>
+        <div layout="row">
+            <md-button class="md-fab md-mini" ng-disabled="paginationOptions.pageNumber === 1"
+                       ng-click="fnPreviousPage();">
+                <md-icon md-font-set="material-icons">skip_previous</md-icon>
+            </md-button>
+            <md-button class="md-fab md-mini" ng-disabled="updatesData.length === 0" ng-click="fnNextPage();">
+                <md-icon md-font-set="material-icons">skip_next</md-icon>
+            </md-button>
+        </div>
+    </div>
+
+    <div ng-if="isMsgShow" layout="column" layout-align="center center" layout-fill flex>
+        <div class="md-headline">No updates available.</div>
+    </div>
+
+    <div ng-if="!isDataNotNull && !isMsgShow" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div class="gridStyle"
+         ng-if="isDataNotNull" ng-style="$root.fnReturnGridHeight(updatesData.length);"
+         ui-grid="updateGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-pagination></div>
+
+</div>
+
+<!-- include swapping view-->
+<div ng-include="rightView"></div>

@@ -19,7 +19,9 @@ var app = angular
     'ui.grid.selection',
     'ui.grid.autoResize',
     'ui.grid.pagination',
-    'ui.grid.exporter'
+    'ui.grid.exporter',
+    'ngWYSIWYG',
+    'angular-bind-html-compile'
   ])
   .constant('cookieName', 'cargly_rloAdmin_access_token')
   .constant('toastr', toastr)
@@ -113,6 +115,16 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
       url: 'clients',
       templateUrl: 'views/authenticated/clients/clients.html',
       controller: 'clientsCtrl',
+      resolve: {
+        GetUser: ['GetUserService', function (GetUserService) {
+          return GetUserService.fetchUser();
+        }]
+      }
+    })
+    .state('main.settings', {
+      url: 'settings/:settingsName',
+      templateUrl: 'views/authenticated/settings/settings.html',
+      controller: 'settingsCtrl',
       resolve: {
         GetUser: ['GetUserService', function (GetUserService) {
           return GetUserService.fetchUser();

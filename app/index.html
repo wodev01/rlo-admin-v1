@@ -22,6 +22,11 @@
   <link rel="stylesheet" href="styles/global.css">
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/media.css">
+  <link rel="stylesheet" href="styles/jquery-ui.min.css">
+  <!-- endbuild -->
+
+  <!-- build:css(.tmp) styles/wysiwyg.editor.min.css -->
+  <link rel="stylesheet" href="styles/editor.css">
   <!-- endbuild -->
 </head>
 <body ng-app="rloAdminApp">
@@ -63,6 +68,7 @@
 <script src="bower_components/d3/d3.js"></script>
 <script src="bower_components/c3/c3.js"></script>
 <script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/angular-bind-html-compile/angular-bind-html-compile.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -71,14 +77,23 @@
 <script type="text/javascript" src="scripts/vendor/chargeio.min.js"></script>
 <!-- endbuild -->
 
+<!-- build:js({.tmp,app}) scripts/plugin.min.js -->
+<script type="text/javascript" src="scripts/vendor/jquery-ui.min.js"></script>
+<!-- endbuild -->
+
+<script src="scripts/vendor/wysiwyg.js"></script>
+
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
+<script src="scripts/directives/directives.js"></script>
+<script src="scripts/filters/filter.js"></script>
 
 <!-- START : SERVICES -->
 <script src="scripts/services/interceptorsService.js"></script>
 <script src="scripts/services/encodeParamService.js"></script>
 <script src="scripts/services/errorMsgService.js"></script>
 <script src="scripts/services/getUserService.js"></script>
+<script src="scripts/services/locationService.js"></script>
 
 <!-- START : Clients Services-->
 <!-- END : Clients Services-->
@@ -96,6 +111,11 @@
 <!-- END : Segments Services-->
 
 <!-- START : Settings Services-->
+<script src="scripts/services/settings/accountServices.js"></script>
+<script src="scripts/services/settings/userService.js"></script>
+<script src="scripts/services/settings/subscriptionService.js"></script>
+<script src="scripts/services/settings/updateService.js"></script>
+<script src="scripts/services/settings/templateService.js"></script>
 <!-- END : Settings Services-->
 <!-- END : SERVICES -->
 
@@ -122,7 +142,16 @@
 <!-- END : Shop Locations Ctrl-->
 
 <!-- START : Settings Ctrl-->
-
+<script src="scripts/controllers/authenticated/settings/settingsCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/accountCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/usersCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/manageUsersCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/subscriptionsCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/manageSubscriptionCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/updatesCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/manageUpdatesCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/templatesCtrl.js"></script>
+<script src="scripts/controllers/authenticated/settings/templateManageCtrl.js"></script>
 <!-- END : Settings Ctrl-->
 <!-- END : CTRL -->
 <!-- endbuild -->
