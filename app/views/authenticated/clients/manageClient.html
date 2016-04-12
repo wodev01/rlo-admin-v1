@@ -1,0 +1,22 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageClientSwap">
+    <!-- swapping view header -->
+    <md-toolbar class="top-header">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            {{editClientName}}
+            <md-button ng-click="fnCloseClientManageSwap();" class="md-raised md-primary md-hue-2">Back</md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content md-theme="grey">
+        <md-tabs class="md-primary" md-selected="selectedClientTab" md-dynamic-height ng-if="isTabsLoad">
+            <md-tab label="Info">
+                <div ng-if="selectedClientTab == 0"
+                   ng-controller="clientInfoCtrl"
+                   ng-include="'views/authenticated/clients/clientInfo.html'"
+                   ng-init="fnInitClientInfo();">
+                </div>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+
+</md-sidenav>

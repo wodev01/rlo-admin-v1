@@ -1,0 +1,78 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="newClientView">
+    <md-toolbar class="top-header">
+        <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span>New Client</span>
+            <md-button ng-click="fnCloseNewClientSwap()" class="md-raised md-primary md-hue-2">Back</md-button>
+        </h1>
+    </md-toolbar>
+
+    <!-- swapping view content -->
+    <md-content class="md-padding" ng-controller="newClientsCtrl" ng-init="fnInitManageClient();">
+        <form name="newClientForm" layout="column" novalidate>
+            <md-input-container class="remove-error-space">
+                <label>Client Name</label>
+                <input name="name" ng-model="client.name" ng-minlength="5" required>
+            </md-input-container>
+            <md-input-container class="remove-error-space">
+                <label>Website</label>
+                <input name="website" ng-model="client.website" required/>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label for="client_timezone">Timezone</label>
+                <md-select aria-label="Select Timezone" ng-model="client.timezone" id="client_timezone">
+                    <md-option ng-repeat="option in timeZoneDDOptions" ng-value="option">
+                      {{option}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Contact Name</label>
+                <input name="contact_name" ng-model="client.contact_name" ng-minlength="5" required/>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Contact Phone</label>
+                <input name="contact_phone" ng-model="client.contact_phone" ng-minlength="5"
+                       ng-pattern="/^\d+$/" required>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Contact Email</label>
+                <input type="email" name="contact_email" ng-model="client.contact_email" ng-minlength="5" required/>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Address</label>
+                <input name="address" ng-model="client.address" required/>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>City</label>
+                <input name="city" ng-model="client.city" required/>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>State</label>
+                <input name="state" ng-model="client.state" required>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Zip</label>
+                <input name="zip" ng-model="client.zip" md-maxlength="15" required/>
+            </md-input-container>
+
+            <div layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary md-hue-2"
+                           ng-disabled="newClientForm.$invalid"
+                           ng-click="fnSaveClient(client);">Save
+                </md-button>
+
+                <md-button class="md-warn md-raised md-hue-2"
+                           ng-click="fnCloseNewClientSwap();">Cancel
+                </md-button>
+            </div>
+        </form>
+    </md-content>
+</md-sidenav>

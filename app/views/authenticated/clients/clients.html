@@ -1,0 +1,64 @@
+<div id="client-page" class="md-padding overflow-auto"
+     ng-init="fnInitClients();">
+
+    <div layout="row" layout-align="space-between center">
+        <div class="md-display-1">Clients</div>
+        <md-button class="md-raised md-primary md-hue-2" ng-click="fnNewClientView();">New Client</md-button>
+    </div>
+
+    <p class="md-subhead">Below are the clients in your organization</p>
+
+    <section layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+            <md-select aria-label="Select Status" ng-model="selectStatus" ng-change="fnChangeStatus(selectStatus);">
+                <md-option ng-repeat="item in selectStatusOptions" value="{{item.value}}">
+                    {{item.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <form name="searchForm" class="margin-right-0" layout-margin>
+            <input name="searchFilter" class="filterBox margin-right-0"
+                   ng-model="searchFilter"
+                   placeholder="Search..."
+                   ng-change="onSearchTextChanged(searchFilter);"
+                   ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }"
+                   ng-keyup="$root.fnCancelSearchFilter($event, this);" layout-margin />
+        </form>
+    </section>
+
+    <div ng-if="isMsgGridShow" layout="row" layout-align="center center">
+        <div class="md-headline"> No clients available.</div>
+    </div>
+
+    <div ng-if="!isClientsData && !isMsgGridShow" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <!-- Grid Section -->
+    <div class="margin-bottom-10" ng-if="isClientsData"
+         ui-grid="clientsGridOptions" ui-grid-selection ui-grid-auto-resize
+         ng-style="$root.fnReturnGridHeight(clientsData.length);" ng-cloak>
+    </div>
+
+    <div ng-if="isClientsData"
+         layout="row" layout-align="center center" layout-margin ng-cloak>
+
+        <div ng-if="!isPagingCursor">
+            <md-button aria-label="More Client" class="md-raised md-primary md-hue-2"
+                       ng-click="fnLoadMoreClients();">
+                <span ng-if="isMoreClients"> Loading... </span>
+                <span ng-if="!isMoreClients">More Clients </span>
+            </md-button>
+        </div>
+
+        <div ng-if="isPagingCursor">
+            <div class="md-title">... No more results found ...</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- include swapping view-->
+<div ng-include="rightView"></div>
+<div ng-include="rightEditView"></div>
