@@ -1,0 +1,25 @@
+<div class="md-padding overflow-auto" ng-init="fnInitGroups();">
+
+    <div layout="row" layout-align="space-between center">
+        <div class="md-display-1">Groups</div>
+        <md-button class="md-raised md-primary md-hue-2" ng-click="fnOpenManageGroupSwap(false);">New Group</md-button>
+    </div>
+
+    <p class="md-subhead">Below are the groups in your organization</p>
+
+    <div ng-if="isMsgGridShow" layout="row" layout-align="center center">
+        <div class="md-headline"> No groups available.</div>
+    </div>
+
+    <div ng-if="!isGroupsData && !isMsgGridShow" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <!-- Grid Section -->
+    <div ng-if="isGroupsData" ng-style="$root.fnReturnGridHeight(groupsData.length);"
+         ui-grid="groupsGridOptions" ui-grid-selection ui-grid-auto-resize ng-cloak>
+    </div>
+
+</div>
+<!-- include swapping view-->
+<div ng-include="rightView"></div>

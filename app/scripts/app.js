@@ -122,6 +122,16 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
         }]
       }
     })
+    .state('main.groups', {
+      url: 'groups',
+      templateUrl: 'views/authenticated/shopGroups/groups.html',
+      controller: 'groupsCtrl',
+      resolve: {
+        GetUser: ['GetUserService', function (GetUserService) {
+          return GetUserService.fetchUser();
+        }]
+      }
+    })
     .state('main.settings', {
       url: 'settings/:settingsName',
       templateUrl: 'views/authenticated/settings/settings.html',
