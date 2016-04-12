@@ -21,7 +21,8 @@ var app = angular
     'ui.grid.pagination',
     'ui.grid.exporter',
     'ngWYSIWYG',
-    'angular-bind-html-compile'
+    'angular-bind-html-compile',
+    'angular.filter'
   ])
   .constant('cookieName', 'cargly_rloAdmin_access_token')
   .constant('toastr', toastr)

@@ -1,0 +1,31 @@
+<md-sidenav class="md-sidenav-right right-side-nav md-whiteframe-z2" md-component-id="manageClientEmailSwap">
+    <!-- swapping view header -->
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">
+            <span>{{$root.locationName}}</span>
+            <span flex></span>
+            <md-button ng-click="fnCloseClientEmailSwap()" class="md-raised md-accent">
+                Back
+            </md-button>
+        </h1>
+    </md-toolbar>
+
+    <!-- swapping view content -->
+    <md-content ng-controller="clientEmailManageCtrl" class="md-padding" layout-fill>
+        <form name="clientEmailForm" novalidate>
+            <md-input-container flex>
+                <label>From</label>
+                <input name="from_name" ng-model="clientEmailData.from_email" disabled>
+            </md-input-container>
+            <md-input-container flex>
+                <label>To</label>
+                <input name="to_name" ng-model="clientEmailData.to_email" disabled>
+            </md-input-container>
+            <md-input-container flex>
+                <label>Subject</label>
+                <input name="subject" ng-model="clientEmailData.subject" disabled>
+            </md-input-container>
+            <iframe id="clientHtmlEmailTemplate" width="100%" style="min-height: 500px;"></iframe>
+        </form>
+    </md-content>
+</md-sidenav>

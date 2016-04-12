@@ -5,6 +5,7 @@
     "angular": "1.4.9",
     "angular-animate": "1.4.9",
     "angular-cookies": "1.4.9",
+    "angular-filter": "0.5.8",
     "angular-sanitize": "1.4.9",
     "angular-material": "~1.0.5",
     "angular-ui-router": "~0.2.18",

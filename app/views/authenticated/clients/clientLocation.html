@@ -1,0 +1,28 @@
+<md-content class="md-padding">
+    <div layout="row" layout-align="space-between center">
+        <div class="md-display-1">Locations</div>
+        <md-button class="md-raised md-accent" ng-click="fnNewLocationView();">New Location</md-button>
+    </div>
+
+    <p class="md-subhead">
+        Below are the locations in your organization that have access to the Cargly Partner Console.
+    </p>
+
+    <div ng-if="isMsgShow" layout="row" layout-align="center center">
+        <div class="md-headline">No locations available.</div>
+    </div>
+
+    <!-- Loader -->
+    <div ng-if="!isDataNotNull && !isMsgShow" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <!-- UI grid -->
+    <div ng-if="isDataNotNull"
+         ng-style="$root.fnReturnGridHeight(locationData.length);"
+         ui-grid="locationGridOptions" ui-grid-selection ui-grid-auto-resize></div>
+
+</md-content>
+
+<!-- include swapping view-->
+<div ng-include="rightLocationSwapView"></div>

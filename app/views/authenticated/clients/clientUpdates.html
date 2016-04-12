@@ -1,0 +1,65 @@
+<md-content id="client-updates-tab" class="md-padding">
+    <div layout="row" layout-align="space-between center">
+        <div class="md-display-1">Updates</div>
+
+        <div layout="row" layout-align="end center">
+            <md-button class="md-raised md-accent" ng-click="fnNewUpdateView();">New Update</md-button>
+            <md-button class="md-raised md-accent" ng-click="fnRunUpdateNow($event);">Update Now</md-button>
+        </div>
+    </div>
+
+    <div layout="row">
+        <md-input-container>
+            <md-select aria-label="Select Type"
+                       ng-model="selectType"
+                       ng-change="fnUpdatesDefinitionsDDChange(selectType);"
+                       ng-selected="$first"
+                       placeholder="-- Select Type --">
+                <md-option ng-repeat="option in updatesDefinitions | unique: 'type'" ng-value="option.type">
+                    {{option.type}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <div layout="row" layout-xs="column" layout-align="space-between center">
+        <div layout="row" layout-align="space-between center" layout-fill>
+            <md-input-container>
+                <md-select aria-label="Select Update Page Size" ng-model="paginationOptions.pageSize"
+                           ng-change="fnUpdatesPageSizeChange(paginationOptions);">
+                    <md-option ng-repeat="pageSize in pagingOptions" ng-value="pageSize">
+                        {{pageSize}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <div ng-bind="'Current Page : ' + paginationOptions.pageNumber"></div>
+        </div>
+
+        <div layout="row" layout-align="end center" layout-align-xs="space-between center" layout-fill>
+            <md-button class="md-fab md-mini" ng-disabled="paginationOptions.pageNumber === 1"
+                       ng-click="fnPreviousPage();">
+                <md-icon md-font-set="material-icons">skip_previous</md-icon>
+            </md-button>
+
+            <md-button class="md-fab md-mini" ng-disabled="clientUpdatesData.length === 0" ng-click="fnNextPage();">
+                <md-icon md-font-set="material-icons">skip_next</md-icon>
+            </md-button>
+        </div>
+    </div>
+
+    <div ng-if="isMsgShow" layout="column" layout-align="center center" layout-fill flex>
+        <div class="md-headline">No updates available.</div>
+    </div>
+
+    <!-- Loader -->
+    <div ng-if="!isDataNotNull && !isMsgShow" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <!--UI Grid-->
+    <div ng-if="isDataNotNull"
+         ui-grid="updateGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-pagination
+         ng-style="$root.fnReturnGridHeight(clientUpdatesData.length);"></div>
+
+</md-content>

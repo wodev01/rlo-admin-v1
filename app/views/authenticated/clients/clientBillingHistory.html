@@ -1,0 +1,20 @@
+<md-content class="md-padding">
+    <div class="margin-bottom-10" layout="row" layout-align="space-between center">
+        <div class="md-display-1">Billing History</div>
+    </div>
+
+    <!-- Loader -->
+    <div ng-if="!isDataNotNull || isProcessing" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div ng-if="isMsg" layout="row" layout-align="center center">
+        <p class="md-headline">No billing history available.</p>
+    </div>
+
+    <!-- UI-Grid -->
+    <div ng-if="isDataNotNull && !isProcessing && !isMsg"
+         ui-grid="billingHistoryGridOptions" ui-grid-selection ui-grid-auto-resize
+         ng-style="$root.fnReturnGridHeight(billingHistoryData.length);"></div>
+
+</md-content>

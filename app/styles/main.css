@@ -7,6 +7,32 @@
     max-height: 500px;
 }
 
+/*---------- Client Billing ----------*/
+#client-billing-tab .subInfo-container {
+    border: 1px solid #CCCCCC;
+}
+
+#client-billing-tab .subscriptions .subscriptions-row {
+    display: block;
+}
+
+#client-billing-tab .checkbox {
+    margin: 0px 20px 10px 3px !important;
+    font-size: 11px !important;
+    float: left;
+    min-width: 190px;
+}
+
+#client-billing-tab .subscriptions {
+    overflow-x: auto !important;
+    padding: 10px;
+}
+
+#client-billing-tab .subscriptions .sub-last-row td {
+    font-size: 14px;
+    font-weight: 600;
+}
+
 /*------------------------------ Templates Tab ------------------------------*/
 /*---------- Template > Template HTML WYSIWYG editor ----------*/
 #template-side-nav .tab-container {
