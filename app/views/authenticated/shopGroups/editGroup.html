@@ -1,0 +1,18 @@
+<form id="groupForm" name="groupForm" class="md-padding" layout="column" novalidate>
+    <md-input-container class="remove-error-space">
+        <label>Group Name</label>
+        <input name="name" ng-model="group.name" required ng-minlength="5" ng-pattern="/^[a-zA-Z0-9_ ]*$/">
+    </md-input-container>
+
+    <div layout="row" layout-align="end center">
+        <md-button class="md-raised md-accent"
+                   ng-disabled="groupForm.$invalid"
+                   ng-click="fnSaveGroup(group);">Save
+        </md-button>
+
+        <md-button class="md-warn md-raised md-hue-2"
+                   ng-click="fnCloseManageGroupSwap();">Cancel
+        </md-button>
+    </div>
+</form>
+
