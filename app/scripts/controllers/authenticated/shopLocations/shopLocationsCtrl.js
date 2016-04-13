@@ -232,7 +232,7 @@ app.controller('shopLocationsCtrl',
                 '       <div>' +
                 '       <div layout-margin> Are you sure you want to send the email?</div>' +
                 '       <div layout="row" layout-align="end center">' +
-                '           <md-button class="md-raised md-accent"' +
+                '           <md-button class="md-raised md-primary"' +
                 '                       ng-click="fnSendDailyEmail();">Send</md-button>' +
                 '           <md-button class="md-raised md-warn" style="margin:0px 10px !important;"' +
                 '                       ng-click="fnCloseDialog();">Cancel</md-button>' +
@@ -264,7 +264,7 @@ app.controller('shopLocationsCtrl',
                 parent: parentElem,
                 template: '<md-bottom-sheet class="md-grid" layout="column" ng-cloak>' +
                 '   <div layout="row" layout-align="start center" >' +
-                '       <md-button class="md-raised md-accent" ' +
+                '       <md-button class="md-raised md-primary" ' +
                 '                  ng-click="fnSendDailyEmail(shopLocationObj, $event);">Send Daily Email' +
                 '       </md-button>' +
                 '   </div>' +
