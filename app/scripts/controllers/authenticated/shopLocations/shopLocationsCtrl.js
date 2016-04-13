@@ -252,16 +252,6 @@ app.controller('shopLocationsCtrl',
             event.stopPropagation();
         });
 
-        $scope.fnDownloadCustomerCSV = function (shopLocationObj) {
-            $mdDialog.show({
-                locals: {locationId: $scope.selectedLocationId, pId: shopLocationObj.partnerId},
-                controller: 'downloadCustomerCSVCtrl',
-                templateUrl: 'views/authenticated/shopLocations/modals/downloadCustomerCSV.tmpl.html'
-            }).then(function () {
-                },
-                function (err) {
-                });
-        };
         /*----------- End of Manage Shop Locations ------------*/
 
         $scope.fnOpenBottomSheet = function () {
@@ -276,9 +266,6 @@ app.controller('shopLocationsCtrl',
                 '   <div layout="row" layout-align="start center" >' +
                 '       <md-button class="md-raised md-accent" ' +
                 '                  ng-click="fnSendDailyEmail(shopLocationObj, $event);">Send Daily Email' +
-                '       </md-button>' +
-                '       <md-button class="md-raised md-accent" ' +
-                '                  ng-click="fnDownloadCustomerCSV(shopLocationObj);">Export Customer CSV ' +
                 '       </md-button>' +
                 '   </div>' +
                 '</md-bottom-sheet>'

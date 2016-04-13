@@ -52,14 +52,14 @@
                      ng-init="fnInitBillingHistory();"></div>
             </md-tab>
 
-            <md-tab label="Updates">
+            <md-tab label="Updates" ng-if="isSuperRole">
                 <div ng-if="selectedClientTab == 6"
                      ng-controller="clientUpdatesCtrl"
                      ng-include="'views/authenticated/clients/clientUpdates.html'"
                      ng-init="fnInitUpdates();"></div>
             </md-tab>
 
-            <md-tab label="Update Status">
+            <md-tab label="Update Status" ng-if="isSuperRole">
                 <div ng-if="selectedClientTab == 7"
                      ng-controller="clientUpdateStatusesCtrl"
                      ng-include="'views/authenticated/clients/clientUpdateStatuses.html'"
