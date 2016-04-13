@@ -36,14 +36,22 @@
             <input name="contactPhone" ng-model="client.contactPhone" required>
         </md-input-container>
 
-        <md-input-container flex>
+        <md-input-container class="remove-error-space">
             <label>Groups</label>
             <input name="groupName" ng-model="client.groupsName" ng-disabled="true">
         </md-input-container>
 
+        <md-input-container>
+            <label>Avg. Tech Hourly Cost</label>
+            <input name="avg_tech_hourly_cost" ng-disabled="true">
+        </md-input-container>
+
         <div layout="row" layout-align="end center">
+            <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                  md-mode="indeterminate"></md-progress-circular>
+
             <md-button class="md-raised md-primary"
-                       ng-disabled="clientInfoForm.$invalid"
+                       ng-disabled="clientInfoForm.$invalid || !clientInfoForm.$dirty || isProcessing"
                        ng-click="fnSaveClientInfo(client);">Save
             </md-button>
         </div>

@@ -1,9 +1,4 @@
 <md-content id="client-billing-tab" md-theme="rlo" layout-margin>
-    <!-- Loader -->
-    <div ng-if="isProcessing" layout="column" layout-align="center center" layout-fill flex>
-        <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
-    </div>
-
     <form name="subscriptionInfoForm" layout="column" novalidate>
         <section class="subInfo-container" layout-margin>
             <div layout="row" layout-xs="row" layout-margin>
@@ -58,7 +53,7 @@
                     <input name="balance_cents" type="number" ng-model="subscriptionInfo.balance_cents" required>
                 </md-input-container>
 
-                <md-input-container flex >
+                <md-input-container flex>
                     <label>Subscription Status</label>
                     <md-select aria-label="Select Status"
                                ng-model="subscriptionInfo.subscription_status"
@@ -80,7 +75,13 @@
             </div>
 
             <div class="subscriptions" layout-margin layout-padding>
-                <div class="custom-table">
+                <!-- Loader -->
+                <div ng-if="!isSubscriptionDefLoaded" layout="column" layout-align="center center" layout-fill flex>
+                    <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate">
+                    </md-progress-circular>
+                </div>
+
+                <div class="custom-table" ng-if="isSubscriptionDefLoaded">
                     <table>
                         <tr>
                             <td>Locations</td>
@@ -110,7 +111,9 @@
                             <td class="text-right">{{subTotal[location.id] | CentToDollar | currency}}</td>
                         </tr>
                         <tr class="sub-last-row" ng-if="locations.length != 0">
-                            <td colspan="2"><div class="text-right">Grand Total:</div></td>
+                            <td colspan="2">
+                                <div class="text-right">Grand Total:</div>
+                            </td>
                             <td class="text-right">{{grandTotal | CentToDollar | currency}}</td>
                         </tr>
                     </table>
@@ -118,8 +121,11 @@
             </div>
 
             <div layout="row" layout-align="end center" layout-margin>
+                <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                      md-mode="indeterminate"></md-progress-circular>
+
                 <md-button class="md-raised md-primary"
-                           ng-disabled="subscriptionInfoForm.$invalid || isSubInfoBtnDisabled"
+                           ng-disabled="subscriptionInfoForm.$invalid || !subscriptionInfoForm.$dirty || isProcessing || isSubInfoBtnDisabled"
                            ng-click="fnSaveSubscriptionInfo(subscriptionInfo, grandTotal);">
                     Save Subscription Info
                 </md-button>

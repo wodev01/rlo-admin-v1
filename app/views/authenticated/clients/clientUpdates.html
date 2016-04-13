@@ -4,7 +4,9 @@
 
         <div layout="row" layout-align="end center">
             <md-button class="md-raised md-primary" ng-click="fnNewUpdateView();">New Update</md-button>
-            <md-button class="md-raised md-primary" ng-click="fnRunUpdateNow($event);">Update Now</md-button>
+            <md-button class="md-raised md-primary margin-right-0" ng-click="fnRunUpdateNow($event);">
+                Update Now
+            </md-button>
         </div>
     </div>
 
@@ -42,7 +44,8 @@
                 <md-icon md-font-set="material-icons">skip_previous</md-icon>
             </md-button>
 
-            <md-button class="md-fab md-mini md-primary" ng-disabled="clientUpdatesData.length === 0" ng-click="fnNextPage();">
+            <md-button class="md-fab md-mini md-primary" ng-disabled="clientUpdatesData.length === 0"
+                       ng-click="fnNextPage();">
                 <md-icon md-font-set="material-icons">skip_next</md-icon>
             </md-button>
         </div>
@@ -59,7 +62,7 @@
 
     <!--UI Grid-->
     <div ng-if="isDataNotNull"
-         ui-grid="updateGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-pagination
+         ui-grid="updateGridOptions" ui-grid-selection ui-grid-auto-resize
          ng-style="$root.fnReturnGridHeight(clientUpdatesData.length);"></div>
 
 </md-content>

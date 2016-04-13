@@ -1,6 +1,6 @@
 'use strict';
 app.controller('clientsCtrl',
-    function ($scope, $timeout, $mdSidenav, groupService, clientService) {
+    function ($scope, $rootScope, $timeout, $mdSidenav, groupService, clientService) {
 
         $scope.rightView = 'views/authenticated/clients/newClient.html';
         $scope.rightEditView = 'views/authenticated/clients/manageClient.html';
@@ -167,10 +167,10 @@ app.controller('clientsCtrl',
                     minWidth: 160,
                     enableHiding: false
                 },
-                {field: 'partner', displayName: 'Name', minWidth: 200},
-                {field: 'contactName', displayName: 'Contact Name', minWidth: 150},
-                {field: 'groupsName', displayName: 'Groups', minWidth: 200},
-                {field: 'subscriptionStatus', displayName: 'Subscription Status', minWidth: 100},
+                {field: 'partner', displayName: 'Name', minWidth: 200, enableHiding: false},
+                {field: 'contactName', displayName: 'Contact Name', minWidth: 150, enableHiding: false},
+                {field: 'groupsName', displayName: 'Groups', minWidth: 200, enableHiding: false},
+                {field: 'subscriptionStatus', displayName: 'Subscription Status', minWidth: 100, enableHiding: false},
                 {
                     name: 'action',
                     displayName: '',
@@ -187,6 +187,11 @@ app.controller('clientsCtrl',
             }
         }
         /*--------------- End clients Grid Options ---------------*/
+
+        //$broadcast event
+        $rootScope.$on('RefreshClientsGrid', function () {
+            $scope.getPagedDataAsync($scope.selectStatus, $scope.searchFilter);
+        });
 
         /*--------------- Clients grid actions ---------------*/
         $scope.fnClientEdit = function (row) {

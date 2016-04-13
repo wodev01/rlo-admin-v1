@@ -1,7 +1,6 @@
 'use strict';
 app.controller('clientEmailManageCtrl',
-    function ($scope,
-              clientEmailService) {
+    function ($scope, clientEmailService) {
 
         $scope.clientEmailData = clientEmailService.getClientEmailObj();
 
@@ -10,8 +9,8 @@ app.controller('clientEmailManageCtrl',
         iframe.contentWindow.document.open('text/htmlreplace');
         iframe.contentWindow.document.write($scope.clientEmailData.html);
         iframe.contentWindow.document.close();
-        iframe.contentWindow.document.onmousedown = function() {
+        iframe.contentWindow.document.onmousedown = function () {
             return false;
-        }
+        };
 
     });

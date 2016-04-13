@@ -79,10 +79,21 @@ app.controller('clientUsersCtrl',
             }
         };
 
-        $scope.fnSendWelcomeEmail =function(row){
-            clientUsersService.sendWelcomeEmail(row.entity.email).then(function(){
-                toastr.success('Welcome Email send successfully.');
-            });
+        $scope.fnSendWelcomeEmail = function (row) {
+            var confirm = $mdDialog.confirm()
+                .title('Resend Welcome E-mail')
+                .content('Resending welcome email to your mail-id ?')
+                .ariaLabel('Resend')
+                .ok('Resend')
+                .cancel('Cancel')
+                .targetEvent(event);
+
+            $mdDialog.show(confirm)
+                .then(function () {
+                    clientUsersService.sendWelcomeEmail(row.entity.email).then(function () {
+                        toastr.success('Welcome Email sent successfully.');
+                    });
+                });
         };
 
         $scope.fnResendConfirmation = function (row, event) {

@@ -22,3 +22,8 @@
     }
 }
 
+@media (min-width: 599px) {
+    #group-member-list button.addMemberBtn {
+        margin-right: 0 !important;
+    }
+}

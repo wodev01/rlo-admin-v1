@@ -27,6 +27,7 @@
                 <md-select aria-label="Select Role" ng-model="user.role" placeholder="Select Role" id="user_role">
                     <md-option value="User">User</md-option>
                     <md-option value="Admin">Admin</md-option>
+                    <md-option value="LocationManager">LocationManager</md-option>
                 </md-select>
             </md-input-container>
 
@@ -51,23 +52,24 @@
             </md-input-container>
 
             <div layout="row" layout-margin>
-                <md-checkbox class="md-primary" aria-label="owner" ng-model="user.owner">Owner</md-checkbox>
+                <md-checkbox class="md-primary" aria-label="owner" ng-model="user.owner">
+                    Owner (Receives Daily Email)
+                </md-checkbox>
                 <md-checkbox class="md-primary" aria-label="verified" ng-model="user.verified" ng-disabled="true">
                     Verified
                 </md-checkbox>
             </div>
 
             <div layout="row" layout-align="end center">
-                <div ng-if="isProcessing">
-                    <md-progress-circular class="md-primary" md-diameter="100"
-                                          md-mode="indeterminate"></md-progress-circular>
-                </div>
-                <md-button class="md-raised md-primary" ng-disabled="userForm.$invalid" ng-click="fnSaveUser(user);">
-                    Save
-                </md-button>
+                <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                      md-mode="indeterminate"></md-progress-circular>
+
+                <md-button class="md-raised md-primary"
+                           ng-disabled="userForm.$invalid || !userForm.$dirty || isProcessing"
+                           ng-click="fnSaveUser(user);">Save</md-button>
+
                 <md-button class="md-raised md-warn" ng-click="fnCloseManageUser();">Cancel</md-button>
             </div>
         </form>
     </md-content>
 </md-sidenav>
-

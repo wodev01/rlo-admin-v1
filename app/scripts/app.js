@@ -22,7 +22,8 @@ var app = angular
         'ui.grid.exporter',
         'ngWYSIWYG',
         'angular-bind-html-compile',
-        'angular.filter'
+        'angular.filter',
+        'mdDateTime'
     ])
     .constant('cookieName', 'cargly_rloAdmin_access_token')
     .constant('toastr', toastr)

@@ -2,7 +2,9 @@
 
     <div layout="row" layout-align="space-between center">
         <div class="md-display-1">Groups</div>
-        <md-button class="md-raised md-primary" ng-click="fnOpenManageGroupSwap(false);">New Group</md-button>
+        <md-button class="md-raised md-primary margin-right-0" ng-click="fnOpenManageGroupSwap(false);">
+            New Group
+        </md-button>
     </div>
 
     <p class="md-subhead">Below are the groups in your organization</p>
@@ -21,5 +23,6 @@
     </div>
 
 </div>
+
 <!-- include swapping view-->
 <div ng-include="rightView"></div>

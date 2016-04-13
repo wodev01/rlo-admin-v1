@@ -54,18 +54,37 @@ app.controller('clientEmailsCtrl',
             enableRowHeaderSelection: false,
             enableVerticalScrollbar: 0,
             columnDefs: [
-                {field: 'sent', displayName: 'Sent', cellFilter: 'date:\'MM/dd/yyyy h:mm a\'', minWidth: 200},
-                {field: 'location_name', displayName: 'Location', minWidth: 200},
-                {field: 'to_email', displayName: 'Email', minWidth: 200},
-                {field: 'state', displayName: 'Status', minWidth: 50},
-                {field: 'last_event', displayName: 'Modified', cellFilter: 'date:\'MM/dd/yyyy h:mm a\'', minWidth: 200},
-                {name:'action', displayName: '', cellTemplate: $scope.clientEmailAction, width: '50', enableSorting:false}
+                {
+                    field: 'sent',
+                    displayName: 'Sent',
+                    cellFilter: 'date:\'MM/dd/yyyy h:mm a\'',
+                    minWidth: 200,
+                    enableHiding: false
+                },
+                {field: 'location_name', displayName: 'Location', minWidth: 200, enableHiding: false},
+                {field: 'to_email', displayName: 'Email', minWidth: 200, enableHiding: false},
+                {field: 'state', displayName: 'Status', minWidth: 50, enableHiding: false},
+                {
+                    field: 'last_event',
+                    displayName: 'Modified',
+                    cellFilter: 'date:\'MM/dd/yyyy h:mm a\'',
+                    minWidth: 200,
+                    enableHiding: false
+                },
+                {
+                    name: 'action',
+                    displayName: '',
+                    cellTemplate: $scope.clientEmailAction,
+                    width: '50',
+                    enableSorting: false,
+                    enableColumnMenu: false
+                }
             ]
         };
 
         // Swapping view open function
         $scope.fnOpenManageEmailClient = function () {
-            $timeout(function() {
+            $timeout(function () {
                 $rootScope.rightClientEmailSwapView = '';
                 $scope.$apply();
                 $rootScope.rightClientEmailSwapView = 'views/authenticated/clients/clientEmailManage.html';

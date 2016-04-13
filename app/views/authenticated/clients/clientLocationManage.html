@@ -8,10 +8,6 @@
     </md-toolbar>
 
     <md-content class="md-padding" ng-controller="clientLocationManageCtrl" ng-init="fnInitClientLocationManage();">
-        <!-- Loader -->
-        <div ng-if="isProcessing" layout="column" layout-align="center center" layout-fill flex>
-            <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
-        </div>
         <form id="locationForm" name="locationForm" layout="column" novalidate>
             <md-input-container class="remove-error-space">
                 <label>Name</label>
@@ -54,9 +50,15 @@
             </md-input-container>
 
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-disabled="locationForm.$invalid"
-                           ng-click="fnSaveLocation(location);">Save</md-button>
-                <md-button class="md-raised md-warn" ng-click="fnCloseManageLoc();">Cancel</md-button>
+                <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                      md-mode="indeterminate"></md-progress-circular>
+
+                <md-button class="md-raised md-primary"
+                           ng-disabled="locationForm.$invalid || !locationForm.$dirty || isProcessing"
+                           ng-click="fnSaveLocation(location);">Save
+                </md-button>
+
+                <md-button class="md-warn md-raised" ng-click="fnCloseManageLoc();">Cancel</md-button>
             </div>
         </form>
 

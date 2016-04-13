@@ -6,6 +6,8 @@ app.controller('clientBillingCtrl',
         $scope.client = clientService.getClientObj().id ? clientService.getClientObj() : {};
         var cId = $scope.client.id;
 
+        $scope.isSubscriptionDefLoaded = false;
+
         $scope.fnCreateSubDD = function () {
             $scope.selectStatusOptions = [
                 {name: 'Disabled', value: 'Disabled'},
@@ -175,8 +177,10 @@ app.controller('clientBillingCtrl',
             });
         };
         $scope.fnFetchLocations = function () {
+            $scope.isSubscriptionDefLoaded = false;
             clientLocationService.fetchLocations(cId).then(function (res) {
                 $scope.locations = res;
+                $scope.isSubscriptionDefLoaded = true;
             });
         };
 

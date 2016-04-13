@@ -7,6 +7,7 @@ app.controller('manageGroupCtrl',
         $scope.partnerId = '';
         $scope.selectedGroupsTab = 0;
         $scope.autoComplete = {};
+        $scope.isProcessing = false;
 
         $scope.searchTextChange = function (text) {
             $scope.isAddBtnDisabled = true;
@@ -54,15 +55,26 @@ app.controller('manageGroupCtrl',
         };
 
         $scope.fnSaveGroup = function (group) {
+            $scope.isProcessing = true;
             if (group.id) {
                 groupService.editGroup(group.id, group).then(function (res) {
+                    toastr.success('Group saved successfully.');
                     $scope.fnGroupToastMsg(res);
                     $scope.fnCloseManageGroupSwap();
+                    $scope.isProcessing = false;
+                }, function (error) {
+                    toastr.error('Failed saving group information.', 'STATUS CODE: ' + error.status);
+                    $scope.isProcessing = false;
                 });
             } else {
                 groupService.createGroup(group).then(function (res) {
+                    toastr.success('Group created successfully.');
                     $scope.fnGroupToastMsg(res);
                     $scope.fnCloseManageGroupSwap();
+                    $scope.isProcessing = false;
+                }, function (error) {
+                    toastr.error('Failed creating group.', 'STATUS CODE: ' + error.status);
+                    $scope.isProcessing = false;
                 });
             }
         };
@@ -86,7 +98,6 @@ app.controller('manageGroupCtrl',
                 var data = JSON.parse(arr.data);
                 toastr.error(data.messages[0].message);
             } else {
-                toastr.success('Group saved successfully.');
                 $rootScope.$broadcast('RefreshGroupsGrid');
             }
         };

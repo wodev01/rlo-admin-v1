@@ -1,43 +1,43 @@
 <md-content id="group-member-list" class="md-padding" layout="column">
-  <section class="margin-bottom-10" ng-if="isGroupEditable">
-    <div class="md-title margin-bottom-10">Add Member to Group:</div>
+    <section class="margin-bottom-10" ng-if="isGroupEditable">
+        <div class="md-title margin-bottom-10">Add Member to Group:</div>
 
 
-    <div layout="row" layout-xs="column" md-theme="rlo" layout-align-gt-sm="space-between center">
-      <md-autocomplete
-        md-selected-item="autoComplete.selectedItem"
-        md-search-text-change="searchTextChange(autoComplete.searchText);"
-        md-search-text="autoComplete.searchText"
-        md-selected-item-change="selectedItemChange(item);"
-        md-items="item in initMember(autoComplete.searchText)"
-        md-item-text="item.label"
-        md-delay="500"
-        md-min-length="0"
-        placeholder="Search members" flex>
-        <md-item-template>
-          <span md-highlight-text="autoComplete.searchText" md-highlight-flags="^i">{{item.label}}</span>
-        </md-item-template>
-      </md-autocomplete>
-      <md-button class="md-raised md-primary addMemberBtn"
-                 ng-click="fnAddMemberToGroup(partnerId); autoComplete.searchText = ''"
-                 ng-disabled="isAddBtnDisabled">Add Member
-      </md-button>
-    </div>
-  </section>
+        <div layout="row" layout-xs="column" md-theme="rlo" layout-align-gt-sm="space-between center">
+            <md-autocomplete
+                    md-selected-item="autoComplete.selectedItem"
+                    md-search-text-change="searchTextChange(autoComplete.searchText);"
+                    md-search-text="autoComplete.searchText"
+                    md-selected-item-change="selectedItemChange(item);"
+                    md-items="item in initMember(autoComplete.searchText)"
+                    md-item-text="item.label"
+                    md-delay="500"
+                    md-min-length="0"
+                    placeholder="Search members" flex>
+                <md-item-template>
+                    <span md-highlight-text="autoComplete.searchText" md-highlight-flags="^i">{{item.label}}</span>
+                </md-item-template>
+            </md-autocomplete>
+            <md-button class="md-raised md-primary addMemberBtn"
+                       ng-click="fnAddMemberToGroup(partnerId); autoComplete.searchText = ''"
+                       ng-disabled="isAddBtnDisabled">Add Member
+            </md-button>
+        </div>
+    </section>
 
-  <section ng-if="isGroupEditable">
-    <div ng-if="isGroupMembersLoad && groupsMembersData.length === 0" layout="row" layout-align="center center">
-      <div class="md-headline">No group members available.</div>
-    </div>
+    <section ng-if="isGroupEditable">
+        <div ng-if="isGroupMembersLoad && groupsMembersData.length === 0" layout="row" layout-align="center center">
+            <div class="md-headline">No group members available.</div>
+        </div>
 
-    <div ng-if="!isGroupMembersLoad" layout="column" layout-align="center center" layout-fill flex>
-      <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
-    </div>
+        <div ng-if="!isGroupMembersLoad" layout="column" layout-align="center center" layout-fill flex>
+            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </div>
 
-    <!-- Grid Section -->
-    <div ng-if="isGroupMembersLoad && groupsMembersData.length !== 0"
-         ui-grid="groupMembersGridOptions" ui-grid-selection ui-grid-auto-resize
-         ng-style="$root.fnReturnGridHeight(groupsMembersData.length);"></div>
+        <!-- Grid Section -->
+        <div ng-if="isGroupMembersLoad && groupsMembersData.length !== 0"
+             ui-grid="groupMembersGridOptions" ui-grid-selection ui-grid-auto-resize
+             ng-style="$root.fnReturnGridHeight(groupsMembersData.length);"></div>
 
-  </section>
+    </section>
 </md-content>

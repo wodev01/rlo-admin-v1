@@ -24,7 +24,7 @@
                      ng-init="fnInitUsers();"></div>
             </md-tab>
 
-            <md-tab label="Email">
+            <md-tab label="Emails">
                 <div ng-if="selectedClientTab == 2"
                      ng-controller="clientEmailsCtrl"
                      ng-include="'views/authenticated/clients/clientEmails.html'"
@@ -73,3 +73,4 @@
 <div ng-include="rightUserSwapView"></div>
 <div ng-include="rightLocationSwapView"></div>
 <div ng-include="rightClientEmailSwapView"></div>
+<div ng-include="rightUpdateSwapView"></div>

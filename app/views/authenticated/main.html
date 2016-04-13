@@ -6,8 +6,11 @@
 
         <div layout="row" layout-align="space-between center" layout-fill>
             <img class="img-responsive rlo-logo" alt="Repair Shop Marketing Tools" src="images/rlo-full-logo.png"/>
-            <a href="http://rlotraining.com/demo/" target="_blank"
-               style="font-size: 16px; font-weight: bold;">Watch Video</a>
+
+            <md-button class="md-icon-button" ng-href="http://rlotraining.com/demo/" target="_blank">
+                <md-icon md-font-set="material-icons">play_circle_filled</md-icon>
+                <md-tooltip ng-if="$root.isMobile === null" md-direction="left">Watch Video</md-tooltip>
+            </md-button>
         </div>
 
         <md-menu md-position-mode="target-right target">
