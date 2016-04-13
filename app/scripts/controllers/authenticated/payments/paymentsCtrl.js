@@ -53,12 +53,12 @@ app.controller('paymentsCtrl',
             '</div>{{row.entity.status}}</div>';
 
         $scope.paymentsAction = '<div layout="row">' +
-            '<md-button class="md-icon-button md-accent" ' +
+            '<md-button class="md-icon-button md-primary" ' +
             '           ng-click="grid.appScope.fnOpenClientPaymentPage(row,$event,grid.appScope.clients);" ' +
             '           ng-init="grid.appScope.fnOpenClientBtnInit();">' +
             '   <md-icon md-font-set="material-icons">visibility</md-icon>' +
             '   <md-tooltip md-direction="top">Open Client</md-tooltip></md-button>' +
-            '<md-button class="md-icon-button md-accent" ng-if="grid.appScope.isPaid(row)" ' +
+            '<md-button class="md-icon-button md-primary" ng-if="grid.appScope.isPaid(row)" ' +
             '           ng-disabled="grid.appScope.isProcessing" ' +
             '           ng-click="grid.appScope.fnRefund(row,$event);">' +
             '   <md-icon md-font-set="material-icons">payment</md-icon>' +

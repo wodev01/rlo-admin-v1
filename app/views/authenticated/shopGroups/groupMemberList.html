@@ -3,7 +3,7 @@
     <div class="md-title margin-bottom-10">Add Member to Group:</div>
 
 
-    <div layout="row" layout-xs="column" layout-align-gt-sm="space-between center">
+    <div layout="row" layout-xs="column" md-theme="rlo" layout-align-gt-sm="space-between center">
       <md-autocomplete
         md-selected-item="autoComplete.selectedItem"
         md-search-text-change="searchTextChange(autoComplete.searchText);"
@@ -18,7 +18,7 @@
           <span md-highlight-text="autoComplete.searchText" md-highlight-flags="^i">{{item.label}}</span>
         </md-item-template>
       </md-autocomplete>
-      <md-button class="md-raised md-accent addMemberBtn"
+      <md-button class="md-raised md-primary addMemberBtn"
                  ng-click="fnAddMemberToGroup(partnerId); autoComplete.searchText = ''"
                  ng-disabled="isAddBtnDisabled">Add Member
       </md-button>
