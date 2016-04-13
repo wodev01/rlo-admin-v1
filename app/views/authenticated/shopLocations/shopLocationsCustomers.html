@@ -1,0 +1,216 @@
+<md-content id="customerTab" class="md-padding">
+    <ul class="breadcrumb">
+        <li ng-repeat="breadcrumb in breadcrumbArr" ng-click="fnOnSelectBreadcrumb($index)">
+            <a href="javascript:void(0);">{{breadcrumb.name}}</a>
+        </li>
+    </ul>
+
+    <div ng-if="customerIndex == 0">
+        <form name="searchForm" class="margin-bottom-10">
+            <input type="text" name="searchFilter"
+                   class="filterBox"
+                   ng-model="searchCustomerFilter"
+                   placeholder="Search..."
+                   ng-change="fnFilterKeyEvent(searchCustomerFilter)"
+                   ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }"
+                   ng-keyup="fnCancelSearchFilter($event, this)"/>
+        </form>
+
+        <div ng-if="isMsgShow">
+            <div class="md-headline text-center">No customers data available.</div>
+        </div>
+
+        <div ng-if="!isDataNotNull && !isMsgShow" layout="column" layout-align="center center"
+             layout-fill flex>
+            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <!-- Grid Section -->
+        <div ng-if="isDataNotNull"
+             ui-grid="customersGridOptions" ui-grid-selection ui-grid-auto-resize
+             ng-style="$root.fnReturnGridHeight(customersData.length, false, true);" ng-cloak></div>
+    </div>
+
+    <div ng-if="customerIndex == 1">
+        <!-- Customer Info-->
+        <div class="md-whiteframe-10dp">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout layout-align="center center">
+                    <span class="md-title">Customer Info</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Name:</label>
+                    <label flex>{{customer.first_name}}&nbsp;{{customer.last_name}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Company:</label>
+                    <label flex>{{customer.company}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Address 1:</label>
+                    <label flex>{{customer.address1}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Postal Code:</label>
+                    <label flex>{{customer.postal_code}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">City:</label>
+                    <label flex>{{customer.city}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Phone Numbers:</label>
+                    <label flex>{{customer.phone_numbers | joinTelArray}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">State:</label>
+                    <label flex>{{customer.state}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Email:</label>
+                    <label flex>{{customer.email_addresses | joinArray}}</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vehicles Info-->
+        <div class="md-whiteframe-10dp">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout layout-align="center center">
+                    <span class="md-title">Vehicles Info</span>
+                </div>
+            </md-toolbar>
+
+            <div style="overflow: auto"> <!--max-height: 350px-->
+                <div layout="column" layout-sm="column" layout-margin>
+                    <div layout="row" layout-sm="column">
+                        <div class="datagrid">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Make</th>
+                                    <th>License</th>
+                                    <th>Year</th>
+                                    <th>Color</th>
+                                    <th>Odometer</th>
+                                    <th>Notes</th>
+                                    <th>Reference</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="val in customer.vehicles" ng-class="{'selected':$index == selectedRow}"
+                                    ng-click="setClickedRow($index)">
+                                    <td>{{val.model}}</td>
+                                    <td>{{val.make}}</td>
+                                    <td>{{val.license}}</td>
+                                    <td>{{val.year}}</td>
+                                    <td>{{val.color}}</td>
+                                    <td>{{val.last_odo}}</td>
+                                    <td>{{val.notes}}</td>
+                                    <td>{{val.reference}}</td>
+                                    <td>
+                                        <div layout="row">
+                                            <md-button class="md-icon-button md-accent"
+                                                       ng-click="fnViewVehicleDetails(val); setClickedRow($index);">
+                                                <md-icon md-font-set="material-icons">launch</md-icon>
+                                                <md-tooltip ng-if="$root.isMobile === null" md-direction="top">View</md-tooltip>
+                                            </md-button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="customerIndex == 2">
+        <!-- Vehicles Info-->
+        <div class="md-whiteframe-10dp">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout layout-align="center center">
+                    <span class="md-title">Vehicles Info</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Model:</label>
+                    <label flex>{{vehicleObj.model}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Make:</label>
+                    <label flex>{{vehicleObj.make}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Licenses:</label>
+                    <label flex>{{vehicleObj.license}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Year:</label>
+                    <label flex>{{vehicleObj.year}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Color:</label>
+                    <label flex>{{vehicleObj.color}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Odometer:</label>
+                    <label flex>{{vehicleObj.last_odo}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Notes:</label>
+                    <label flex>{{vehicleObj.notes}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Reference:</label>
+                    <label flex>{{vehicleObj.reference}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-whiteframe-10dp margin-bottom-10">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout layout-align="center center">
+                    <span class="md-title">Recommended Items</span>
+                </div>
+            </md-toolbar>
+            <recommended-grid vehicle-id="vehicleObj.id"></recommended-grid>
+        </div>
+
+        <div class="md-whiteframe-10dp">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout layout-align="center center">
+                    <span class="md-title">Repair Orders</span>
+                </div>
+            </md-toolbar>
+            <repair-order-grid vehicle-id="vehicleObj.id"></repair-order-grid>
+        </div>
+    </div>
+</md-content>

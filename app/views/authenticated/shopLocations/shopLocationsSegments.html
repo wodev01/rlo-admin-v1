@@ -1,0 +1,24 @@
+<md-content class="md-padding" ng-init="fnInitSegments();">
+    <div class="margin-bottom-10" layout="row" layout-align="end center">
+        <md-button class="md-raised md-accent"
+                   ng-click="fnRematchLastSixMonths();"
+                   ng-disabled="isShopLocSegmentMsgShow">Rematch Last Six Months
+        </md-button>
+        <md-button class="md-raised md-accent margin-right-0" ng-click="fnCreateNewSegment();">New Segment</md-button>
+    </div>
+
+    <div ng-if="!isShopLocSegmentDataNotNull && !isShopLocSegmentMsgShow" layout="column" layout-align="center center"
+         layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div ng-if="isShopLocSegmentMsgShow">
+        <div class="md-headline text-center">No Segments available.</div>
+    </div>
+
+    <!-- Grid Section -->
+    <div ng-if="isShopLocSegmentDataNotNull"
+         ui-grid="shopLocationSegmentsGridOptions" ui-grid-selection ui-grid-auto-resize
+         ng-style="fnReturnGridHeight(shopLocationSegmentsData.length);"></div>
+
+</md-content>

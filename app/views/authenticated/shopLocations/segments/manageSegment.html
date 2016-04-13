@@ -1,0 +1,35 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageSegmentView">
+    <section ng-controller="manageSegmentsCtrl" ng-if="isManageSegmentOpen">
+        <!-- swapping view header -->
+        <md-toolbar class="light-black-bg-1">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span ng-bind="segment.id ? segmentName : 'New Segment'"></span>
+                <md-button class="md-raised md-accent" ng-click="fnCloseManageSegmentView()">Back</md-button>
+            </div>
+        </md-toolbar>
+
+        <!-- swapping view content -->
+        <md-content class="md-padding">
+            <form name="manageSegmentForm" layout="column" novalidate>
+                <md-input-container>
+                    <label>Segment Name</label>
+                    <input name="name" ng-model="segment.name" ng-minlength="5" required/>
+                </md-input-container>
+
+                <div layout="row" layout-align="end center">
+                    <md-progress-circular class="md-primary" md-theme="rsmt" ng-if="isProcessing"
+                                          md-mode="indeterminate"></md-progress-circular>
+
+                    <md-button class="md-raised md-accent"
+                               ng-disabled="manageSegmentForm.$invalid || !manageSegmentForm.$dirty || isProcessing"
+                               ng-click="fnSaveSegment(segment);">Save
+                    </md-button>
+
+                    <md-button class="md-warn md-raised md-hue-2"
+                               ng-click="fnCloseManageSegmentView();">Cancel
+                    </md-button>
+                </div>
+            </form>
+        </md-content>
+    </section>
+</md-sidenav>

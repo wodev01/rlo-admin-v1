@@ -1,0 +1,611 @@
+<md-content id="dashboard-tab" class="md-padding overflow-hidden" ng-init="fnInitDashboard();">
+    <!-- Location Drop-down -->
+    <div layout="row">
+        <md-input-container>
+            <label>Locations</label>
+            <md-select ng-model="selectedLocationOption"
+                       ng-change="fnLocationChange(selectedLocationOption);">
+                <md-option ng-repeat="location in locationDDOptions" ng-value="location.id">
+                    {{location.name}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <!-- 1st Row : Summary Section -->
+    <section id="summary-section" class="margin-bottom-10 md-whiteframe-10dp" layout="column">
+        <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span class="md-title text-small-599 text-small-959">Summary</span>
+
+                <md-input-container class="md-body-1">
+                    <md-select aria-label="Summary Options"
+                               ng-model="selectedSummaryOption"
+                               ng-change="fnSummaryOptionChanged(selectedSummaryOption, selectedLocationOption);">
+                        <md-option ng-repeat="option in summaryDDOptions" ng-value="option.value" ng-selected="$first">
+                            {{option.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-toolbar>
+
+        <!-- Loader -->
+        <md-content class="dashContainerContent" ng-if="!isDailySummaryData" layout="column"
+                    layout-align="center center" layout-fill>
+            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </md-content>
+
+        <md-content class="dashContainerContent summaryContent" layout="column" layout-padding
+                    ng-if="isDailySummaryData">
+            <!--Year-to-date/Month-to-date-->
+            <section ng-if="selectedSummaryOption === 'year_month_to_date'">
+                <div>
+                    <h3>Year-To-Date</h3>
+
+                    <div layout="column" layout-gt-sm="row">
+                        <div layout="row" layout-xs="column" flex>
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{currentYearData.gross_sales_cents | CentToDollar | currency}}</div>
+                                <div ng-style="{ 'color' : varianceObj[0].gross_sales_cents.colorCode}">
+                                    ({{varianceObj[0].gross_sales_cents.value}})
+                                </div>
+                                <h4>Total Gross Sales</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{currentYearData.average_daily_sales_gross_cents | CentToDollar | currency}}</div>
+                                <div ng-style="{ 'color' : varianceObj[0].average_daily_sales_gross_cents.colorCode}">
+                                    ({{varianceObj[0].average_daily_sales_gross_cents.value}})
+                                </div>
+                                <h4>Avg. Daily Gross Sales</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{currentYearData.average_sale_cents | CentToDollar | currency}}</div>
+                                <div ng-style="{ 'color' : varianceObj[0].average_sale_cents.colorCode}">
+                                    ({{varianceObj[0].average_sale_cents.value}})
+                                </div>
+                                <h4>Average R.O.</h4>
+                            </div>
+                        </div>
+                        <div layout="row" layout-xs="column" flex>
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{currentYearData.average_daily_sales_count | number: 2}}</div>
+                                <div ng-style="{ 'color' : varianceObj[0].average_daily_sales_count.colorCode}">
+                                    ({{varianceObj[0].average_daily_sales_count.value}})
+                                </div>
+                                <h4>Avg. Daily R.O. Count</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>
+                                    {{ currentYearData.gross_sales_cents === 0 ? 0 :
+                                    (fnCalculateGrossProfitCent(currentYearData)/currentYearData.gross_sales_cents)
+                                    * 100 | number: 2}}%
+                                </div>
+                                <div ng-style="{ 'color' : varianceObj[0].gross_profit_per.colorCode}">
+                                    ({{varianceObj[0].gross_profit_per.value}})
+                                </div>
+                                <h4>GP%</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{ fnCalculateGrossProfitCent(currentYearData) | CentToDollar | currency }}</div>
+                                <div ng-style="{ 'color' : varianceObj[0].gross_profit_dollar.colorCode}">
+                                    ({{varianceObj[0].gross_profit_dollar.value}})
+                                </div>
+                                <h4>Gross Profit $</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Month-To-Date</h3>
+
+                    <div layout="column" layout-gt-sm="row">
+                        <div layout="row" layout-xs="column" flex>
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{monthToDate.gross_sales_cents | CentToDollar | currency}}</div>
+                                <h4>Total Gross Sales</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{monthToDate.average_daily_sales_gross_cents | CentToDollar | currency}}</div>
+                                <h4>Avg. Daily Gross Sales</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{monthToDate.average_sale_cents | CentToDollar | currency}}</div>
+                                <h4>Average R.O.</h4>
+                            </div>
+                        </div>
+
+                        <div layout="row" layout-xs="column" flex>
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{monthToDate.average_daily_sales_count | number:2}}</div>
+                                <h4>Avg. Daily R.O. Count</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>
+                                    {{ monthToDate.gross_sales_cents === 0 ? 0 :
+                                    (fnCalculateGrossProfitCent(monthToDate)/monthToDate.gross_sales_cents)
+                                    * 100 | number: 2}}%
+                                </div>
+                                <h4>GP%</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{ fnCalculateGrossProfitCent(monthToDate) | CentToDollar | currency }}</div>
+                                <h4>Gross Profit $</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--Last 12 months/Last 30 days-->
+            <section ng-if="selectedSummaryOption === 'last_12_months_30_days'">
+                <!--last 12 months summary-->
+                <div>
+                    <h3>Last 12 months</h3>
+
+                    <div layout="column" layout-gt-sm="row">
+                        <div layout="row" layout-xs="column" flex>
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{last_12_months.gross_sales_cents | CentToDollar | currency}}</div>
+                                <h4>Total Gross Sales</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{last_12_months.average_daily_sales_gross_cents | CentToDollar | currency}}</div>
+                                <h4>Avg. Daily Gross Sales</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{last_12_months.average_sale_cents | CentToDollar | currency}}</div>
+                                <h4>Average R.O.</h4>
+                            </div>
+                        </div>
+
+                        <div layout="row" layout-xs="column" flex>
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{last_12_months.average_daily_sales_count | number:2}}</div>
+                                <h4>Avg. Daily R.O. Count</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>
+                                    {{ last_12_months.gross_sales_cents === 0 ? 0 :
+                                    (fnCalculateGrossProfitCent(last_12_months)/last_12_months.gross_sales_cents)
+                                    * 100 | number: 2}}%
+                                </div>
+                                <h4>GP%</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div> {{ fnCalculateGrossProfitCent(last_12_months) | CentToDollar | currency }}</div>
+                                <h4>Gross Profit $</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--last 30 days summary-->
+                <div>
+                    <h3>Last 30 days</h3>
+
+                    <div layout="column" layout-gt-sm="row">
+                        <div layout="row" layout-xs="column" flex>
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{last_30_days.gross_sales_cents | CentToDollar | currency}}</div>
+                                <h4>Total Gross Sales</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{last_30_days.average_daily_sales_gross_cents | CentToDollar | currency}}</div>
+                                <h4>Avg. Daily Gross Sales</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{last_30_days.average_sale_cents | CentToDollar | currency}}</div>
+                                <h4>Average R.O.</h4>
+                            </div>
+                        </div>
+
+                        <div layout="row" layout-xs="column" flex>
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>{{last_30_days.average_daily_sales_count | number:2}}</div>
+                                <h4>Avg. Daily R.O. Count</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div>
+                                    {{ last_30_days.gross_sales_cents === 0 ? 0 :
+                                    (fnCalculateGrossProfitCent(last_30_days)/last_30_days.gross_sales_cents)
+                                    * 100 | number: 2}}%
+                                </div>
+                                <h4>GP%</h4>
+                            </div>
+
+                            <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                <div> {{ fnCalculateGrossProfitCent(last_30_days) | CentToDollar | currency }}</div>
+                                <h4>Gross Profit $</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--year 2015 summary-->
+            <section ng-if="selectedSummaryOption === '2015'">
+                <!-- Loader -->
+                <div class="dashContainerContent summaryContent" ng-if="!isSummary2015Data" layout="column"
+                     layout-align="center center" layout-fill flex>
+                    <md-progress-circular class="md-accent" md-diameter="100"
+                                          md-mode="indeterminate"></md-progress-circular>
+                </div>
+
+                <div ng-if="isSummary2015Data">
+                    <div>
+                        <h3>2015</h3>
+
+                        <div layout="column" layout-gt-sm="row">
+                            <div layout="row" layout-xs="column" flex>
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{curr_summary_2015.gross_sales_cents | CentToDollar | currency}}</div>
+                                    <span ng-style="{ 'color' : varianceObj[1].gross_sales_cents.colorCode}">
+                                        ({{varianceObj[1].gross_sales_cents.value}})
+                                    </span>
+                                    <h4>Total Gross Sales</h4>
+                                </div>
+
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{curr_summary_2015.average_daily_sales_gross_cents | CentToDollar | currency}}
+                                    </div>
+                                    <span ng-style="{ 'color' : varianceObj[1].average_daily_sales_gross_cents.colorCode}">
+                                        ({{varianceObj[1].average_daily_sales_gross_cents.value}})
+                                    </span>
+                                    <h4>Avg. Daily Gross Sales</h4>
+                                </div>
+
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{curr_summary_2015.average_sale_cents | CentToDollar | currency}}</div>
+                                <span ng-style="{ 'color' : varianceObj[1].average_sale_cents.colorCode}">
+                                    ({{varianceObj[1].average_sale_cents.value}})
+                                </span>
+                                    <h4>Average R.O.</h4>
+                                </div>
+                            </div>
+                            <div layout="row" layout-xs="column" flex>
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{curr_summary_2015.average_daily_sales_count | number:2}}</div>
+                                <span ng-style="{ 'color' : varianceObj[1].average_daily_sales_count.colorCode}">
+                                    ({{varianceObj[1].average_daily_sales_count.value}})
+                                </span>
+                                    <h4>Avg. Daily R.O. Count</h4>
+                                </div>
+
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>
+                                        {{ curr_summary_2015.gross_sales_cents === 0 ? 0 :
+                                        (fnCalculateGrossProfitCent(curr_summary_2015)/curr_summary_2015.gross_sales_cents)
+                                        * 100 | number: 2}}%
+                                    </div>
+                                <span ng-style="{ 'color' : varianceObj[1].gross_profit_per.colorCode}">
+                                    ({{varianceObj[1].gross_profit_per.value}})
+                                </span>
+                                    <h4>GP%</h4>
+                                </div>
+
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div> {{ fnCalculateGrossProfitCent(curr_summary_2015) | CentToDollar | currency}}
+                                    </div>
+                                <span ng-style="{ 'color' : varianceObj[1].gross_profit_dollar.colorCode}">
+                                    ({{varianceObj[1].gross_profit_dollar.value}})
+                                </span>
+                                    <h4>Gross Profit $</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3>December 2015</h3>
+
+                        <div layout="column" layout-gt-sm="row">
+                            <div layout="row" layout-xs="column" flex>
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{dec_summary_2015.gross_sales_cents | CentToDollar | currency}}</div>
+                                    <h4>Total Gross Sales</h4>
+                                </div>
+
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{dec_summary_2015.average_daily_sales_gross_cents | CentToDollar | currency}}
+                                    </div>
+                                    <h4>Avg. Daily Gross Sales</h4>
+                                </div>
+
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{dec_summary_2015.average_sale_cents | CentToDollar | currency}}</div>
+                                    <h4>Average R.O.</h4>
+                                </div>
+                            </div>
+                            <div layout="row" layout-xs="column" flex>
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{dec_summary_2015.average_daily_sales_count | number:2}}</div>
+                                    <h4>Avg. Daily R.O. Count</h4>
+                                </div>
+
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>
+                                        {{ dec_summary_2015.gross_sales_cents === 0 ? 0 :
+                                        (fnCalculateGrossProfitCent(dec_summary_2015)/dec_summary_2015.gross_sales_cents)
+                                        * 100 | number: 2}}%
+                                    </div>
+                                    <h4>GP%</h4>
+                                </div>
+
+                                <div class="total md-padding" md-whiteframe="3" layout="column" layout-margin flex>
+                                    <div>{{ fnCalculateGrossProfitCent(dec_summary_2015) | CentToDollar | currency}}
+                                    </div>
+                                    <h4>Gross Profit $</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </md-content>
+    </section>
+
+    <!--2nd Row-->
+    <section id="monthly-barchart-section" class="margin-bottom-10 md-whiteframe-10dp" layout="column">
+        <!--Monthly Bar Chart-->
+        <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span class="md-title text-small-599 text-small-959" flex="33">{{barChartName}} By Month</span>
+
+                <div layout="row" layout-align="end center" flex>
+                    <md-input-container class="md-body-1">
+                        <md-select aria-label="Group Type" ng-model="selectedGroupOption"
+                                   ng-change="fnChangeGroup(selectedGroupOption);">
+                            <md-option ng-repeat="group in chartGroupsOptions" ng-selected="$first"
+                                       ng-value="group">{{group.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <span hide show-gt-sm>&nbsp;&nbsp;</span>
+                    <md-input-container ng-if="sendJsonToBar.length !== 0" class="md-body-1">
+                        <md-select aria-label="Chart Type" ng-model="selectedChartType"
+                                   ng-change="fnGenerateBarChart(selectedChartType, selectedLocationOption);">
+                            <md-option ng-repeat="chart in chartOptions" ng-value="chart"
+                                       ng-selected="$first">{{chart.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </div>
+        </md-toolbar>
+
+        <!-- Loader -->
+        <md-content class="dashContainerContent" ng-if="!isMonthlySummaryData" layout="column"
+                    layout-align="center center" layout-fill>
+            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </md-content>
+
+        <md-content class="md-padding overflow-hidden" ng-if="isMonthlySummaryData">
+            <div class="bar-data-msg" ng-if="isMonthlyBarMsg && isDailySummaryData">{{barChartName}} is not available.
+            </div>
+            <div id="bar-chart" ng-init="fnGenerateBarChart(selectedChartType, selectedLocationOption);"></div>
+        </md-content>
+    </section>
+
+    <!--3rd Row-->
+    <section id="daily-barchart-section" layout="row" layout-sm="column" layout-xs="column">
+        <!--Daily Bar Chart-->
+        <div class="dailyBarContainer margin-bottom-10 md-whiteframe-10dp" flex flex-gt-sm="70">
+            <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+                <div class="md-toolbar-tools">
+                    <span class="md-title text-small-599 text-small-959">
+                        {{dailyHeading}} By Day For {{dailyBarMonth}}
+                    </span>
+                </div>
+            </md-toolbar>
+
+            <!-- Loader -->
+            <div class="dashContainerContent" ng-if="!isDailySummaryData" layout="column" layout-align="center center"
+                 layout-fill flex>
+                <md-progress-circular class="md-accent" md-diameter="100"
+                                      md-mode="indeterminate"></md-progress-circular>
+            </div>
+
+            <md-content class="md-padding" ng-if="isDailySummaryData">
+                <div class="bar-data-msg" ng-if="isDailyBarMsg && isDailySummaryData">
+                    {{dailyHeading}} is not available.
+                </div>
+                <div id="daily-bar-chart"></div>
+            </md-content>
+        </div>
+
+        <span hide show-gt-sm>&nbsp;&nbsp;</span>
+        <!--Repair Orders-->
+        <div class="roContainer margin-bottom-10 md-whiteframe-10dp" flex flex-gt-sm="30">
+            <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+                <div class="md-toolbar-tools">
+                    <span class="md-title text-small-599 text-small-959">
+                        Repair Orders <span ng-if="isLocId">for {{currentDate | date : 'longDate'}}</span>
+                    </span>
+                </div>
+            </md-toolbar>
+
+            <!-- Loader -->
+            <div class="dashContainerContent" ng-if="!isRepairOrdersData" layout="column" layout-align="center center"
+                 layout-fill flex>
+                <md-progress-circular class="md-accent" md-diameter="100"
+                                      md-mode="indeterminate"></md-progress-circular>
+            </div>
+
+            <md-content class="dashContainerContent" ng-if="isRepairOrdersData">
+                <div ng-if="!isLocId" layout-margin layout-padding>
+                    Please select a single location above to see a list of repair orders.
+                </div>
+
+                <div ng-if="isRepairOrderMsg" layout-margin layout-padding>Repair orders not available.</div>
+
+                <md-list ng-if="isLocId && !isRepairOrderMsg">
+                    <md-list-item class="md-3-line md-long-text" layout="column"
+                                  ng-repeat="repairOrder in repairOrders">
+                        <div class="margin-bottom-10"
+                             ng-click="fnOpenRepairOrderModal($event, repairOrder, repairOrders);">
+                            <h3>RO #{{repairOrder.order_number}}</h3>
+
+                            <div layout="row"><span class="leftLabel">Customer :</span>
+                                {{repairOrder.customer.first_name}}&nbsp;{{repairOrder.customer.last_name}}
+                            </div>
+
+                            <div layout="row"><span class="leftLabel">Vehicle Type :</span>
+                                {{repairOrder.vehicle.model}}
+                            </div>
+
+                            <div layout="row"><span class="leftLabel">Amount :</span>
+                                {{repairOrder.total_sold_price_cents | CentToDollar | currency}}
+                            </div>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-list>
+            </md-content>
+        </div>
+    </section>
+
+    <!--4th Row-->
+    <section id="employee-barchart-section" class="margin-bottom-10 md-whiteframe-10dp" layout="column">
+        <!--Employee Performance Bar Chart-->
+
+        <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span class="md-title text-small-599 text-small-959">Employee Performance</span>
+
+                <md-input-container class="md-body-1">
+                    <md-select aria-label="Group Type" ng-model="selectedEmpPerformanceOption"
+                               ng-change="fnGenerateBarEmpPerChart(selectedEmpPerformanceOption);">
+                        <md-option ng-repeat="empType in empPerformanceDDOptions" ng-value="empType.value"
+                                   ng-selected="$first">
+                            {{empType.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </md-toolbar>
+
+        <!-- Loader -->
+        <div class="dashContainerContent" ng-if="!isEmpPerformanceDataLoaded" layout="column"
+             layout-align="center center" layout-fill>
+            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <md-content class="dashContainerContent md-padding" ng-if="isEmpPerformanceDataLoaded && isEmpPerformanceMsg">
+            <div class="bar-data-msg">Employee Performance is not available.</div>
+        </md-content>
+
+        <md-content class="md-padding overflow-hidden" ng-if="isEmpPerformanceDataLoaded && !isEmpPerformanceMsg">
+            <div id="bar-chart-emp-performance" ng-init="fnGenerateBarEmpPerChart(selectedEmpPerformanceOption);"></div>
+        </md-content>
+
+    </section>
+
+    <!--5th Row-->
+    <section id="customer-barchart-section" layout="row" layout-sm="column" layout-xs="column">
+        <!-- Customer Report Bar-chart -->
+        <div class="custBarContainer margin-bottom-10 md-whiteframe-10dp" flex flex-gt-sm="70">
+            <!--Daily Bar Chart-->
+            <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+                <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                    <span class="md-title text-small-599 text-small-959">
+                        Customer Report for {{custRepoBarChartName}}
+                    </span>
+
+                    <md-input-container class="md-body-1">
+                        <md-select aria-label="Customer Type"
+                                   ng-model="selectedCustRepoOptions"
+                                   ng-change="fnGenerateCustomerReportBarChart(selectedCustRepoOptions);">
+                            <md-option ng-repeat="custType in custRepoOptions" ng-value="custType.value"
+                                       ng-selected="$first">
+                                {{custType.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </md-toolbar>
+
+            <!-- Loader -->
+            <div class="dashContainerContent" ng-if="!isCustomerReportData" layout="column" layout-align="center center"
+                 layout-fill flex>
+                <md-progress-circular class="md-accent" md-diameter="100"
+                                      md-mode="indeterminate"></md-progress-circular>
+            </div>
+
+            <md-content class="md-padding" ng-if="isCustomerReportData">
+                <div class="bar-data-msg" ng-if="isCustRepoBarMsg"> {{custRepoBarChartName}} is not available.</div>
+                <div id="customer-report-bar-chart"
+                     ng-init="fnGenerateCustomerReportBarChart(selectedCustRepoOptions);"></div>
+            </md-content>
+        </div>
+
+        <span hide show-gt-sm>&nbsp;&nbsp;</span>
+        <!-- pie-chart -->
+        <div class="pieChartContainer margin-bottom-10 md-whiteframe-10dp" flex flex-gt-sm="30">
+            <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+                <div class="md-toolbar-tools">
+                    <span class="md-title text-small-599 text-small-959">
+                        Active, New and Lost Customers for {{pieChartTitle}}
+                    </span>
+                </div>
+            </md-toolbar>
+
+            <!-- Loader -->
+            <div class="dashContainerContent" ng-if="!isPieChartCustData" layout="column" layout-align="center center"
+                 layout-fill flex>
+                <md-progress-circular class="md-accent" md-diameter="100"
+                                      md-mode="indeterminate"></md-progress-circular>
+            </div>
+
+            <md-content class="md-padding" ng-if="isPieChartDataMsg && isPieChartCustData" layout-margin layout-padding>
+                <span>Active, New and Lost Customers data is not available.</span>
+            </md-content>
+
+            <md-content class="md-padding daily-container-content" ng-if="isPieChartCustData">
+                <div id="pie-chart"
+                     ng-init="fnGeneratePieChart(customerReportData[customerReportData.length-1]);"></div>
+            </md-content>
+        </div>
+    </section>
+
+    <!--6th Row-->
+    <section id="marketing-barchart-section" class="margin-bottom-10 overflow-hidden md-whiteframe-10dp"
+             layout="column">
+        <!--Marketing Source Bar Chart-->
+        <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span class="md-title text-small-599 text-small-959">Marketing Sources</span>
+            </div>
+        </md-toolbar>
+
+        <!-- Loader -->
+        <div class="dashContainerContent" ng-if="!isMarketingSourcesDataLoaded" layout="column"
+             layout-align="center center" layout-fill>
+            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <md-content class="md-padding" ng-if="isMarketingSourcesDataLoaded">
+            <div class="bar-data-msg" ng-if="isMarketingSourcesMsg">Marketing Sources is not available.</div>
+            <div id="bar-chart-marketing-sources"
+                 ng-init="fnGenerateBarMSChart(createMarketingSourceArr,marketingSourceYAxisArr);"></div>
+        </md-content>
+    </section>
+
+</md-content>

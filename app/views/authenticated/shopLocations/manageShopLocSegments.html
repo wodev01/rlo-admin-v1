@@ -1,0 +1,32 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageShopLocSegmentsView">
+    <!-- swapping view header -->
+    <md-toolbar class="light-black-bg-1">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            {{segmentName}}
+            <md-button class="md-raised md-accent" ng-click="fnCloseManageShopLocSegmentsView();">Back</md-button>
+        </div>
+    </md-toolbar>
+
+    <div layout="column" md-theme="grey">
+        <md-tabs class="md-primary" md-dynamic-height md-selected="selectedIndex">
+            <md-tab label="Interactions">
+                <div ng-if="selectedIndex == 0 && isManageSegmentOpenTabsView"
+                     ng-include="'views/authenticated/shopLocations/segments/segmentsInteractions.html'"
+                     ng-controller="segmentsInteractionCtrl"></div>
+            </md-tab>
+
+            <md-tab label="Configuration">
+                <div ng-if="selectedIndex == 1 && isManageSegmentOpenTabsView"
+                     ng-controller="segmentsConfigurationCtrl"
+                     ng-include="'views/authenticated/shopLocations/segments/segmentsConfiguration.html'"></div>
+            </md-tab>
+
+            <md-tab label="Info">
+                <div ng-if="selectedIndex == 2 && isManageSegmentOpenTabsView"
+                     ng-controller="segmentInfoCtrl"
+                     ng-include="'views/authenticated/shopLocations/segments/segmentInfo.html'"></div>
+            </md-tab>
+        </md-tabs>
+    </div>
+
+</md-sidenav>

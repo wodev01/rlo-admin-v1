@@ -1,0 +1,70 @@
+<md-content class="md-padding">
+    <div layout="row" layout-align="end center">
+        <div layout="row">
+            <md-button class="md-raised md-accent margin-right-0" ng-click="fnAddRow(nextConfig,keyDDArr);"
+                       ng-show="isAddBtnShow">
+                Add Row
+            </md-button>
+            <md-button class="md-raised md-accent margin-right-0" ng-click="fnResetTable(nextConfig);"
+                       ng-show="isResetBtnShow">
+                Reset Next Config
+            </md-button>
+        </div>
+    </div>
+
+    <md-content layout="row">
+        <div class="custom-table" style="overflow-x: auto !important;">
+            <div style="color: green;margin: 0 auto;" ng-show="isUpdated"><span>{{msg}}</span></div>
+            <table style="overflow-y: hidden;">
+                <tr>
+                    <td>Name</td>
+                    <td style="min-width: 200px;">Value</td>
+                    <td>Empty</td>
+                    <td></td>
+                </tr>
+                <tr ng-repeat="(ncKey,ncVal) in nextConfig">
+                    <td>
+                        <select name="keyDD" ng-model="selectedKey[ncKey]"
+                                ng-init="fnInitDD(ncKey,nextConfig,keyDDArr);"
+                                ng-change="fnChangeDD(nextConfig,ncKey,selectedKey[ncKey]);"
+                                ng-disabled="isResetBtnShow">
+                            <option ng-repeat="dd in tableRowObjForDD[ncKey]" value="{{dd.val}}" ng-disabled="!dd.val">
+                                {{dd.label}}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <md-input-container class="remove-error-space" layout-fill>
+                            <input name="last_inform" aria-label="last inform" ng-model="ncVal"
+                                   ng-disabled="isChecked || isResetBtnShow"
+                                   ng-keyup="fnTextBoxKeyEvent(nextConfig,ncKey,ncVal);"/>
+                        </md-input-container>
+                    </td>
+                    <td>
+                        <div style="padding-top: 15px;" layout="row" layout-align="space-around center" layout-fill>
+                            <md-checkbox aria-label="checkbox.label" ng-disabled="isResetBtnShow"
+                                         ng-change="fnCheckboxChange(isChecked,nextConfig,ncKey,ncVal);"
+                                         ng-model="isChecked"></md-checkbox>
+                        </div>
+                    </td>
+                    <td>
+                        <div layout="row" layout-align="space-around center" layout-fill>
+                            <md-button class="md-icon-button md-warn md-hue-2" ng-disabled="isResetBtnShow"
+                                       ng-click="fnDeleteRow(nextConfig,selectedKey[ncKey]);">
+                                <md-icon md-font-set="material-icons">delete</md-icon>
+                                <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Delete Row</md-tooltip>
+                            </md-button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </md-content>
+
+    <md-content layout="row" layout-align="end center">
+        <md-button class="md-raised md-accent margin-right-0" ng-click="fnSaveNextConfig(nextConfig);"
+                   ng-disabled="isSaveDisabled">
+            Save Next Config
+        </md-button>
+    </md-content>
+</md-content>

@@ -1,0 +1,35 @@
+<md-dialog id="download-customer-csv-dialog" aria-label="Download Customer CSV Dialog" flex-sm="60" flex-gt-sm="40">
+    <md-toolbar>
+        <div class="md-toolbar-tools"> Download Customer CSV</div>
+    </md-toolbar>
+
+    <md-content class="md-padding" ng-init="fnInit();">
+        <form name="downloadCustomerCSVForm" layout="column" novalidate>
+            <div> This could take some time. Are you sure..?</div>
+            <p class="text-danger text-justify">
+                Part and Labor match fields should be a comma list of search terms.
+                Don’t forget to use the wildcard character ‘*’ (asterisk) before and
+                after terms in order to do partial string matching.
+            </p>
+
+            <input id="pickDateRange" ng-model="drpObj" />
+
+            <md-input-container class="remove-error-space" flex>
+                <label>Labor Match</label>
+                <input type="text" ng-model="downloadFilter.labor_match"/>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space" flex>
+                <label>Part Match</label>
+                <input type="text" ng-model="downloadFilter.part_match"/>
+            </md-input-container>
+
+            <div class="md-dialog-actions" layout="row" layout-align="end center">
+                <md-button aria-label="download" class="md-raised md-accent" ng-click="fnDownload();">Download
+                </md-button>
+                <md-button aria-label="cancel" class="md-raised md-warn" ng-click="fnHide();">Cancel</md-button>
+            </div>
+
+        </form>
+    </md-content>
+</md-dialog>

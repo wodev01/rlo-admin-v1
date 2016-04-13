@@ -4,13 +4,16 @@
             <md-icon aria-label="Menu">menu</md-icon>
         </md-button>
 
-        <div layout="row">
+        <div layout="row" layout-align="space-between center" layout-fill>
             <img class="img-responsive rlo-logo" alt="Repair Shop Marketing Tools" src="images/rlo-full-logo.png"/>
+            <a href="http://rlotraining.com/demo/" target="_blank"
+               style="font-size: 16px; font-weight: bold;">Watch Video</a>
         </div>
 
         <md-menu md-position-mode="target-right target">
             <md-button ng-click="$mdOpenMenu($event);">
-                <span ng-bind="userObj.name"></span><md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>
+                <span ng-bind="userObj.name"></span>
+                <md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>
             </md-button>
 
             <md-menu-content width="4">
@@ -48,19 +51,27 @@
                 md-is-locked-open="$mdMedia('gt-sm')">
         <md-button class="md-accent" ng-class="fnIsActive('/clients')"
                    ng-click="$root.fnCloseSideNavs();" ui-sref="main.clients">
-            <md-icon md-font-set="material-icons">group</md-icon> Clients</md-button>
+            <md-icon md-font-set="material-icons">group</md-icon>
+            Clients
+        </md-button>
 
         <md-button class="md-accent" ng-class="fnIsActive('/payments')"
                    ng-click="$root.fnCloseSideNavs();" ui-sref="main.payments">
-            <md-icon md-font-set="material-icons">payment</md-icon> Payments</md-button>
+            <md-icon md-font-set="material-icons">payment</md-icon>
+            Payments
+        </md-button>
 
         <md-button class="md-accent" ng-class="fnIsActive('/groups')"
                    ng-click="$root.fnCloseSideNavs();" ui-sref="main.groups">
-            <md-icon md-font-set="material-icons">group_work</md-icon> Shop Groups</md-button>
+            <md-icon md-font-set="material-icons">group_work</md-icon>
+            Shop Groups
+        </md-button>
 
         <md-button class="md-accent" ng-class="fnIsActive('/shop-locations')"
                    ng-click="$root.fnCloseSideNavs();" ui-sref="main.shopLocations">
-            <md-icon md-font-set="material-icons">location_on</md-icon> Shop Locations</md-button>
+            <md-icon md-font-set="material-icons">location_on</md-icon>
+            Shop Locations
+        </md-button>
     </md-sidenav>
     <!-- Left Side Navigation : END-->
 

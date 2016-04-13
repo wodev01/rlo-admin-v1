@@ -92,3 +92,95 @@
 .checked_item_gray {
     background-color: #9E9E9E;
 }
+
+/*---------- START: Dashbaord Tab ----------*/
+#dashboard-tab {
+    min-height: 600px;
+}
+
+#dashboard-tab section .dashContainerContent {
+    height: 352px;
+}
+
+#dashboard-tab section .dashContainerContent.summaryContent {
+    height: 425px;
+    max-height: 425px;
+}
+
+/*---------- Summary Calculation ----------*/
+.total {
+    background-color: #EEEDEE;
+    text-align: center;
+}
+
+/*---------- END: Dashbaord Tab ----------*/
+
+/*---------- Shop-locations Log tab tooltip ----------*/
+#shopLocation-logs-tab .custom-table tr:not(:first-child):hover {
+    cursor: pointer;
+}
+
+#shopLocation-logs-tab .custom-table a.tooltips {
+    color: #000000;
+    position: relative;
+    display: inline;
+    text-decoration: none;
+}
+
+#shopLocation-logs-tab .custom-table a.tooltips > span {
+    position: absolute;
+    width: auto;
+    color: #000000;
+    background: #FFC670;
+    border: 2px solid #CCCCCC;
+    height: auto;
+    line-height: 1.5em;
+    text-align: left;
+    visibility: hidden;
+    border-radius: 6px;
+    box-shadow: 1px 1px 5px #000000;
+}
+
+#shopLocation-logs-tab .custom-table a.tooltips > span > p {
+    height: 100px;
+    width: 500px;
+    overflow: auto;
+    margin: 0;
+    padding: 10px;
+}
+
+#shopLocation-logs-tab .custom-table a.tooltips > span:before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    right: 100%;
+    margin-top: -12px;
+    width: 0;
+    height: 0;
+    border-right: 12px solid #CCCCCC;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+}
+
+#shopLocation-logs-tab .custom-table a.tooltips > span:after {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: -6px;
+    margin-top: -8px;
+    width: 0;
+    height: 0;
+    border-right: 8px solid #FFC670;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+}
+
+#shopLocation-logs-tab .custom-table a:hover.tooltips > span {
+    display: inline-table;
+    visibility: visible;
+    left: 100%;
+    top: 50%;
+    margin-top: -1.7em;
+    margin-left: 15px;
+    z-index: 1;
+}

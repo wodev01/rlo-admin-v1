@@ -1,0 +1,59 @@
+<md-content class="md-padding">
+    <div layout="row" layout-align="center center" ng-if="!lastConfig">
+        <div class="md-headline">No config information available.</div>
+    </div>
+
+    <div ng-if="lastConfig">
+        <div class="md-headline">Basic</div>
+        <div class="margin-bottom-20" layout="row" layout-sm="column">
+            <div class="custom-table">
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td>Value</td>
+                    </tr>
+                    <tr>
+                        <td>version</td>
+                        <td>{{shopLocationData.lastConfig.version}}</td>
+                    </tr>
+                    <tr ng-repeat="(key, val) in sms_info">
+                        <td>sms.{{key}}</td>
+                        <td>{{val}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="md-headline">Settings</div>
+        <div class="margin-bottom-20" layout="row" layout-sm="column">
+            <div class="custom-table" style="overflow-x: auto !important;">
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td>Value</td>
+                    </tr>
+                    <tr ng-repeat="(key, val) in settings">
+                        <td>{{key}}</td>
+                        <td>{{val}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="md-headline">Environment</div>
+        <div layout="row" layout-sm="column">
+            <div class="custom-table" style="overflow-x: auto !important;">
+                <table>
+                    <tr>
+                        <td>Name</td>
+                        <td>Value</td>
+                    </tr>
+                    <tr ng-repeat="(key, val) in environment">
+                        <td>{{key}}</td>
+                        <td>{{val}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</md-content>

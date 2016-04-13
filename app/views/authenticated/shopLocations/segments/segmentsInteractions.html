@@ -1,0 +1,95 @@
+<div id="segment-interaction-tab" class="md-padding">
+    <div ng-init="fnInitSegmentInteraction();">
+        <div layout="row">
+            <md-input-container>
+                <md-select aria-label="Select Sub Segment" ng-model="subSegmentId"
+                           ng-change="fnChangeSegmentInteractions(subSegmentId);"
+                           ng-disabled="isProcessing">
+                    <md-option ng-repeat="subSegment in segment.sub_segments | unique: 'id'" ng-value="subSegment.id">
+                        {{subSegment.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <section layout="row" layout-sm="column" layout-xs="column"
+                 layout-align="space-between center"
+                 layout-align-sm="space-around start"
+                 layout-align-xs="space-around start">
+            <div ng-if="segment.sub_segments" layout="row" flex>
+                <input id="pickDateRange" ng-model="drpObj"/>
+            </div>
+
+            <div layout="row" layout-align="space-between center" layout-fill flex>
+                <md-input-container flex>
+                    <md-select-label>Status:</md-select-label>
+                    <md-select aria-label="Select Sub Segment" ng-model="filter.status"
+                               ng-change="fnChangeFilter(filter);"
+                               ng-disabled="isProcessing">
+                        <md-option value="" selected>All Status</md-option>
+                        <md-option value="SCHEDULED">Scheduled</md-option>
+                        <md-option value="UNDELIVERED">Undelivered</md-option>
+                        <md-option value="DELIVERED">Delivered</md-option>
+                        <md-option value="FAILED">Failed</md-option>
+                        <md-option value="IGNORED">Ignored</md-option>
+                        <md-option value="PREEMPTED">Preempted</md-option>
+                    </md-select>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <md-select-label>Type:</md-select-label>
+                    <md-select aria-label="Select Sub Segment" ng-model="filter.deliveryType"
+                               ng-change="fnChangeFilter(filter);"
+                               ng-disabled="isProcessing">
+                        <md-option value="" selected>All Type</md-option>
+                        <md-option value="EMAIL">Email</md-option>
+                        <md-option value="POST">Post</md-option>
+                        <md-option value="SMS">SMS</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-align="end center"
+                 layout-align-sm="space-between center" layout-align-xs="space-between center"
+                 layout-fill flex>
+                <md-button aria-label="Refresh Grid"
+                           class="md-raised md-accent"
+                           ng-click="fnRefreshGrid();"
+                           ng-disabled="isProcessing">Refresh
+                </md-button>
+                <md-button aria-label="Download CSV"
+                           class="md-raised md-accent"
+                           ng-click="fnDownloadInteractionCSV($event);"
+                           ng-disabled="isProcessing">Export Interaction CSV
+                </md-button>
+            </div>
+        </section>
+
+        <div ng-if="!isSegmentInteractionData && !isMsgGridShow" layout="column" layout-align="center center"
+             layout-fill flex>
+            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <div class="margin-bottom-10" ng-if="isMsgGridShow">
+            <div class="md-headline text-center">No Segments Interactions Available.</div>
+        </div>
+
+        <!-- Grid Section -->
+        <div class="margin-bottom-10" ng-if="isSegmentInteractionData"
+             ui-grid="segmentInteractionGridOptions" ui-grid-selection ui-grid-auto-resize
+             ng-style="$root.fnReturnGridHeight(segmentInteractionData.length, _intRowHeight);"></div>
+
+        <div ng-if="isSegmentInteractionData" layout="row" layout-align="center center" layout-margin>
+            <div ng-if="isPagingData">
+                <md-button aria-label="More Segment Interactions" class="md-raised md-accent"
+                           ng-click="fnLoadMoreSegmentInteractions();">
+                    <span ng-if="isMoreSegmentInteractions"> Loading... </span>
+                    <span ng-if="!isMoreSegmentInteractions">More Segment Interactions </span>
+                </md-button>
+            </div>
+            <div ng-if="!isPagingData">
+                <div class="md-title">... No more results found ...</div>
+            </div>
+        </div>
+    </div>
+</div>

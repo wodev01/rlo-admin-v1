@@ -1,0 +1,161 @@
+<md-dialog id="sub-segment-dialog" style="width: 100%;" aria-label="Sub Segment Form"
+           ng-init="fnInitManageSubSegment();">
+    <!-- swapping view header -->
+    <md-toolbar class="light-black-bg-1">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span class="md-title" ng-bind="isEdit ? 'Edit Sub Segment' : 'Create Sub Segment'"></span>
+
+            <md-button class="md-icon-button" ng-click="fnCloseDialog();">
+                <md-icon md-font-set="material-icons">close</md-icon>
+                <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Close</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-padding" layout="row">
+        <!-- Segment form section -->
+        <div layout="column" class="formSection md-whiteframe-10dp overflow-hidden" layout-fill flex="40">
+            <md-toolbar class="md-primary md-hue-1 md-whiteframe-2dp">
+                <div class="md-toolbar-tools">
+                    <span ng-bind="isEdit ? 'Edit' : 'Create'"></span>
+                </div>
+            </md-toolbar>
+
+            <md-content class="contentViewSection">
+                <form name="manageSubSegmentForm" class="md-padding" layout="column" novalidate>
+                    <md-input-container class="remove-error-space">
+                        <label flex>Sub-segment Name</label>
+                        <input type="text" ng-model="subSegment.name" ng-minlength="5" required flex/>
+                    </md-input-container>
+
+                    <md-input-container class="remove-error-space">
+                        <label flex>Template Name</label>
+                        <input type="text" ng-model="subSegment.template_name" ng-minlength="3" required flex/>
+                    </md-input-container>
+
+                    <md-input-container class="remove-error-space">
+                        <label flex>Scheduled Days</label>
+                        <input type="number" ng-model="subSegment.interaction_delay_days" min="0" required flex/>
+                    </md-input-container>
+
+                    <md-input-container class="remove-error-space">
+                        <label flex>Expression</label>
+                        <textarea rows="3" cols="50" name="expression"
+                                  ng-model="subSegment.expression" required flex></textarea>
+                    </md-input-container>
+
+                    <md-checkbox aria-label="verified" ng-model="subSegment.enabled" class="md-accent">
+                        Enabled
+                    </md-checkbox>
+
+                    <md-dialog-actions layout="column" layout-gt-sm="row">
+                        <md-progress-circular class="md-primary" ng-if="isProcessing"
+                                              md-mode="indeterminate"></md-progress-circular>
+
+                        <md-button class="md-warn md-raised md-hue-2"
+                                   ng-click="fnCloseDialog();">Cancel
+                        </md-button>
+
+                        <md-button class="md-raised md-accent"
+                                   ng-disabled="manageSubSegmentForm.$invalid
+                                                    || !manageSubSegmentForm.$dirty || isProcessing"
+                                   ng-click="fnSaveSubSegment(subSegment);">Save
+                        </md-button>
+                    </md-dialog-actions>
+                </form>
+            </md-content>
+        </div>
+
+        <!-- RO preview section -->
+        &nbsp;&nbsp;
+        <div layout="column" class="previewSection md-whiteframe-10dp overflow-hidden" layout-fill flex>
+            <md-toolbar class="md-primary md-hue-1 md-whiteframe-2dp">
+                <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                    <span class="text-small-599 text-small-959" flex="20">Segment Preview</span>
+
+                    <div layout="row" layout-align="space-between center">
+                        <md-button class="md-fab md-mini" ng-click="fnPrevDate();" show-md hide-sm hide-xs>
+                            <md-icon md-font-set="material-icons">keyboard_arrow_left</md-icon>
+                            <md-tooltip md-direction="top">Previous</md-tooltip>
+                        </md-button>
+
+                        <md-datepicker class="margin-right-0"
+                                       ng-model="subSegmentDate"
+                                       md-placeholder="Enter date"></md-datepicker>
+
+                        <md-button class="md-fab md-mini" ng-click="fnNextDate();" show-md hide-sm hide-xs>
+                            <md-icon md-font-set="material-icons">keyboard_arrow_right</md-icon>
+                            <md-tooltip md-direction="top">Next</md-tooltip>
+                        </md-button>
+                    </div>
+
+                    <md-button class="md-fab md-mini"
+                               ng-disabled="manageSubSegmentForm.expression.$invalid"
+                               ng-click="fnSegmentPreview();">
+                        <md-icon md-font-set="material-icons">refresh</md-icon>
+                        <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Refresh Preview</md-tooltip>
+                    </md-button>
+                </div>
+
+                <div class="text-danger md-body-2"
+                     style="background-color: #E0E0E0; position: absolute; width: 100%;"
+                     layout="row" layout-align="end center"
+                     ng-show="manageSubSegmentForm.expression.$invalid" layout-padding flex>
+                    [ Please provide an expression. ]
+                </div>
+            </md-toolbar>
+
+            <div class="contentViewSection" ng-if="!isSegmentPreviewDataNotNull && !isSegmentPreviewMsg" layout="column"
+                 layout-align="center center" layout-fill flex>
+                <md-progress-circular class="md-accent" md-diameter="100"
+                                      md-mode="indeterminate"></md-progress-circular>
+            </div>
+
+            <div class="contentViewSection" ng-if="isSegmentPreviewMsg && !isInvalidExpMsg" layout-padding flex>
+                <div class="md-subhead">Repair orders not available.</div>
+            </div>
+
+            <div class="contentViewSection"
+                 ng-if="!isSegmentPreviewDataNotNull && isSegmentPreviewMsg && isInvalidExpMsg"
+                 layout-padding layout-margin flex> {{ invalidExpMsg }}
+            </div>
+
+            <md-content class="contentViewSection" layout="column"
+                        ng-if="isSegmentPreviewDataNotNull && !isSegmentPreviewMsg && !isInvalidExpMsg" flex>
+                <md-list>
+                    <md-list-item class="md-3-line md-long-text" layout="column"
+                                  ng-repeat="item in segmentPreviewData">
+                        <div class="margin-bottom-10" ng-click="fnSegmentPreviewEditor(item);" layout="row">
+                            <div class="checked_item" flex-sm="10" layout="row" layout-align="center center"
+                                 ng-class="item.matched ? 'checked_item_green' : 'checked_item_red'">
+                            </div>
+
+                            <div>
+                                <h3>RO #{{item.order_number}}</h3>
+
+                                <div layout="row" flex>
+                                    <span class="leftLabel">Customer :</span>
+                                    {{item.customer.first_name}}&nbsp;{{item.customer.last_name}}
+                                </div>
+
+                                <div layout="row" flex>
+                                    <span class="leftLabel">Vehicle Type :</span>
+                                    {{item.vehicle.model}}
+                                </div>
+
+                                <div layout="row" flex>
+                                    <span class="leftLabel">Amount :</span>
+                                    {{item.total_sold_price_cents | CentToDollar | currency}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-list>
+
+                <div ng-include="segmentPreviewSwapView"></div>
+            </md-content>
+        </div>
+    </md-dialog-content>
+</md-dialog>

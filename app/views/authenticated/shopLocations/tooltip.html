@@ -1,0 +1,112 @@
+<ul layout="row" layout-align="space-around center">
+    <li class="active has-sub">
+        <a href="javascript:void(0);">
+            <span class="view_labors{{rowIndex}}">View</span>
+        </a>
+
+        <ul id="view_ul{{rowIndex}}">
+            <div class="closeBtn"
+                 ng-if="$root.isMobile"
+                 ng-click="fnClose($event);">X
+            </div>
+            <li class="has-sub">
+                <div class="md-whiteframe-3dp">
+                    <md-toolbar md-theme="rsmt">
+                        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                            <div class="md-title"> Order #{{recent_repair_orders_obj.order_number }}</div>
+
+                            <div class="md-primary" layout="row">
+                                <md-button class="md-fab md-mini"
+                                           ng-disabled="position <= 0"
+                                           ng-click="fnMove(-1);">
+                                    <md-icon md-font-set="material-icons"> skip_previous</md-icon>
+                                    <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Previous</md-tooltip>
+                                </md-button>
+
+                                <md-button class="md-fab md-mini"
+                                           ng-disabled="position === recRepairArr.length-1"
+                                           ng-click="fnMove(1);">
+                                    <md-icon md-font-set="material-icons">skip_next</md-icon>
+                                    <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Next</md-tooltip>
+                                </md-button>
+                            </div>
+                        </div>
+                    </md-toolbar>
+
+                    <div layout="row" layout-xs="column"
+                         layout-align="space-between center"
+                         layout-align-xs="start start"
+                         layout-margin>
+                        <div layout="row">
+                            <label class="leftLabel">Closed:</label>
+                            <label>{{recent_repair_orders_obj.closed | date :'MM/dd/yyyy h:mm a'}}</label>
+                        </div>
+
+                        <div layout="row">
+                            <label class="leftLabel">Closed ODO:</label>
+                            <label>{{recent_repair_orders_obj.closed_odo}}</label>
+                        </div>
+                    </div>
+
+                    <div layout="column" layout-gt-xs="row" layout-margin>
+                        <div layout="column" flex>
+                            <md-subheader class="md-hue-1 md-no-sticky">Labor</md-subheader>
+                            <md-content class="border">
+                                <div ng-if="!recent_repair_orders_obj.labor ||
+                                                recent_repair_orders_obj.labor.length == 0" class="md-padding">
+                                    Labor details not available.
+                                </div>
+
+                                <md-list>
+                                    <md-list-item class="md-3-line md-long-text"
+                                                  ng-repeat="labor in recent_repair_orders_obj.labor"
+                                                  layout="column">
+                                        <div class="margin-bottom-10" style="width: 100%;">
+                                            <h4 layout="row">
+                                                <span class="leftLabel">OP Code:</span>{{ labor.op_code }}
+                                            </h4>
+
+                                            <div layout="column">
+                                                <span class="leftLabel">DESCRIPTION:</span>
+                                                {{labor.description}}
+                                            </div>
+                                        </div>
+                                        <md-divider></md-divider>
+                                    </md-list-item>
+                                </md-list>
+                            </md-content>
+                        </div>
+
+                        <div layout="column" flex>
+                            <md-subheader class="md-hue-1 md-no-sticky">Parts</md-subheader>
+                            <md-content class="border">
+                                <div ng-if="!recent_repair_orders_obj.parts ||
+                                                    recent_repair_orders_obj.parts.length == 0" class="md-padding">
+                                    Parts details not available.
+                                </div>
+
+                                <md-list>
+                                    <md-list-item class="md-3-line md-long-text"
+                                                  ng-repeat="parts in recent_repair_orders_obj.parts"
+                                                  layout="column">
+                                        <div class="margin-bottom-10" style="width: 100%;">
+                                            <h4 layout="row">
+                                                <span class="leftLabel">OP Code:</span>{{ parts.op_code }}
+                                            </h4>
+
+                                            <div layout="column">
+                                                <span class="leftLabel">DESCRIPTION:</span>
+                                                {{parts.description}}
+                                            </div>
+                                        </div>
+                                        <md-divider></md-divider>
+                                    </md-list-item>
+                                </md-list>
+                            </md-content>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>

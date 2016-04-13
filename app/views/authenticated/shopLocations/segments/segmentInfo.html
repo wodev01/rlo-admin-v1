@@ -1,0 +1,29 @@
+<md-content class="md-padding">
+
+    <form name="manageSegmentForm" layout="column" novalidate>
+        <md-input-container class="remove-error-space">
+            <label>Segment Name</label>
+            <input name="name" ng-model="segment.name" ng-minlength="5" required/>
+        </md-input-container>
+
+        <div layout="row" layout-align="space-between center">
+            <md-checkbox aria-label="verified" class="md-accent" ng-model="segment.delivery_enabled">
+                Delivery Enabled
+            </md-checkbox>
+
+            <div layout="row">
+                <md-progress-circular class="md-primary" md-theme="rsmt" ng-if="isProcessing"
+                                      md-mode="indeterminate"></md-progress-circular>
+
+                <md-button class="md-raised md-accent"
+                           ng-disabled="manageSegmentForm.$invalid || !manageSegmentForm.$dirty || isProcessing"
+                           ng-click="fnSaveSegment(segment);">Save
+                </md-button>
+
+                <md-button class="md-warn md-raised md-hue-2"
+                           ng-click="fnManageShopLocSegmentsView();">Cancel
+                </md-button>
+            </div>
+        </div>
+    </form>
+</md-content>

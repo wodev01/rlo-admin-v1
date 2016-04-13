@@ -1,0 +1,36 @@
+<md-content id="shopLocation-logs-tab" class="md-padding" layout="column">
+    <div ng-if="isProcessing" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div ng-if="!isProcessing" layout-fill flex>
+        <div ng-if="logs.length == 0" layout="row" layout-align="center center">
+            <div class="md-headline">Logs information not available.</div>
+        </div>
+
+        <div class="custom-table" ng-if="logs.length != 0"
+             style="padding-bottom: 100px; overflow-x: auto; overflow-y: hidden;">
+            <table>
+                <tr>
+                    <td>Date</td>
+                    <td>Level</td>
+                    <td>Message</td>
+                </tr>
+
+                <tr ng-repeat="logObj in logs">
+                    <td style="min-width: 150px;">{{logObj.timestamp | date:'MM/dd/yyyy HH:mm a'}}</td>
+                    <td style="min-width: 100px;text-align: center">{{logObj.level}}</td>
+                    <td>
+                        <a class="tooltips" href="javascript:void(0);">
+                            <div layout="row">{{logObj.thread}}&nbsp;-&nbsp;{{logObj.category}}</div>
+                            <div layout="row">{{logObj.message}}</div>
+                                <span ng-if="logObj.stack != null ">
+                                    <p> {{ logObj.stack }} </p>
+                                </span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</md-content>

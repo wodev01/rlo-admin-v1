@@ -22,10 +22,10 @@ app.factory('shopLocationsService',['$q', 'ErrorMsg', 'encodeParamService',
         };
 
         //retrieve the clients using parameters for RLO
-        shopLocationsService.filterShopLocationsData = function(search){
+        shopLocationsService.filterShopLocationsData = function(filter){
             var defer = $q.defer();
             CarglyPartner.ajax({
-                url: '/partners/api/agent/client-locations?filter='+(search ? search : ''),
+                url: '/partners/api/agent/client-locations' + encodeParamService.getEncodedParams(filter),
                 type: 'GET',
                 success: function (data, status, headers) {
                     pagingCursor = headers['x-paging-cursor'];

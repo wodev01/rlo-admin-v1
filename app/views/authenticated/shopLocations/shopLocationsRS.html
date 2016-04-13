@@ -1,0 +1,34 @@
+<md-content id="rs-grid" class="md-padding">
+    <div class="margin-bottom-10" layout="row" layout-align="end center"
+         ng-if="locId"
+         ng-init="fnInit();">
+        <div ng-if="isProcessing">
+            <md-progress-circular class="md-accent"
+                                  style="z-index: 2;"
+                                  md-mode="indeterminate"></md-progress-circular>
+        </div>
+        <input id="pickDateRange" ng-model="drpObj"/>
+        <md-button aria-label="Export CSV"
+                   id="btn-export-csv"
+                   class="md-raised md-accent margin-right-0"
+                   ng-click="fnExportCSV();"
+                   ng-disabled="isProcessing || !isRSDataNotNull">Export CSV
+        </md-button>
+    </div>
+
+    <div ng-if="!isRSDataNotNull && !isRSMsgShow" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div ng-if="isRSMsgShow">
+        <div class="md-headline text-center">No recommended service available.</div>
+    </div>
+
+    <!-- Grid Section -->
+    <div ng-if="isRSDataNotNull"
+         ui-grid="recommendedServiceGridOptions"
+         ui-grid-selection ui-grid-pagination ui-grid-exporter ui-grid-auto-resize
+         ng-style="$root.fnReturnGridHeight(filteredData.length, '', true, _filteringEnabled);">
+    </div>
+
+</md-content>

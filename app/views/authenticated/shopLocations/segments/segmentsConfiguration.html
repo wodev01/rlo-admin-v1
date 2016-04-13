@@ -1,0 +1,32 @@
+<div class="md-padding">
+    <div ng-init="fnInitSubSegments();">
+        <div layout="row" layout-align="space-between center">
+            <div class="md-display-1">Sub-segments</div>
+            <md-button class="md-raised md-accent margin-right-0" ng-click="fnCreateNewSubSegment();">New Sub-segment
+            </md-button>
+        </div>
+
+        <p class="md-subhead" ng-if="isSubSegmentDataNotNull">
+            Move/Drag single-row up or down to reorder the sub-segments.
+        </p>
+
+        <div ng-if="isSubSegmentMsgShow">
+            <p class="md-headline text-center">No Sub-segments available.</p>
+        </div>
+
+        <!-- Loader -->
+        <div ng-if="!isSubSegmentDataNotNull && !isSubSegmentMsgShow" layout="column" layout-align="center center"
+             layout-fill flex>
+            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <!-- uiGrid -->
+        <div ng-if="isSubSegmentDataNotNull"
+             ui-grid-draggable-rows
+             ui-grid-selection
+             ui-grid-auto-resize
+             ng-style="fnReturnGridHeight(subSegmentsData.length);"
+             ui-grid="subSegmentsGridOptions"></div>
+
+    </div>
+</div>

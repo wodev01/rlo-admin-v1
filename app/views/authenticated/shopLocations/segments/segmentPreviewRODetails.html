@@ -1,0 +1,424 @@
+<md-sidenav id="segment-preview-ro-sidenav" class="md-sidenav-right md-whiteframe-z2"
+            md-component-id="segmentPreviewROSwap">
+
+    <!-- swapping view header -->
+    <md-toolbar class="light-black-bg-1">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span class="text-small-599 text-small-959 md-title">
+                RO #{{repairOrder.order_number}}&nbsp;:&nbsp;{{repairOrder.customer.first_name}}
+                &nbsp;{{repairOrder.customer.last_name}}</span>
+            <md-button ng-click="fnCloseSegmentPreviewROSwap();" class="md-raised md-accent">
+                Back
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content class="contentSection" layout-fill>
+
+        <!-- Customer Info-->
+        <section class="md-whiteframe-3dp">
+            <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Customer Info</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">Name:</label>
+                    <label flex>{{repairOrder.customer.first_name}}&nbsp;{{repairOrder.customer.last_name}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Company:</label>
+                    <label flex>{{repairOrder.customer.company}}</label>
+                </div>
+            </div>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">Address 1:</label>
+                    <label flex>{{repairOrder.customer.address1}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Postal Code:</label>
+                    <label flex>{{repairOrder.customer.postal_code}}</label>
+                </div>
+            </div>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">City:</label>
+                    <label flex>{{repairOrder.customer.city}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Phone Number:</label>
+                    <label flex>{{repairOrder.customer.phone_numbers[0]}}</label>
+                </div>
+            </div>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">State:</label>
+                    <label flex>{{repairOrder.customer.state}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Email:</label>
+                    <label flex>{{repairOrder.customer.email_addresses[0]}}</label>
+                </div>
+            </div>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">Marketing Source:</label>
+                    <label flex>{{repairOrder.marketing_source}}</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vehicles Info-->
+        <section class="md-whiteframe-10dp">
+            <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Vehicles Info</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">Model:</label>
+                    <label flex>{{repairOrder.vehicle.model}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Make:</label>
+                    <label flex>{{repairOrder.vehicle.make}}</label>
+                </div>
+            </div>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">License:</label>
+                    <label flex>{{repairOrder.vehicle.license}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Year:</label>
+                    <label flex>{{repairOrder.vehicle.year}}</label>
+                </div>
+            </div>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">Mileage:</label>
+                    <label flex>{{repairOrder.vehicle.last_odo}}</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Advisor -->
+        <section class="md-whiteframe-10dp">
+            <md-toolbar class="md-primary md-hue-1" md-theme="grey">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Service Details</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">Service Advisor:</label>
+                    <label flex>{{repairOrder.writer.full_name}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Technician:</label>
+                    <label flex>{{repairOrder.technician_name}}</label>
+                </div>
+            </div>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">Arrived:</label>
+                    <label flex>{{repairOrder.opened | date :'MM/dd/yyyy h:mm a'}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Status:</label>
+                    <label flex>{{repairOrder.order_status}}</label>
+                </div>
+            </div>
+
+            <div layout="column" layout-gt-md="row" layout-padding>
+                <div layout="row" flex>
+                    <label class="leftLabel">Closed:</label>
+                    <label flex>{{repairOrder.closed | date :'MM/dd/yyyy h:mm a'}}</label>
+                </div>
+            </div>
+
+            <!--Labor Details Section-->
+            <md-content layout="column" layout-margin>
+                <md-list>
+                    <md-subheader class="md-hue-1">Labor Details</md-subheader>
+                    <div class="border">
+                        <div ng-if="repairOrder.labor.length == 0" layout-margin layout-padding>
+                            Labor details not available.
+                        </div>
+
+                        <md-list-item class="md-3-line md-long-text" ng-repeat="labor in repairOrder.labor"
+                                      layout="column">
+                            <h3>{{labor.tech.full_name}}</h3>
+
+                            <div class="margin-bottom-10">
+                                <span>
+                                    <span class="leftLabel">Operation Code:</span>
+                                    {{labor.operation_code}}
+                                </span>
+
+                                <div layout="column" layout-gt-lg="row">
+                                    <span>
+                                        <span class="leftLabel">Price:</span>
+                                        {{ labor.sold_price_cents ? labor.sold_price_cents : 0
+                                                                            | CentToDollar | currency }}
+                                        <span hide show-gt-lg>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span>
+                                        <span class="leftLabel">Cost:</span>
+                                        {{labor.actual_cost_cents ? labor.actual_cost_cents : 0
+                                                                            | CentToDollar | currency}}
+                                        <span hide show-gt-lg>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span>
+                                        <span class="leftLabel">Gross Profit:</span>
+                                        {{ labor.sold_price_cents - labor.actual_cost_cents
+                                                                            | CentToDollar | currency }}
+                                            ({{ labor.sold_price_cents == 0 ? 0 : ((labor.sold_price_cents
+                                                            - labor.actual_cost_cents) / labor.sold_price_cents)
+                                                                            * 100 | number:2 }}%)
+                                    </span>
+                                </div>
+                            </div>
+
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+
+            <!--Parts Details Section-->
+            <md-content layout="column" layout-margin>
+                <md-list>
+                    <md-subheader class="md-hue-1">Parts Details</md-subheader>
+                    <div class="border">
+                        <div ng-if="repairOrder.parts.length == 0" layout-margin layout-padding>
+                            Parts details not available.
+                        </div>
+                        <md-list-item class="md-3-line md-long-text" ng-repeat="part in repairOrder.parts"
+                                      layout="column">
+                            <h3>{{part.tech.full_name}}</h3>
+
+                            <div>
+                                <span><span class="leftLabel">Part</span>#{{part.part_num}}</span>
+
+                                <div layout="column" layout-gt-lg="row">
+                                    <span><span class="leftLabel"> Price: </span>
+                                                {{ part.sold_price_cents ? part.sold_price_cents : 0
+                                                                            | CentToDollar | currency }}
+                                        <span hide show-gt-lg>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span><span class="leftLabel"> Cost: </span>
+                                                {{part.actual_cost_cents ? part.actual_cost_cents : 0
+                                                                            | CentToDollar | currency}}
+                                        <span hide show-gt-lg>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span><span class="leftLabel"> Qty: </span>
+                                                {{part.quantity ? part.quantity : 0 | toFloor}}
+                                        <span hide show-gt-lg>&nbsp;|&nbsp;</span></span>
+                                    <span>
+
+                                    <span class="leftLabel"> Gross Profit: </span>
+                                                {{ part.sold_price_cents - part.actual_cost_cents
+                                                                            | CentToDollar | currency }}
+                                            ({{ part.sold_price_cents == 0 ? 0 :
+                                                    ((part.sold_price_cents - part.actual_cost_cents)
+                                                                / part.sold_price_cents) * 100 | number:2 }}%)
+                                    </span>
+                                </div>
+                                <p>{{part.description}}</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+
+            <!--Sublet Details Section-->
+            <md-content layout="column" layout-margin>
+                <md-list>
+                    <md-subheader class="md-hue-1">Sublet Details</md-subheader>
+                    <div class="border">
+                        <div ng-if="repairOrder.sublets.length == 0" layout-margin layout-padding>
+                            Sublet details not available.
+                        </div>
+                        <md-list-item class="md-3-line md-long-text" ng-repeat="sublet in repairOrder.sublets"
+                                      layout="column">
+                            <div>
+                                <span><span class="leftLabel">Order ID:</span>#{{sublet.id}}</span>
+
+                                <div layout="column" layout-gt-lg="row">
+                                    <span><span class="leftLabel"> Price: </span>
+                                            {{ sublet.sold_price_cents ? sublet.sold_price_cents : 0
+                                                                            | CentToDollar | currency }}
+                                        <span hide show-gt-lg>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span><span class="leftLabel"> Cost: </span>
+                                            {{sublet.actual_cost_cents ? sublet.actual_cost_cents : 0
+                                                                            | CentToDollar | currency}}
+                                        <span hide show-gt-lg>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span>
+                                        <span class="leftLabel"> Gross Profit: </span>
+                                            {{ sublet.sold_price_cents - sublet.actual_cost_cents
+                                                                            | CentToDollar | currency }}
+                                            ({{ sublet.sold_price_cents == 0 ? 0 :
+                                                    ((sublet.sold_price_cents - sublet.actual_cost_cents)
+                                                            / sublet.sold_price_cents) * 100 | number:2 }}%)
+                                    </span>
+                                </div>
+                                <p>{{sublet.description}}</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+        </section>
+
+        <!-- Recommended Items section -->
+        <section class="md-whiteframe-3dp">
+            <md-toolbar class="md-primary md-hue-1 md-whiteframe-2dp" md-theme="grey">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Recommended Items</span>
+                </div>
+            </md-toolbar>
+
+            <div ng-if="!repairOrder.recommendations ||
+                            (repairOrder.recommendations && repairOrder.recommendations.length === 0)"
+                 layout="row" layout-align="center center" layout-margin layout-padding>
+                <div class="md-subhead">No recommended items available.</div>
+            </div>
+
+            <div layout="column" ng-if="repairOrder.recommendations != null">
+                <md-list>
+                    <md-list-item class="md-3-line md-long-text"
+                                  ng-repeat="recItem in repairOrder.recommendations" layout="column">
+                        <div>
+                            <span class="leftLabel">{{recItem.recommendation_type}}</span>
+
+                            <div layout="column" layout-gt-lg="row">
+                                <span><span class="leftLabel">Operation Code:</span>
+                                    {{recItem.operation_code}}
+                                    <span hide show-gt-lg>&nbsp;|&nbsp;</span>
+                                </span>
+
+                                <span><span class="leftLabel">Due Date:</span>
+                                    {{recItem.due_date | date :'MM/dd/yyyy h:mm a'}}
+                                    <span hide show-gt-lg>&nbsp;|&nbsp;</span>
+                                </span>
+
+                                <span><span class="leftLabel">Recommended Date:</span>
+                                    {{recItem.recommended_date | date: 'MM/dd/yyyy h:mm a'}}
+                                </span>
+                            </div>
+                            <p>{{recItem.text}}</p>
+                        </div>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-list>
+            </div>
+        </section>
+
+        <!-- Inspection Details Section -->
+        <section class="md-whiteframe-3dp">
+            <md-toolbar class="md-primary md-hue-1 md-whiteframe-2dp" md-theme="grey">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Inspection</span>
+                </div>
+            </md-toolbar>
+
+            <div class="md-padding" layout="row" layout-align="center center"
+                 ng-if="!repairOrder.inspection || (repairOrder.inspection && repairOrder.inspection.length === 0)"
+                 layout-margin layout-padding>
+                <div class="md-subhead">No inspection available.</div>
+            </div>
+
+            <div class="md-padding" layout="column" ng-if="repairOrder.inspection!=null" layout-margin>
+                <div layout="row" layout-xs="column">
+                    <div layout="row" flex>
+                        <label class="leftLabel">ID :</label>
+                        <label flex>{{repairOrder.inspection.id}}</label>
+                    </div>
+
+                    <div layout="row" flex>
+                        <label class="leftLabel">Repair Order ID :</label>
+                        <label flex>{{repairOrder.inspection.repairOrderId}}</label>
+                    </div>
+                </div>
+
+                <div>
+                    <div ng-repeat="(key, value) in
+                            repairOrder.inspection.inspectionDefinition.inspectedItemDefinitions | groupBy: 'category'"
+                         layout="column" layout-sm="column" ng-init="groupIndex = $index">
+                        <div ng-repeat="(locKey, locVal) in value | groupBy: 'location'" layout="column"
+                             layout-sm="column">
+                            <h3><span>{{ key }}&nbsp;</span><span ng-if="locKey">-&nbsp;{{locKey}}</span></h3>
+
+                            <div layout="row" layout-sm="column">
+                                <div class="datagrid">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>Description</th>
+                                            <th>Location</th>
+                                            <th>Before Status</th>
+                                            <th>Before Value</th>
+                                            <th>After Status</th>
+                                            <th>After Value</th>
+                                            <th>Notes</th>
+                                            <th>Due Days</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="val in locVal"
+                                            ng-init="fnInitInspectedItems(val.name,
+                                                            repairOrder.inspection.inspectedItems); rowIndex = $index;"
+                                            ng-class="groupIndex == selectedGroup && rowIndex == selectedRow ?
+                                                            'selected' : ''"
+                                            ng-click="setClickedRow(groupIndex, $index);">
+                                            <td>{{item[val.name].description}}</td>
+                                            <td>{{locKey}}</td>
+                                            <td>
+                                                <div ng-if="item[val.name].beforeStatus == 'green'"
+                                                     class="checked_item checked_item_green"></div>
+                                                <div ng-if="item[val.name].beforeStatus == 'red'"
+                                                     class="checked_item checked_item_red"></div>
+                                                <div ng-if="item[val.name].beforeStatus == 'yellow'"
+                                                     class="checked_item checked_item_yellow"></div>
+                                            </td>
+                                            <td>{{item[val.name].beforeValue}}</td>
+                                            <td>{{item[val.name].afterStatus}}</td>
+                                            <td>{{item[val.name].afterValue}}</td>
+                                            <td>{{item[val.name].notes}}</td>
+                                            <td>{{item[val.name].dueDays}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </md-content>
+</md-sidenav>

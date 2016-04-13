@@ -1,0 +1,14 @@
+<div id="ro-grid" class="md-padding">
+    <!-- Loader -->
+    <div ng-if="!isRODataNotNull && !isROMsgShow" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div ng-if="isROMsgShow" layout="row" layout-align="center center">
+        <div class="md-headline">No repair orders available.</div>
+    </div>
+
+    <div ng-if="isRODataNotNull"
+         ng-style="$root.fnReturnGridHeight(filteredData.length, _intRowHeight, true, _filteringEnabled);"
+         ui-grid="repairOrderGridOptions" ui-grid-selection ui-grid-pagination ui-grid-auto-resize></div>
+</div>

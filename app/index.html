@@ -79,7 +79,12 @@
 <!-- endbuild -->
 
 <!-- build:js({.tmp,app}) scripts/plugin.min.js -->
+<script type="text/javascript" src="scripts/vendor/within-viewport.js"></script>
 <script type="text/javascript" src="scripts/vendor/jquery-ui.min.js"></script>
+
+<!--Fix SVGPathSeg for newer browsers-->
+<script type="text/javascript" src="scripts/vendor/polyfill.js"></script>
+
 <!-- endbuild -->
 
 <script src="scripts/vendor/wysiwyg.js"></script>
@@ -115,6 +120,8 @@
 
 <!-- START : Shop Locations Services-->
 <script src="scripts/services/shopLocations/shopLocationsService.js"></script>
+<script src="scripts/services/shopLocations/shopLocationsDashboardServices.js"></script>
+<script src="scripts/services/shopLocations/shopLocationSegmentService.js"></script>
 <!-- END : Shop Locations Services-->
 
 <!-- START : Segments Services-->
@@ -163,6 +170,20 @@
 <!-- END : Shop Groups Ctrl-->
 
 <!-- START : Shop Locations Ctrl-->
+<script src="scripts/controllers/authenticated/shopLocations/shopLocationsCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/shopLocationsConfigCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/shopLocationsCustomersCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/shopLocationsDashboardCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/shopLocationsInfoCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/shopLocationsLogCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/shopLocationsNextConfigCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/shopLocationsSegmentsCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/manageSegmentsCtrl.js"></script>
+<script src="scripts/controllers/authenticated/shopLocations/modals/downloadCustomerCSVCtrl.js"></script>
+
+<!-- Modals -->
+<script src="scripts/controllers/authenticated/shopLocations/modals/repairOrderModalCtrl.js"></script>
+
 <!-- END : Shop Locations Ctrl-->
 
 <!-- START : Settings Ctrl-->
