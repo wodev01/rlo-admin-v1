@@ -1,7 +1,7 @@
 <md-content id="templatesTab" class="md-padding">
     <div class="margin-bottom-10" layout="row" layout-align="space-between center">
         <div class="md-display-1">Templates</div>
-        <md-button class="md-raised md-accent"
+        <md-button class="md-raised md-primary"
                    ng-click="fnCreateTemplate();"
                    sytle="margin-left: 0">Create Template
         </md-button>
@@ -10,7 +10,7 @@
     <!-- Loader -->
     <div ng-if="!isTemplatesDataNotNull && !isTemplatesMsgShow" layout="column" layout-align="center center" layout-fill
          flex>
-        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
     </div>
 
     <!-- No content message -->
