@@ -68,3 +68,27 @@
     height: 100%;
     min-height: 550px;
 }
+
+/*---------- Location Color Indicator ----------*/
+.checked_item {
+    border-radius: 13px;
+    height: 26px;
+    margin: 15px;
+    width: 26px;
+}
+
+.checked_item_green {
+    background-color: #00D500;
+}
+
+.checked_item_yellow {
+    background-color: #FFFF00;
+}
+
+.checked_item_red {
+    background-color: #DD0000;
+}
+
+.checked_item_gray {
+    background-color: #9E9E9E;
+}

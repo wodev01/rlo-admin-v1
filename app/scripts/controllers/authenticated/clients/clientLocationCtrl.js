@@ -7,7 +7,7 @@ app.controller('clientLocationCtrl',
         $rootScope.rightLocationSwapView = 'views/authenticated/clients/clientLocationManage.html';
 
         $scope.fnInitLocation = function (selectedTab) {
-            if (selectedTab === 2) {
+            if (selectedTab === 3) {
                 $scope.getPagedDataAsync();
             }
         };

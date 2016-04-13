@@ -45,7 +45,11 @@ app.controller('clientUsersCtrl',
             '   <md-tooltip md-direction="top">Resend Confirmation</md-tooltip></md-button>' +
             '<md-button class="md-icon-button md-accent" ng-click="grid.appScope.fnResetPassword(row, $event);">' +
             '   <md-icon md-font-set="material-icons">vpn_key</md-icon>' +
-            '   <md-tooltip md-direction="top">Reset Password</md-tooltip></md-button></div>';
+            '   <md-tooltip md-direction="top">Reset Password</md-tooltip></md-button>' +
+            '<md-button class="md-icon-button md-accent" ng-click="grid.appScope.fnSendWelcomeEmail(row,$event);">' +
+            '   <md-icon md-font-set="material-icons">email</md-icon>' +
+            '   <md-tooltip md-direction="top">Send Welcome Email</md-tooltip></md-button>' +
+            '</div>';
 
         $scope.userGridOptions = {
             data: 'usersData',
@@ -63,7 +67,7 @@ app.controller('clientUsersCtrl',
                     name: 'action',
                     displayName: '',
                     cellTemplate: $scope.userAction,
-                    width: 150,
+                    width: 200,
                     enableSorting: false,
                     enableColumnMenu: false
                 }
@@ -73,6 +77,12 @@ app.controller('clientUsersCtrl',
                     row.isSelected = true;
                 });
             }
+        };
+
+        $scope.fnSendWelcomeEmail =function(row){
+            clientUsersService.sendWelcomeEmail(row.entity.email).then(function(){
+                toastr.success('Welcome Email send successfully.');
+            });
         };
 
         $scope.fnResendConfirmation = function (row, event) {
