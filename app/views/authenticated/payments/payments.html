@@ -1,0 +1,25 @@
+<div class="md-padding overflow-auto" ng-init="fnInitPayments();">
+
+    <div layout="row" layout-align="space-between center">
+        <div class="md-display-1">Payments</div>
+    </div>
+
+    <p class="md-subhead">Below are the payments history.</p>
+
+    <div ng-if="isMsg" layout="row" layout-align="center center">
+        <div class="md-headline"> No payments available.</div>
+    </div>
+
+    <div ng-if="!isDataNotNull && !isMsg" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <!-- Grid Section -->
+    <div ng-if="isDataNotNull"
+         ng-style="$root.fnReturnGridHeight(paymentsData.length);"
+         ui-grid="paymentsGridOptions" ui-grid-selection ui-grid-auto-resize ng-cloak></div>
+
+</div>
+
+<!-- include swapping view-->
+<div ng-include="rightEditView"></div>

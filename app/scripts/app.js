@@ -127,6 +127,16 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
                 }]
             }
         })
+        .state('main.payments', {
+          url: 'payments',
+          templateUrl: 'views/authenticated/payments/payments.html',
+          controller: 'paymentsCtrl',
+          resolve: {
+            GetUser: ['GetUserService', function (GetUserService) {
+              return GetUserService.fetchUser();
+            }]
+          }
+        })
         .state('main.groups', {
             url: 'groups',
             templateUrl: 'views/authenticated/shopGroups/groups.html',
