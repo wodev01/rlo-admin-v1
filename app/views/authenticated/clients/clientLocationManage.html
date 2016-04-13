@@ -3,14 +3,14 @@
     <md-toolbar class="light-black-bg-1">
         <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
             <span>{{editLocName}}</span>
-            <md-button ng-click="fnCloseManageLoc();" class="md-raised md-accent"> Back</md-button>
+            <md-button ng-click="fnCloseManageLoc();" class="md-raised md-primary"> Back</md-button>
         </h1>
     </md-toolbar>
 
     <md-content class="md-padding" ng-controller="clientLocationManageCtrl" ng-init="fnInitClientLocationManage();">
         <!-- Loader -->
         <div ng-if="isProcessing" layout="column" layout-align="center center" layout-fill flex>
-            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+            <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
         </div>
         <form id="locationForm" name="locationForm" layout="column" novalidate>
             <md-input-container class="remove-error-space">
@@ -54,9 +54,9 @@
             </md-input-container>
 
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-accent" ng-disabled="locationForm.$invalid"
+                <md-button class="md-raised md-primary" ng-disabled="locationForm.$invalid"
                            ng-click="fnSaveLocation(location);">Save</md-button>
-                <md-button class="md-warn md-raised md-hue-2" ng-click="fnCloseManageLoc();">Cancel</md-button>
+                <md-button class="md-raised md-warn" ng-click="fnCloseManageLoc();">Cancel</md-button>
             </div>
         </form>
 

@@ -1,4 +1,4 @@
-<md-content class="md-padding">
+<md-content class="md-padding" md-theme="rlo">
     <div layout="row" layout-align="space-between center">
         <div class="md-display-1">Emails</div>
     </div>
@@ -9,7 +9,7 @@
 
     <!-- Loader -->
     <div ng-if="!isEmailsDataNotNull && !isEmailsMsgShow" layout="column" layout-align="center center" layout-fill flex>
-        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
     </div>
 
     <!--UI Grid-->
@@ -20,7 +20,7 @@
     </div>
     <div ng-if="isEmailsDataNotNull" layout="row" layout-align="center center" layout-margin ng-cloak>
         <div ng-if="isPagingData">
-            <md-button aria-label="Show More" class="md-raised md-primary md-hue-2"
+            <md-button aria-label="Show More" class="md-raised md-primary"
                        ng-click="fnShowMoreEmails()">
                 <span ng-if="isMoreEmailData"> Loading... </span>
                 <span ng-if="!isMoreEmailData">Show More </span>

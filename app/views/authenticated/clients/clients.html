@@ -3,7 +3,7 @@
 
     <div layout="row" layout-align="space-between center">
         <div class="md-display-1">Clients</div>
-        <md-button class="md-raised md-primary md-hue-2" ng-click="fnNewClientView();">New Client</md-button>
+        <md-button class="md-raised md-primary" ng-click="fnNewClientView();">New Client</md-button>
     </div>
 
     <p class="md-subhead">Below are the clients in your organization</p>
@@ -32,7 +32,7 @@
     </div>
 
     <div ng-if="!isClientsData && !isMsgGridShow" layout="column" layout-align="center center" layout-fill flex>
-        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
     </div>
 
     <!-- Grid Section -->
@@ -45,7 +45,7 @@
          layout="row" layout-align="center center" layout-margin ng-cloak>
 
         <div ng-if="!isPagingCursor">
-            <md-button aria-label="More Client" class="md-raised md-primary md-hue-2"
+            <md-button aria-label="More Client" class="md-raised md-primary"
                        ng-click="fnLoadMoreClients();">
                 <span ng-if="isMoreClients"> Loading... </span>
                 <span ng-if="!isMoreClients">More Clients </span>

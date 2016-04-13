@@ -1,8 +1,8 @@
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="newClientView">
-    <md-toolbar class="top-header">
+    <md-toolbar class="light-black-bg-1">
         <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
             <span>New Client</span>
-            <md-button ng-click="fnCloseNewClientSwap()" class="md-raised md-primary md-hue-2">Back</md-button>
+            <md-button ng-click="fnCloseNewClientSwap()" class="md-raised md-primary">Back</md-button>
         </h1>
     </md-toolbar>
 
@@ -64,12 +64,12 @@
             </md-input-container>
 
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary md-hue-2"
+                <md-button class="md-raised md-primary"
                            ng-disabled="newClientForm.$invalid"
                            ng-click="fnSaveClient(client);">Save
                 </md-button>
 
-                <md-button class="md-warn md-raised md-hue-2"
+                <md-button class="md-warn md-raised"
                            ng-click="fnCloseNewClientSwap();">Cancel
                 </md-button>
             </div>

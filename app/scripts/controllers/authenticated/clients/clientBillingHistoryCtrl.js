@@ -46,7 +46,7 @@ app.controller('clientBillingHistoryCtrl',
             '</div>{{row.entity.status}}</div>';
 
         $scope.billingHistoryAction = '<div layout="row">' +
-            '<md-button ng-if="grid.appScope.isPaid(row)" ng-disabled="grid.appScope.isProcessing" class="md-icon-button md-accent" ng-click="grid.appScope.fnRefund(row,$event)">' +
+            '<md-button ng-if="grid.appScope.isPaid(row)" ng-disabled="grid.appScope.isProcessing" class="md-icon-button md-primary" ng-click="grid.appScope.fnRefund(row,$event)">' +
             '   <md-icon md-font-set="material-icons">payment</md-icon>' +
             '   <md-tooltip md-direction="top">Refund</md-tooltip>' +
             '</md-button> </div>';

@@ -43,7 +43,7 @@ app.controller('clientLocationCtrl',
             '<div class="checked_item after-status" location-indicator data-obj="row.entity"></div>';
 
         $scope.locationAction = '<div layout="row">' +
-        '<md-button class="md-icon-button md-accent" ng-click="grid.appScope.fnLocationEdit(row,$event)">' +
+        '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnLocationEdit(row,$event)">' +
         '   <md-icon md-font-set="material-icons">edit</md-icon>' +
         '   <md-tooltip md-direction="top">Edit</md-tooltip>' +
         '</md-button></div>';

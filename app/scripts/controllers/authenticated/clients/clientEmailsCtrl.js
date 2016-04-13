@@ -40,7 +40,7 @@ app.controller('clientEmailsCtrl',
         };
 
         $scope.clientEmailAction = '<div layout="row">' +
-            '   <md-button class="md-icon-button md-primary md-hue-2" ng-click="grid.appScope.fnViewEmailClient(row)">' +
+            '   <md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnViewEmailClient(row)">' +
             '   <md-icon md-font-set="material-icons">visibility</md-icon>' +
             '   <md-tooltip md-direction="top">View</md-tooltip>' +
             '</md-button>' +

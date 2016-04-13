@@ -3,7 +3,7 @@
     <md-toolbar class="light-black-bg-1">
         <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
             <span>{{editUserName}}</span>
-            <md-button class="md-raised md-accent" ng-click="fnCloseManageUser();">
+            <md-button class="md-raised md-primary" ng-click="fnCloseManageUser();">
                 Back
             </md-button>
         </h1>
@@ -51,21 +51,21 @@
             </md-input-container>
 
             <div layout="row" layout-margin>
-                <md-checkbox class="md-accent" aria-label="owner" ng-model="user.owner">Owner</md-checkbox>
-                <md-checkbox class="md-accent" aria-label="verified" ng-model="user.verified" ng-disabled="true">
+                <md-checkbox class="md-primary" aria-label="owner" ng-model="user.owner">Owner</md-checkbox>
+                <md-checkbox class="md-primary" aria-label="verified" ng-model="user.verified" ng-disabled="true">
                     Verified
                 </md-checkbox>
             </div>
 
             <div layout="row" layout-align="end center">
                 <div ng-if="isProcessing">
-                    <md-progress-circular class="md-accent" md-diameter="100"
+                    <md-progress-circular class="md-primary" md-diameter="100"
                                           md-mode="indeterminate"></md-progress-circular>
                 </div>
-                <md-button class="md-raised md-accent" ng-disabled="userForm.$invalid" ng-click="fnSaveUser(user);">
+                <md-button class="md-raised md-primary" ng-disabled="userForm.$invalid" ng-click="fnSaveUser(user);">
                     Save
                 </md-button>
-                <md-button class="md-warn md-raised md-hue-2" ng-click="fnCloseManageUser();">Cancel</md-button>
+                <md-button class="md-raised md-warn" ng-click="fnCloseManageUser();">Cancel</md-button>
             </div>
         </form>
     </md-content>

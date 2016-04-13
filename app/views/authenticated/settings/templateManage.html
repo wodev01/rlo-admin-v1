@@ -12,7 +12,7 @@
     <md-content ng-controller="templateManageCtrl">
         <!-- Loader -->
         <div ng-if="isProcessing" layout="column" layout-align="center center" layout-fill flex>
-            <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+            <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
         </div>
 
         <form id="template-form" name="templateForm" layout="column" md-theme="grey" novalidate>
@@ -87,20 +87,20 @@
                 </md-tabs>
             </md-content>
 
-            <div style="border-top: 1px solid;" layout="column" layout-gt-sm="row" layout-align="end center">
+            <div style="border-top: 1px solid;" layout="column" layout-gt-sm="row" layout-align="end center" md-theme="rlo">
                 <div layout="row" layout-align-sm="center center" layout-align-xs="center center" layout-fill flex>
-                    <md-button class="md-raised md-accent" ng-if="selectedIndex == 3" ng-click="fnTogglePreview();">
+                    <md-button class="md-raised md-primary" ng-if="selectedIndex == 3" ng-click="fnTogglePreview();">
                         Preview {{ toggleText }}
                     </md-button>
                 </div>
 
                 <div layout="column" layout-gt-sm="row" layout-align-gt-sm="end center">
                     <div layout="row" layout-align="end center">
-                        <md-button class="md-raised md-accent"
+                        <md-button class="md-raised md-primary"
                                    ng-click="fnSendTestEmail($event);">Send Test Email
                         </md-button>
 
-                        <md-button class="md-raised md-accent"
+                        <md-button class="md-raised md-primary"
                                    ng-click="fnOpenSetTemplateVariableModal($event);">Set Template Variables
                         </md-button>
                     </div>
@@ -108,12 +108,12 @@
 
                 <div layout="column" layout-gt-sm="row" layout-align-gt-sm="end center">
                     <div layout="row" layout-align="end center">
-                        <md-button class="md-raised md-accent"
+                        <md-button class="md-raised md-primary"
                                    ng-disabled="templateForm.$invalid"
                                    ng-click="fnSaveTemplate(template);">Save
                         </md-button>
 
-                        <md-button class="md-warn md-raised md-hue-2"
+                        <md-button class="md-warn md-raised"
                                    ng-click="fnCloseManageTemplate();">Cancel
                         </md-button>
                     </div>

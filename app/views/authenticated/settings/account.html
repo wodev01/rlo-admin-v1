@@ -84,12 +84,12 @@
         </div>
 
         <div layout="row">
-            <md-button class="md-raised md-accent"
+            <md-button class="md-raised md-primary"
                        ng-disabled="partner_form.$invalid"
                        ng-click="updateUser();">Save
             </md-button>
 
-            <md-button class="md-warn md-raised md-hue-2" ng-click="fnCancelAccount();">Cancel</md-button>
+            <md-button class="md-warn md-raised" ng-click="fnCancelAccount();">Cancel</md-button>
 
             <md-progress-circular class="md-primary" md-theme="rlo" ng-if="isProcessing"
                                   md-mode="indeterminate"></md-progress-circular>

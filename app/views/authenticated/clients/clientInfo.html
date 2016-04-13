@@ -1,4 +1,4 @@
-<md-content class="md-padding" flex="70">
+<md-content class="md-padding" flex="70" md-theme="rlo">
     <form name="clientInfoForm" layout="column" novalidate>
         <md-input-container class="remove-error-space">
             <label>Partner Name</label>
@@ -42,7 +42,7 @@
         </md-input-container>
 
         <div layout="row" layout-align="end center">
-            <md-button class="md-raised btn btnBlue"
+            <md-button class="md-raised md-primary"
                        ng-disabled="clientInfoForm.$invalid"
                        ng-click="fnSaveClientInfo(client);">Save
             </md-button>

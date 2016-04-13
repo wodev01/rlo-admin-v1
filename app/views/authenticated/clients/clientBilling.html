@@ -1,7 +1,7 @@
-<md-content id="client-billing-tab" layout-margin>
+<md-content id="client-billing-tab" md-theme="rlo" layout-margin>
     <!-- Loader -->
     <div ng-if="isProcessing" layout="column" layout-align="center center" layout-fill flex>
-        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
     </div>
 
     <form name="subscriptionInfoForm" layout="column" novalidate>
@@ -30,13 +30,13 @@
                 </md-input-container>
 
                 <div flex>
-                    <md-button class="md-raised md-accent" ng-click="fnOpenClientPaymentInfo($event);">
+                    <md-button class="md-raised md-primary" ng-click="fnOpenClientPaymentInfo($event);">
                         Update Payment Info
                     </md-button>
                 </div>
 
                 <div flex>
-                    <md-button class="md-raised md-accent" ng-click="fnOpenClientChargeNow($event);">
+                    <md-button class="md-raised md-primary" ng-click="fnOpenClientChargeNow($event);">
                         Charge Now
                     </md-button>
                 </div>
@@ -99,7 +99,7 @@
                             <td>
                                 <div layout="row" layout-sm="column" class="subscriptions-row">
                                     <md-checkbox ng-repeat="checkbox in checkboxes" aria-label="checkbox.label"
-                                                 class="checkbox"
+                                                 class="checkbox md-primary"
                                                  ng-model="isSelected[location.id+'_'+$index]"
                                                  ng-init="fnInitCheckbox(checkbox.name,subArr[location.id],location.id+'_'+$index, location.id ,checkbox.amount_cents);"
                                                  ng-change="fnCheckboxChange(subscriptionInfo.locations, isSelected[location.id+'_'+$index],location.id, checkbox.name, checkbox.amount_cents);">
@@ -118,7 +118,7 @@
             </div>
 
             <div layout="row" layout-align="end center" layout-margin>
-                <md-button class="md-raised md-accent"
+                <md-button class="md-raised md-primary"
                            ng-disabled="subscriptionInfoForm.$invalid || isSubInfoBtnDisabled"
                            ng-click="fnSaveSubscriptionInfo(subscriptionInfo, grandTotal);">
                     Save Subscription Info
