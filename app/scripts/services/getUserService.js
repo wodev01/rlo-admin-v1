@@ -1,6 +1,6 @@
 'use strict';
-app.factory('GetUserService',['$q', '$cookies', '$rootScope', 'cookieName', 'localStorage', 'userObjKey', 'ErrorMsg',
-    function($q, $cookies, $rootScope, cookieName, localStorage, userObjKey, ErrorMsg) {
+app.factory('GetUserService',['$q', '$location', '$cookies', '$rootScope', 'cookieName', 'localStorage', 'userObjKey', 'ErrorMsg',
+    function($q, $location, $cookies, $rootScope, cookieName, localStorage, userObjKey, ErrorMsg) {
         var GetUserService = {};
 
         //Get clients for current user partner:
@@ -16,6 +16,19 @@ app.factory('GetUserService',['$q', '$cookies', '$rootScope', 'cookieName', 'loc
                     ErrorMsg.CheckStatusCode(error.status);
                 }
             });
+            return defer.promise;
+        };
+
+        GetUserService.fnResetPWTokenVerified = function () {
+            var defer = $q.defer();
+            /*----- Resolve reset password page if resetpw token exist ----*/
+            if(CarglyPartner.queryParams != null && CarglyPartner.queryParams.resetpw != null
+                && CarglyPartner.queryParams.resetpw != '') {
+                defer.resolve();
+            } else {
+                $location.url('/login');
+                defer.resolve();
+            }
             return defer.promise;
         };
 
