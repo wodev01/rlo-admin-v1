@@ -1199,3 +1199,16 @@ md-input-container.remove-error-space .md-errors-spacer {
 .ui-grid-viewport .ui-grid-cell-contents {
     line-height: 3em;
 }
+
+/*---------- md-dialog delete button ----------*/
+md-dialog[aria-label=Delete] button[aria-label=Delete] {
+    background-color: rgb(198, 40, 40) !important;
+    border-color: #C9302C !important;
+    color: rgba(255, 255, 255, 0.87) !important;
+}
+
+md-dialog[aria-label=Ok] button[aria-label=Run] {
+    background-color: rgb(91, 123, 227) !important;
+    border-color: #5b94e3 !important;
+    color: rgba(255, 255, 255, 0.87) !important;
+}

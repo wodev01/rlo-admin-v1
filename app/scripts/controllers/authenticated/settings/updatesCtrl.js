@@ -91,7 +91,12 @@ app.controller('updatesCtrl',
                     enableColumnMenu: false,
                     enableSorting: false
                 }
-            ]
+            ],
+            onRegisterApi: function (gridApi) {
+                gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+                    row.isSelected = true;
+                });
+            }
         };
 
         $scope.fnUpdateDelete = function (row, event) {

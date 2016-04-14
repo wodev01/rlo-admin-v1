@@ -4,7 +4,7 @@ app.controller('templatesCtrl',
               toastr, localStorage, userObjKey, templateService, $stateParams) {
 
         $rootScope.rightTemplateSwapView = 'views/authenticated/settings/templateManage.html';
-        var partnerId = "";
+        var partnerId = ""; // Get from fnInitTemplates();
 
         $scope.templatesData = {};
         $scope.isTemplatesDataNotNull = $scope.isTemplatesMsgShow = false;
@@ -60,10 +60,10 @@ app.controller('templatesCtrl',
 
         /*---------- Template Grid Options ----------*/
         $scope.templateAction = '<div layout="row">' +
-            '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnEditTemplate(row)">' +
+            '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnEditTemplate(row);">' +
             '   <md-icon md-font-set="material-icons">edit</md-icon>' +
             '   <md-tooltip md-direction="top">Edit</md-tooltip></md-button>' +
-            '<md-button class="md-icon-button md-warn" ng-click="grid.appScope.fnRemoveTemplate(row,$event)">' +
+            '<md-button class="md-icon-button md-warn" ng-click="grid.appScope.fnRemoveTemplate(row,$event);">' +
             '   <md-icon md-font-set="material-icons">delete</md-icon>' +
             '   <md-tooltip md-direction="top">Delete</md-tooltip></md-button></div>';
 

@@ -27,7 +27,7 @@ app.controller('templateManageCtrl',
             localStorage.setItem('preview_values', angular.toJson(JSON.parse(getTemplateObj.preview_values)));
         } else {
             $scope.isInterpolated = true;
-            localStorage.removeItem('preview_values');
+            localStorage.setItem('preview_values', '{}');   
         }
 
         /*---------- Create/Update template ----------*/
@@ -104,7 +104,7 @@ app.controller('templateManageCtrl',
         $scope.fnOpenSetTemplateVariableModal = function (ev) {
             $mdDialog.show({
                 controller: 'templateVarDialogCtrl',
-                templateUrl: 'views/authenticated/settings/templateVariable.dialog.html',
+                templateUrl: 'views/authenticated/settings/modals/templateVariable.dialog.html',
                 targetEvent: ev
             }).then(function () {
                 setTemplateVariables();
@@ -187,10 +187,10 @@ app.controller('templateManageCtrl',
                 '           </md-input-container>' +
                 '       </div>' +
                 '       <md-dialog-actions>' +
-                '           <md-button class="md-raised md-accent"' +
+                '           <md-button class="md-raised md-primary"' +
                 '                       ng-disabled="testEmailForm.to_address.$invalid"' +
                 '                       ng-click="fnSendTestEmail(to_address);">Send</md-button>' +
-                '           <md-button class="md-warn md-raised md-hue-2"' +
+                '           <md-button class="md-warn md-raised"' +
                 '                       ng-click="fnCloseDialog();">Cancel</md-button>' +
                 '       </md-dialog-actions>' +
                 '    </md-content>' +
