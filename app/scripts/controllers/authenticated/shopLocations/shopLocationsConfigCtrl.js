@@ -4,10 +4,10 @@ app.controller('shopLocationsConfigCtrl',
 
         $scope.shopLocationData = shopLocationsService.getShopLocationsObj().id ? angular.copy(shopLocationsService.getShopLocationsObj()) : {};
 
-        console.log($scope.shopLocationData);
-
-        $scope.fnInitShopLocConfig = function(){
-            if($scope.shopLocationData.lastConfig !== null) {$scope.shopLocationData.lastConfig.settings['carglyconnect.lastsync'] = $filter('date')($scope.shopLocationData.lastConfig.settings['carglyconnect.lastsync'],'M/d/yyyy h:mm a');}
+        $scope.fnInitShopLocConfig = function () {
+            if ($scope.shopLocationData.lastConfig !== null) {
+                $scope.shopLocationData.lastConfig.settings['carglyconnect.lastsync'] = $filter('date')($scope.shopLocationData.lastConfig.settings['carglyconnect.lastsync'], 'M/d/yyyy h:mm a');
+            }
 
             $scope.lastConfig = $scope.shopLocationData.lastConfig;
             $scope.sms_info = $scope.lastConfig ? $scope.lastConfig.sms_info : {};

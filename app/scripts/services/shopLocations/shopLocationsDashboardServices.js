@@ -76,7 +76,7 @@ app.factory('shopLocationsDashboardServices', ['$q', 'ErrorMsg', 'encodeParamSer
             return defer.promise;
         };
 
-        shopLocationsDashboardServices.fetchMonthlySummaryWithDateAndLoc = function (pId, locationId, from, to) {
+            shopLocationsDashboardServices.fetchMonthlySummaryWithDateAndLoc = function (pId, locationId, from, to) {
             var defer = $q.defer();
             CarglyPartner.ajax({
                 url: '/partners/api/' + pId + '/reports/monthly_summary' + (locationId ? '?location_id=' + locationId + '&' : '?') + 'from=' + from + '&to=' + to,

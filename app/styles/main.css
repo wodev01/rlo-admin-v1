@@ -58,16 +58,26 @@
     height: calc(100% - 106px) !important;
 }
 
-#template-side-nav .tab-container wysiwyg-edit .tinyeditor .sizer textarea{
+#template-side-nav .tab-container wysiwyg-edit .tinyeditor .sizer textarea {
     height: calc(100% - -75px) !important
 }
 
 /*------------------------------ End Templates Tab ------------------------------*/
 
-.settingTabs .settingTab {
+/*---------- START: Settings Tab ----------*/
+.settingsModuleTabs .settingTab {
     height: 100%;
     min-height: 550px;
 }
+
+.settingsModuleTabs md-tabs.md-rlo-theme.md-primary > md-tabs-wrapper {
+    background-color: #6495ED;
+}
+
+.settingsModuleTabs md-tabs.md-rlo-theme.md-primary > md-tabs-wrapper > md-tabs-canvas > md-pagination-wrapper > md-tab-item:not([disabled]) {
+    color: #FFFFFF;
+}
+/*---------- End: Settings Tab ----------*/
 
 /*---------- Location Color Indicator ----------*/
 .checked_item {

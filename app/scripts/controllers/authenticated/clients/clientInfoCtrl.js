@@ -1,6 +1,7 @@
 'use strict';
 app.controller('clientInfoCtrl',
     function ($scope, $rootScope, toastr, globalTimeZone, clientService, clientUsersService) {
+
         $scope.client = clientService.getClientObj().id ? angular.copy(clientService.getClientObj()) : {};
         var clientId = $scope.client.id;
 

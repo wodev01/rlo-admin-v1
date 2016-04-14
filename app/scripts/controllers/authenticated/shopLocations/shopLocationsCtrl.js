@@ -187,15 +187,6 @@ app.controller('shopLocationsCtrl',
             });
         };
 
-        /*-------------------- Segments Tab ----------------------*/
-        $scope.fnCloseManageShopLocSegmentsView = function () {
-            $mdSidenav('manageShopLocSegmentsView').close().then(function () {
-                shopLocationSegmentService.setShopLocSegmentObj({});
-                $rootScope.isManageSegmentOpenTabsView = false;
-            });
-        };
-        /*-------------------- End Segments Tab ----------------------*/
-
         /*------------ manage tabs ------*/
         $scope.selectedIndex = 0;
 
