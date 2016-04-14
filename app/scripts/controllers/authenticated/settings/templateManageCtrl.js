@@ -1,11 +1,11 @@
 'use strict';
 app.controller('templateManageCtrl',
-    function ($scope, $rootScope, $mdDialog, toastr, localStorage, userObjKey, templateService) {
+    function ($scope, $rootScope, $mdDialog, toastr, localStorage, templateService) {
 
-        if (localStorage.getItem(userObjKey)) {
-            $scope.userObj = JSON.parse(unescape(localStorage.getItem(userObjKey)));
-        }
         var getTemplateObj = templateService.getTemplateObj();
+        if (CarglyPartner.user) {
+            $scope.userObj = CarglyPartner.user;
+        }
 
         $scope.rendered_template = {};
         $scope.toggleText = 'Text';

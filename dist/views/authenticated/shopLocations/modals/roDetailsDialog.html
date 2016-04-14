@@ -1,0 +1,385 @@
+<md-dialog aria-label="Repair Order Dialog" style="width: 100%;">
+    <md-toolbar>
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span class="text-small-599 text-small-959 md-title">
+                RO #{{repairOrder.order_number}}&nbsp;:&nbsp;
+                {{repairOrder.customer.first_name}}&nbsp;{{repairOrder.customer.last_name}}
+            </span>
+
+            <div class="md-primary" layout="row" md-theme="grey">
+                <md-button class="md-fab md-mini"
+                           ng-disabled="position <= 0"
+                           ng-click="fnMove(-1);">
+                    <md-icon md-font-set="material-icons"> skip_previous</md-icon>
+                    <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Previous</md-tooltip>
+                </md-button>
+
+                <md-button class="md-fab md-mini"
+                           ng-disabled="position === repairOrders.length-1"
+                           ng-click="fnMove(1);">
+                    <md-icon md-font-set="material-icons">skip_next</md-icon>
+                    <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Next</md-tooltip>
+                </md-button>
+
+                <md-button class="md-icon-button" ng-click="hide();">
+                    <md-icon md-font-set="material-icons">close</md-icon>
+                    <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Close</md-tooltip>
+                </md-button>
+            </div>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="md-padding" md-theme="grey">
+        <section class="md-whiteframe-10dp margin-bottom-10" layout="column">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Summary</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>{{repairOrder.total_sold_price_cents | CentToDollar | currency}}</div>
+                    <h4>Price</h4>
+                </div>
+
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>{{repairOrder.labor | sumOfValue:'sold_seconds' | toHHMMSS}}</div>
+                    <h4>Sold Hours</h4>
+                </div>
+
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>{{repairOrder.labor | sumOfValue:'actual_seconds' | toHHMMSS}}</div>
+                    <h4>Actual Hours</h4>
+                </div>
+
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>${{ effectiveLaborRate | number:2 }}/hr</div>
+                    <h4> Effective Labor Rate </h4>
+                </div>
+
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>{{discounts | CentToDollar | number:2}}</div>
+                    <h4>Discounts</h4>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>
+                        <div>{{partsProfitDlr | CentToDollar | currency}}</div>
+                        ({{ totalPartsSoldPrice == 0 ? 0 : (partsProfitDlr / totalPartsSoldPrice) * 100 | number:2 }}%)
+                    </div>
+                    <h4>Parts Profit $</h4>
+                </div>
+
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>
+                        <div>{{laborProfitDlr | CentToDollar | currency}}</div>
+                        ({{ totalLaborSoldPrice == 0 ? 0 : (laborProfitDlr / totalLaborSoldPrice) * 100 | number:2 }}%)
+                    </div>
+                    <h4>Labor Profit $</h4>
+                </div>
+
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>
+                        <div>{{subletProfitDlr | CentToDollar | currency}}</div>
+                        ({{ totalSubletSoldPrice == 0 ? 0 : (subletProfitDlr / totalSubletSoldPrice)
+                        * 100 | number:2 }}%)
+                    </div>
+                    <h4>Sublet Profit $</h4>
+                </div>
+
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>
+                        <div>{{ grossProfit | CentToDollar | currency }}</div>
+                        ({{ totalSoldPrice == 0 ? 0 : (grossProfit / totalSoldPrice) * 100 | number:2 }}%)
+                    </div>
+                    <h4>Gross Profit $</h4>
+                </div>
+
+                <div class="total md-whiteframe-3dp md-padding" layout-margin flex>
+                    <div>
+                        {{ ((repairOrder.labor | sumOfValue: 'sold_seconds') === 0 ?
+                        0 : grossProfit/((repairOrder.labor | sumOfValue: 'sold_seconds')/3600)
+                        | CentToDollar | currency)}}/hr
+                    </div>
+                    <h4>Gross Profit Per Sold Hour</h4>
+                </div>
+            </div>
+        </section>
+
+        <section class="md-whiteframe-10dp margin-bottom-10" layout="column">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Customer Info</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Name:</label>
+                    <label flex>{{repairOrder.customer.first_name}}&nbsp;{{repairOrder.customer.last_name}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Company:</label>
+                    <label flex>{{repairOrder.customer.company}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Address 1:</label>
+                    <label flex>{{repairOrder.customer.address1}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Postal Code:</label>
+                    <label flex>{{repairOrder.customer.postal_code}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">City:</label>
+                    <label flex>{{repairOrder.customer.city}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Phone Number:</label>
+                    <label flex>{{repairOrder.customer.phone_numbers[0]}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">State:</label>
+                    <label flex>{{repairOrder.customer.state}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Email:</label>
+                    <label flex>{{repairOrder.customer.email_addresses[0]}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Marketing Source:</label>
+                    <label flex>{{repairOrder.marketing_source}}</label>
+                </div>
+            </div>
+        </section>
+
+        <section class="md-whiteframe-10dp margin-bottom-10" layout="column">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Vehicles Info</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Model:</label>
+                    <label flex>{{repairOrder.vehicle.model}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Make:</label>
+                    <label flex>{{repairOrder.vehicle.make}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">License:</label>
+                    <label flex>{{repairOrder.vehicle.license}}</label>
+                </div>
+                <div layout="row" flex>
+                    <label class="leftLabel">Year:</label>
+                    <label flex>{{repairOrder.vehicle.year}}</label>
+                </div>
+            </div>
+
+            <div layout="row" layout-xs="column" layout-margin>
+                <div layout="row" flex>
+                    <label class="leftLabel">Mileage:</label>
+                    <label flex>{{repairOrder.vehicle.last_odo}}</label>
+                </div>
+            </div>
+        </section>
+
+        <section class="md-whiteframe-10dp margin-bottom-10" layout="column">
+            <md-toolbar class="md-primary md-hue-1">
+                <div class="md-toolbar-tools" layout="row" layout-align="center center">
+                    <span>Service Details</span>
+                </div>
+            </md-toolbar>
+
+            <div layout="column">
+                <div layout="row" layout-xs="column" layout-margin>
+                    <div layout="row" flex>
+                        <label class="leftLabel">Service Advisor:</label>
+                        <label flex>{{repairOrder.writer.full_name}}</label>
+                    </div>
+                    <div layout="row" flex>
+                        <label class="leftLabel">Technician:</label>
+                        <label flex>{{repairOrder.technician_name}}</label>
+                    </div>
+                </div>
+
+                <div layout="row" layout-xs="column" layout-margin>
+                    <div layout="row" flex>
+                        <label class="leftLabel">Arrived:</label>
+                        <label flex>{{repairOrder.opened | date :'MM/dd/yyyy h:mm a'}}</label>
+                    </div>
+                    <div layout="row" flex>
+                        <label class="leftLabel">Status:</label>
+                        <label flex>{{repairOrder.order_status}}</label>
+                    </div>
+                </div>
+
+                <div layout="row" layout-xs="column" layout-margin>
+                    <div layout="row" flex>
+                        <label class="leftLabel">Closed:</label>
+                        <label flex>{{repairOrder.closed | date :'MM/dd/yyyy h:mm a'}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <!--Labor Details Section-->
+            <md-content layout="column" layout-margin>
+                <md-list>
+                    <md-subheader class="md-hue-1">Labor Details</md-subheader>
+                    <div class="border">
+                        <div ng-if="!repairOrder.labor || repairOrder.labor.length == 0" layout-margin layout-padding>
+                            Labor details not available.
+                        </div>
+                        <md-list-item class="md-3-line md-long-text" ng-repeat="labor in repairOrder.labor"
+                                      layout="column">
+                            <h3>{{labor.tech.full_name}}</h3>
+
+                            <div class="margin-bottom-10">
+                                <span><span class="leftLabel">Operation Code:</span>{{labor.operation_code}}</span>
+
+                                <div layout="column" layout-gt-sm="row">
+                                    <span>
+                                        <span class="leftLabel">Price:</span>
+                                        {{ labor.sold_price_cents ? labor.sold_price_cents : 0
+                                                                            | CentToDollar | currency }}
+                                        <span hide show-gt-sm>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span>
+                                        <span class="leftLabel">Cost:</span>
+                                        {{labor.actual_cost_cents ? labor.actual_cost_cents : 0
+                                                                            | CentToDollar | currency}}
+                                        <span hide show-gt-sm>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span>
+                                        <span class="leftLabel">Gross Profit:</span>
+                                        {{ labor.sold_price_cents - labor.actual_cost_cents | CentToDollar | currency }}
+                                            ({{ labor.sold_price_cents == 0 ? 0 : ((labor.sold_price_cents
+                                                            - labor.actual_cost_cents) / labor.sold_price_cents)
+                                                                                                * 100 | number:2 }}%)
+                                    </span>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+
+            <!--Parts Details Section-->
+            <md-content layout="column" layout-margin>
+                <md-list>
+                    <md-subheader class="md-hue-1">Parts Details</md-subheader>
+                    <div class="border">
+                        <div ng-if="!repairOrder.parts || repairOrder.parts.length == 0" layout-margin layout-padding>
+                            Parts details not available.
+                        </div>
+                        <md-list-item class="md-3-line md-long-text" ng-repeat="part in repairOrder.parts"
+                                      layout="column">
+                            <h3>{{part.tech.full_name}}</h3>
+
+                            <div>
+                                <span><span class="leftLabel">Part</span>#{{part.part_num}}</span>
+
+                                <div layout="column" layout-gt-sm="row">
+                                    <span><span class="leftLabel"> Price: </span>
+                                                {{ part.sold_price_cents ? part.sold_price_cents : 0
+                                                                            | CentToDollar | currency }}
+                                        <span hide show-gt-sm>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span><span class="leftLabel"> Cost: </span>
+                                                {{part.actual_cost_cents ? part.actual_cost_cents : 0
+                                                                            | CentToDollar | currency}}
+                                        <span hide show-gt-sm>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span><span class="leftLabel"> Qty: </span>
+                                                {{part.quantity ? part.quantity : 0 | toFloor}}
+                                        <span hide show-gt-sm>&nbsp;|&nbsp;</span></span>
+                                    <span>
+
+                                    <span class="leftLabel"> Gross Profit: </span>
+                                                {{ part.sold_price_cents - part.actual_cost_cents
+                                                                            | CentToDollar | currency }}
+                                            ({{ part.sold_price_cents == 0 ? 0 :
+                                            ((part.sold_price_cents - part.actual_cost_cents) / part.sold_price_cents)
+                                                                                                * 100 | number:2 }}%)
+                                    </span>
+                                </div>
+                                <p>{{part.description}}</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+
+            <!--Sublet Details Section-->
+            <md-content layout="column" layout-margin>
+                <md-list>
+                    <md-subheader class="md-hue-1">Sublet Details</md-subheader>
+                    <div class="border">
+                        <div ng-if="!repairOrder.sublets || repairOrder.sublets.length == 0"
+                             layout-margin layout-padding>
+                            Sublet details not available.
+                        </div>
+                        <md-list-item class="md-3-line md-long-text" ng-repeat="sublet in repairOrder.sublets"
+                                      layout="column">
+                            <div>
+                                <span><span class="leftLabel">Order ID:</span>#{{sublet.id}}</span>
+
+                                <div layout="column" layout-gt-sm="row">
+                                    <span><span class="leftLabel"> Price: </span>
+                                            {{ sublet.sold_price_cents ? sublet.sold_price_cents : 0
+                                                                            | CentToDollar | currency }}
+                                        <span hide show-gt-sm>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span><span class="leftLabel"> Cost: </span>
+                                            {{sublet.actual_cost_cents ? sublet.actual_cost_cents : 0
+                                                                            | CentToDollar | currency}}
+                                        <span hide show-gt-sm>&nbsp;|&nbsp;</span>
+                                    </span>
+
+                                    <span>
+                                        <span class="leftLabel"> Gross Profit: </span>
+                                            {{ sublet.sold_price_cents - sublet.actual_cost_cents
+                                                                            | CentToDollar | currency }}
+                                            ({{ sublet.sold_price_cents == 0 ? 0 :
+                                            ((sublet.sold_price_cents - sublet.actual_cost_cents)
+                                                                    / sublet.sold_price_cents) * 100 | number:2 }}%)
+                                    </span>
+                                </div>
+                                <p>{{sublet.description}}</p>
+                            </div>
+                            <md-divider></md-divider>
+                        </md-list-item>
+                    </div>
+                </md-list>
+            </md-content>
+        </section>
+    </md-dialog-content>
+</md-dialog>

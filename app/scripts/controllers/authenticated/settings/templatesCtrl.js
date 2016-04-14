@@ -1,7 +1,7 @@
 'use strict';
 app.controller('templatesCtrl',
     function ($scope, $rootScope, $timeout, $mdDialog, $mdSidenav,
-              toastr, localStorage, userObjKey, templateService, $stateParams) {
+              toastr, localStorage, templateService, $stateParams) {
 
         $rootScope.rightTemplateSwapView = 'views/authenticated/settings/templateManage.html';
         var partnerId = ""; // Get from fnInitTemplates();
@@ -132,8 +132,8 @@ app.controller('templatesCtrl',
 
         /*---------- Initialize Templates ----------*/
         $scope.fnInitTemplates = function () {
-            if (localStorage.getItem(userObjKey)) {
-                $scope.userObj = JSON.parse(unescape(localStorage.getItem(userObjKey)));
+            if (CarglyPartner.user) {
+                $scope.userObj = CarglyPartner.user;
                 partnerId = $scope.userObj.partnerId;
                 if ($stateParams.settingsName == 'templates') {
                     $scope.getPagedDataAsync();

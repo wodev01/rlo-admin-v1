@@ -1,0 +1,51 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageUpdateSwap">
+    <!-- swapping view header -->
+    <md-toolbar class="light-black-bg-1">
+        <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span>{{updateHeading}}</span>
+            <md-button class="md-raised md-primary" ng-click="fnCloseManageUpdate();">Back</md-button>
+        </h1>
+    </md-toolbar>
+
+    <md-content class="md-padding" ng-controller="clientUpdateManageCtrl" ng-init="fnInitUpdateManage();">
+        <form id="updateForm" name="updateForm" layout="column" novalidate>
+            <md-input-container>
+                <label>Update Definition</label>
+                <md-select aria-label="Select Timezone"
+                           ng-model="updatesDefinitionObj"
+                           ng-change="fnUpdatesDefinitionsDDChange(updatesDefinitionObj);"
+                           ng-selected="$first"
+                           placeholder="Update Definition">
+                    <md-option ng-repeat="option in updatesDefinitions" ng-value="option">
+                        {{option.type + ' ' + option.version}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container ng-show="isAppliesToLocation">
+                <label>Location</label>
+                <md-select aria-label="Select Timezone"
+                           ng-model="update.location_id"
+                           ng-selected="$first"
+                           placeholder="Location">
+                    <md-option ng-repeat="option in locationsDD" ng-value="option.id">
+                        {{option.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <div layout="row" layout-align="end center">
+                <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                      md-mode="indeterminate"></md-progress-circular>
+
+                <md-button class="md-raised md-primary" ng-disabled="updateForm.$invalid || isProcessing"
+                           ng-click="fnSaveUpdate(update);">Save
+                </md-button>
+
+                <md-button class="md-warn md-raised"
+                           ng-click="fnCloseManageUpdate();">Cancel
+                </md-button>
+            </div>
+        </form>
+    </md-content>
+</md-sidenav>

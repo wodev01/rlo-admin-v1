@@ -1,0 +1,56 @@
+<div class="md-padding overflow-auto">
+    <div class="margin-bottom-25" layout="row">
+        <div class="md-display-1">Settings</div>
+    </div>
+
+    <div class="settingTabs md-whiteframe-z2" ng-init="tabInit();">
+        <md-content layout-fill flex>
+            <md-tabs class="md-primary" md-dynamic-height md-selected="selectedIndex">
+                <md-tab label="Account Settings" ui-sref="main.settings({settingsName:'account'})">
+                    <div class="settingTab" ng-if="selectedIndex == 0"
+                         layout="row" layout-sm="column" layout-padding layout-fill flex>
+                        <div class="tabView" ng-include="'views/authenticated/settings/account.html'"
+                             ng-controller="accountCtrl" ng-init="fnInitAccount();"
+                             layout-padding layout-fill flex></div>
+                    </div>
+                </md-tab>
+
+                <md-tab label="Users" ui-sref="main.settings({settingsName:'users'})">
+                    <div class="settingTab" ng-if="selectedIndex == 1"
+                         layout="row" layout-sm="column" layout-padding layout-fill>
+                        <div class="tabView" ng-include="'views/authenticated/settings/users.html'"
+                             ng-controller="usersCtrl" ng-init="fnInitUsers();" layout-padding layout-fill flex></div>
+                    </div>
+                </md-tab>
+
+                <md-tab label="Subscriptions" ui-sref="main.settings({settingsName:'subscriptions'})">
+                    <div class="settingTab" ng-if="selectedIndex == 2"
+                         layout="row" layout-sm="column" layout-padding layout-fill>
+                        <div class="tabView" ng-include="'views/authenticated/settings/subscriptions.html'"
+                             ng-controller="subscriptionsCtrl" ng-init="fnInitSubscriptions();"
+                             layout-padding layout-fill flex></div>
+                    </div>
+                </md-tab>
+
+                <md-tab label="Templates" ui-sref="main.settings({settingsName:'templates'})">
+                    <div class="settingTab" ng-if="selectedIndex == 3"
+                         layout="row" layout-sm="column" layout-padding layout-fill>
+                        <div class="tabView" ng-include="'views/authenticated/settings/templates.html'"
+                             ng-controller="templatesCtrl" ng-init="fnInitTemplates();"
+                             layout-padding layout-fill flex></div>
+                    </div>
+                </md-tab>
+
+                <md-tab label="Updates" ui-sref="main.settings({settingsName:'updates'})"
+                        ng-if="$root.isSettingsUpdatesTabShown">
+                    <div class="settingTab" ng-if="selectedIndex == 4"
+                         layout="row" layout-sm="column" layout-padding layout-fill>
+                        <div class="tabView" ng-include="'views/authenticated/settings/updates.html'"
+                             ng-controller="updatesCtrl" ng-init="fnInitUpdates();"
+                             layout-padding layout-fill flex></div>
+                    </div>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+</div>

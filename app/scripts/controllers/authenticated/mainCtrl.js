@@ -8,7 +8,7 @@
  * Controller of the rloAdminApp
  */
 app.controller('MainCtrl',
-  function ($scope, $state, $location, $cookies, $mdSidenav, $mdUtil, cookieName, localStorage, userObjKey) {
+  function ($scope, $state, $location, $cookies, $mdSidenav, $mdUtil, cookieName) {
 
   $scope.fnToggleSideNav = function (componentId) {
     $mdSidenav(componentId).toggle().then(function () {
@@ -26,7 +26,6 @@ app.controller('MainCtrl',
   $scope.fnLogout = function () {
     CarglyPartner.logout(function () {
       $cookies.remove(cookieName);
-      localStorage.removeItem(userObjKey);
       $state.go('login');
     }, function () {
     });
@@ -37,8 +36,8 @@ app.controller('MainCtrl',
   };
 
   $scope.fnInitMain = function () {
-    if (localStorage.getItem(userObjKey)) {
-      $scope.userObj = JSON.parse(unescape(localStorage.getItem(userObjKey)));
+    if (CarglyPartner.user) {
+      $scope.userObj = CarglyPartner.user;
     }
   };
 });

@@ -27,7 +27,6 @@ var app = angular
     ])
     .constant('cookieName', 'cargly_rloAdmin_access_token')
     .constant('toastr', toastr)
-    .constant('userObjKey', 'tfjhk7w4s4i') //Math.random().toString(36).substring(7);
     .constant('localStorage', localStorage)
     .constant('pagingOptions', ["5", "10", "25", "50", "100"])
     .constant('globalTimeZone', ["US/Hawaii", "US/Alaska", "US/Pacific", "US/Arizona", "US/Mountain", "US/Central", "US/Eastern"]);
@@ -107,9 +106,9 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
             templateUrl: "views/resetPassword.html",
             controller: 'ResetPasswordCtrl',
             resolve: {
-                GetUser: function (GetUserService) {
-                    return GetUserService.fnResetPWTokenVerified();
-                }
+                AuthService: ['AuthService', function (AuthService) {
+                    return AuthService.fnResetPWTokenVerified();
+                }]
             }
         })
         .state('main', {
@@ -123,8 +122,8 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
             templateUrl: 'views/authenticated/clients/clients.html',
             controller: 'clientsCtrl',
             resolve: {
-                GetUser: ['GetUserService', function (GetUserService) {
-                    return GetUserService.fetchUser();
+                AuthService: ['AuthService', function (AuthService) {
+                    return AuthService.fnGetUser();
                 }]
             }
         })
@@ -133,8 +132,8 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
           templateUrl: 'views/authenticated/payments/payments.html',
           controller: 'paymentsCtrl',
           resolve: {
-            GetUser: ['GetUserService', function (GetUserService) {
-              return GetUserService.fetchUser();
+            AuthService: ['AuthService', function (AuthService) {
+              return AuthService.fnGetUser();
             }]
           }
         })
@@ -143,8 +142,8 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
             templateUrl: 'views/authenticated/shopGroups/groups.html',
             controller: 'groupsCtrl',
             resolve: {
-                GetUser: ['GetUserService', function (GetUserService) {
-                    return GetUserService.fetchUser();
+                AuthService: ['AuthService', function (AuthService) {
+                    return AuthService.fnGetUser();
                 }]
             }
         })
@@ -153,8 +152,8 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
             templateUrl: 'views/authenticated/shopLocations/shopLocations.html',
             controller: 'shopLocationsCtrl',
             resolve: {
-                GetUser: ['GetUserService', function (GetUserService) {
-                    return GetUserService.fetchUser();
+                AuthService: ['AuthService', function (AuthService) {
+                    return AuthService.fnGetUser();
                 }]
             }
         })
@@ -163,8 +162,8 @@ app.config(function ($httpProvider, $mdThemingProvider, $stateProvider, $urlRout
             templateUrl: 'views/authenticated/settings/settings.html',
             controller: 'settingsCtrl',
             resolve: {
-                GetUser: ['GetUserService', function (GetUserService) {
-                    return GetUserService.fetchUser();
+                AuthService: ['AuthService', function (AuthService) {
+                    return AuthService.fnGetUser();
                 }]
             }
         });

@@ -1,0 +1,76 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageClientSwap">
+    <!-- swapping view header -->
+    <md-toolbar class="light-black-bg-1">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            {{editClientName}}
+            <md-button ng-click="fnCloseClientManageSwap();" class="md-raised md-primary">Back</md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content md-theme="grey">
+        <md-tabs class="md-primary" md-selected="selectedClientTab" md-dynamic-height ng-if="isTabsLoad">
+            <md-tab label="Info">
+                <div ng-if="selectedClientTab == 0"
+                     ng-controller="clientInfoCtrl"
+                     ng-include="'views/authenticated/clients/clientInfo.html'"
+                     ng-init="fnInitClientInfo();">
+                </div>
+            </md-tab>
+
+            <md-tab label="Users">
+                <div ng-if="selectedClientTab == 1"
+                     ng-controller="clientUsersCtrl"
+                     ng-include="'views/authenticated/clients/clientUser.html'"
+                     ng-init="fnInitUsers();"></div>
+            </md-tab>
+
+            <md-tab label="Emails">
+                <div ng-if="selectedClientTab == 2"
+                     ng-controller="clientEmailsCtrl"
+                     ng-include="'views/authenticated/clients/clientEmails.html'"
+                     ng-init="fnInitEmails();"></div>
+            </md-tab>
+
+            <md-tab label="Locations">
+                <div ng-if="selectedClientTab == 3"
+                     ng-controller="clientLocationCtrl"
+                     ng-include="'views/authenticated/clients/clientLocation.html'"
+                     ng-init="fnInitLocation(selectedClientTab);"></div>
+            </md-tab>
+
+            <md-tab label="Billing">
+                <div ng-if="selectedClientTab == 4"
+                     ng-controller="clientBillingCtrl"
+                     ng-include="'views/authenticated/clients/clientBilling.html'"
+                     ng-init="fnClientBillingInit();"></div>
+            </md-tab>
+
+            <md-tab label="Billing History">
+                <div ng-if="selectedClientTab == 5"
+                     ng-controller="clientBillingHistoryCtrl"
+                     ng-include="'views/authenticated/clients/clientBillingHistory.html'"
+                     ng-init="fnInitBillingHistory();"></div>
+            </md-tab>
+
+            <md-tab label="Updates" ng-if="isSuperRole">
+                <div ng-if="selectedClientTab == 6"
+                     ng-controller="clientUpdatesCtrl"
+                     ng-include="'views/authenticated/clients/clientUpdates.html'"
+                     ng-init="fnInitUpdates();"></div>
+            </md-tab>
+
+            <md-tab label="Update Status" ng-if="isSuperRole">
+                <div ng-if="selectedClientTab == 7"
+                     ng-controller="clientUpdateStatusesCtrl"
+                     ng-include="'views/authenticated/clients/clientUpdateStatuses.html'"
+                     ng-init="fnInitUpdateStatuses();"></div>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</md-sidenav>
+
+<!-- include swapping view-->
+<div ng-include="rightUserSwapView"></div>
+<div ng-include="rightLocationSwapView"></div>
+<div ng-include="rightClientEmailSwapView"></div>
+<div ng-include="rightUpdateSwapView"></div>

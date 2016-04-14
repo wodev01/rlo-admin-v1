@@ -1,0 +1,31 @@
+<md-content class="md-padding" md-theme="rlo">
+    <div class="md-display-1 margin-bottom-10">Emails</div>
+
+    <div ng-if="isEmailsMsgShow" layout="row" layout-align="center center">
+        <h1>No emails available.</h1>
+    </div>
+
+    <!-- Loader -->
+    <div ng-if="!isEmailsDataNotNull && !isEmailsMsgShow" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <!--UI Grid-->
+    <div ng-if="isEmailsDataNotNull"
+         ui-grid="clientEmailsGridOptions"
+         ng-style="$root.fnReturnGridHeight(clientEmailsData.length);"
+         ng-cloak ui-grid-selection ui-grid-auto-resize>
+    </div>
+    <div ng-if="isEmailsDataNotNull" layout="row" layout-align="center center" layout-margin ng-cloak>
+        <div ng-if="isPagingData">
+            <md-button aria-label="Show More" class="md-raised md-primary"
+                       ng-click="fnShowMoreEmails()">
+                <span ng-if="isMoreEmailData"> Loading... </span>
+                <span ng-if="!isMoreEmailData">Show More </span>
+            </md-button>
+        </div>
+        <div ng-if="!isPagingData">
+            <h2>... No more results found ...</h2>
+        </div>
+    </div>
+</md-content>

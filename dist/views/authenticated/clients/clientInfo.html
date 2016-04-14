@@ -1,0 +1,59 @@
+<md-content class="md-padding" flex="70" md-theme="rlo">
+    <form name="clientInfoForm" layout="column" novalidate>
+        <md-input-container class="remove-error-space">
+            <label>Partner Name</label>
+            <input name="partner" ng-model="client.partner" required>
+        </md-input-container>
+
+        <md-input-container>
+            <label for="location_timezone">Timezone</label>
+            <md-select aria-label="Select Timezone" ng-model="client.timezone" id="location_timezone">
+                <md-option ng-repeat="option in timeZoneDDOptions" value="{{option}}">
+                  {{option}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container>
+            <label for="contact">Contact</label>
+            <md-select id="contact" aria-label="Select Contact"
+                       ng-model="selectedContact"
+                       ng-change="fnChangeContactDD(client, selectedContact);"
+                       placeholder="-- Select Contact --">
+                <md-option ng-repeat="option in contactDDOptions" ng-value="option.contactId">
+                    {{option.contactName}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container class="remove-error-space">
+            <label>Contact Email</label>
+            <input name="contactName" ng-model="client.contactEmail" ng-disabled="true" required>
+        </md-input-container>
+
+        <md-input-container class="remove-error-space">
+            <label>Contact Phone</label>
+            <input name="contactPhone" ng-model="client.contactPhone" required>
+        </md-input-container>
+
+        <md-input-container class="remove-error-space">
+            <label>Groups</label>
+            <input name="groupName" ng-model="client.groupsName" ng-disabled="true">
+        </md-input-container>
+
+        <md-input-container>
+            <label>Avg. Tech Hourly Cost</label>
+            <input name="avg_tech_hourly_cost" ng-disabled="true">
+        </md-input-container>
+
+        <div layout="row" layout-align="end center">
+            <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                  md-mode="indeterminate"></md-progress-circular>
+
+            <md-button class="md-raised md-primary"
+                       ng-disabled="clientInfoForm.$invalid || !clientInfoForm.$dirty || isProcessing"
+                       ng-click="fnSaveClientInfo(client);">Save
+            </md-button>
+        </div>
+    </form>
+</md-content>

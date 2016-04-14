@@ -1,0 +1,40 @@
+<md-dialog aria-label="invoiceForm" flex-gt-sm="30" flex-sm="60" flex-xs="70">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-title">New Customer Bill</span>
+        </div>
+    </md-toolbar>
+
+    <md-content class="md-padding">
+        <form name="invoiceForm" layout="column" novalidate>
+            <md-input-container class="remove-error-space">
+                <label>Invoice Number</label>
+                <input name="invoiceNum" ng-model="invoice.reference" required/>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Description</label>
+                <input name="description" ng-model="invoice.description" required/>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Payable Amount</label>
+                <input type="number" name="payableAmount" min="0" ng-model="invoice.amount" required/>
+            </md-input-container>
+
+            <md-dialog-actions>
+                <div ng-if="isProcessing">
+                    <div layout="row" layout-sm="column" layout-align="left center" md-theme="rsmt">
+                        <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
+                    </div>
+                </div>
+                <md-button class="md-raised md-primary"
+                           ng-disabled="invoiceForm.$invalid || isProcessing"
+                           ng-click="fnSaveInvoice(invoice);">Charge Now
+                </md-button>
+                <md-button class="md-warn md-raised" ng-click="fnCancel();">Cancel</md-button>
+            </md-dialog-actions>
+        </form>
+    </md-content>
+
+</md-dialog>

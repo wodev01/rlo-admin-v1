@@ -1,0 +1,136 @@
+<md-content id="client-billing-tab" md-theme="rlo" layout-margin>
+    <form name="subscriptionInfoForm" layout="column" novalidate>
+        <section class="subInfo-container" layout-margin>
+            <div layout="row" layout-xs="row" layout-margin>
+                <md-input-container flex class="remove-error-space">
+                    <label>Last Payment</label>
+                    <input name="last_payment" ng-model="subscriptionInfo.last_payment" ng-disabled="true">
+                </md-input-container>
+
+                <md-input-container flex class="remove-error-space">
+                    <label>Total Subscription</label>
+                    <input name="subscription_total" ng-model="subscriptionInfo.subscription_total" ng-disabled="true">
+                </md-input-container>
+            </div>
+
+            <div layout="column" layout-gt-sm="row" layout-margin>
+                <md-input-container flex class="remove-error-space">
+                    <label>Card Number</label>
+                    <input name="card_number" ng-model="paymentInfo.number" ng-disabled="true">
+                </md-input-container>
+
+                <md-input-container flex class="remove-error-space">
+                    <label>Expiration</label>
+                    <input name="expires" ng-model="paymentExpiration" ng-disabled="true">
+                </md-input-container>
+
+                <div flex>
+                    <md-button class="md-raised md-primary" ng-click="fnOpenClientPaymentInfo($event);">
+                        Update Payment Info
+                    </md-button>
+                </div>
+
+                <div flex>
+                    <md-button class="md-raised md-primary" ng-click="fnOpenClientChargeNow($event);">
+                        Charge Now
+                    </md-button>
+                </div>
+            </div>
+        </section>
+
+        <sections class="subInfo-container" layout-margin>
+            <div class="md-title" layout-margin>Subscriptions</div>
+
+            <div layout="column" layout-gt-sm="row" layout-margin>
+                <md-input-container flex class="remove-error-space">
+                    <label>Next Payment Due</label>
+                    <input name="next_payment_due" ng-model="subscriptionInfo.next_payment_due"
+                           ng-click="openDatePicker($event,subscriptionInfo);" readonly="true" style="cursor: pointer;">
+                </md-input-container>
+
+                <md-input-container flex class="remove-error-space">
+                    <label>Balance</label>
+                    <input name="balance_cents" type="number" ng-model="subscriptionInfo.balance_cents" required>
+                </md-input-container>
+
+                <md-input-container flex>
+                    <label>Subscription Status</label>
+                    <md-select aria-label="Select Status"
+                               ng-model="subscriptionInfo.subscription_status"
+                               ng-change="fnChangeStatus(selectStatus);"
+                               placeholder="Subscription Status">
+                        <md-option ng-repeat="item in selectStatusOptions" value="{{item.value}}">
+                            {{item.name}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <div layout="row" layout-sm="column" layout-margin>
+                <md-input-container flex class="remove-error-space">
+                    <label>Receipt emails</label>
+                    <textarea name="receipt_emails"
+                              ng-model="subscriptionInfo.receipt_emails" multiple-emails columns="1"></textarea>
+                </md-input-container>
+            </div>
+
+            <div class="subscriptions" layout-margin layout-padding>
+                <!-- Loader -->
+                <div ng-if="!isSubscriptionDefLoaded" layout="column" layout-align="center center" layout-fill flex>
+                    <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate">
+                    </md-progress-circular>
+                </div>
+
+                <div class="custom-table" ng-if="isSubscriptionDefLoaded">
+                    <table>
+                        <tr>
+                            <td>Locations</td>
+                            <td>Subscriptions</td>
+                            <td>Total</td>
+                        </tr>
+                        <tr ng-if="locations.length == 0">
+                            <td colspan="3">
+                                <div class="md-subhead text-center">No subscriptions available.</div>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="location in locations"
+                            ng-init="fnInitLocation(location.id,subscriptionInfo.locations);"
+                            ng-if="locations.length != 0">
+                            <td>{{location.name}}</td>
+                            <td>
+                                <div layout="row" layout-sm="column" class="subscriptions-row">
+                                    <md-checkbox ng-repeat="checkbox in checkboxes" aria-label="checkbox.label"
+                                                 class="checkbox md-primary"
+                                                 ng-model="isSelected[location.id+'_'+$index]"
+                                                 ng-init="fnInitCheckbox(checkbox.name,subArr[location.id],location.id+'_'+$index, location.id ,checkbox.amount_cents);"
+                                                 ng-change="fnCheckboxChange(subscriptionInfo.locations, isSelected[location.id+'_'+$index],location.id, checkbox.name, checkbox.amount_cents);">
+                                        {{checkbox.description}} - {{checkbox.amount_cents | CentToDollar | currency}}
+                                    </md-checkbox>
+                                </div>
+                            </td>
+                            <td class="text-right">{{subTotal[location.id] | CentToDollar | currency}}</td>
+                        </tr>
+                        <tr class="sub-last-row" ng-if="locations.length != 0">
+                            <td colspan="2">
+                                <div class="text-right">Grand Total:</div>
+                            </td>
+                            <td class="text-right">{{grandTotal | CentToDollar | currency}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div layout="row" layout-align="end center" layout-margin>
+                <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                      md-mode="indeterminate"></md-progress-circular>
+
+                <md-button class="md-raised md-primary"
+                           ng-disabled="subscriptionInfoForm.$invalid || !subscriptionInfoForm.$dirty || isProcessing || isSubInfoBtnDisabled"
+                           ng-click="fnSaveSubscriptionInfo(subscriptionInfo, grandTotal);">
+                    Save Subscription Info
+                </md-button>
+            </div>
+        </sections>
+    </form>
+
+</md-content>

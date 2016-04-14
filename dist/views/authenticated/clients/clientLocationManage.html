@@ -1,0 +1,66 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageLocSwap">
+    <!-- swapping view header -->
+    <md-toolbar class="light-black-bg-1">
+        <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span>{{editLocName}}</span>
+            <md-button ng-click="fnCloseManageLoc();" class="md-raised md-primary"> Back</md-button>
+        </h1>
+    </md-toolbar>
+
+    <md-content class="md-padding" ng-controller="clientLocationManageCtrl" ng-init="fnInitClientLocationManage();">
+        <form id="locationForm" name="locationForm" layout="column" novalidate>
+            <md-input-container class="remove-error-space">
+                <label>Name</label>
+                <input name="name" ng-model="location.name" ng-minlength="5" required>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Phone</label>
+                <input name="phone" ng-model="location.phone" ng-minlength="10" ng-maxlength="20" required>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Address</label>
+                <input name="address" name="address" ng-model="location.address" required>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>City</label>
+                <input name="city" ng-model="location.city" required>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>State</label>
+                <input name="state" ng-model="location.state" required>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Zip</label>
+                <input name="zip" ng-model="location.zip"
+                       ng-pattern="/^[0-9]+$/" ng-minlength="5" md-maxlength="10" required>
+            </md-input-container>
+
+            <md-input-container>
+              <label>Timezone</label>
+                <md-select aria-label="Select Timezone" ng-model="location.timezone">
+                    <md-option ng-repeat="option in timeZoneDDOptions" value="{{option}}">
+                        {{option}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <div layout="row" layout-align="end center">
+                <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                      md-mode="indeterminate"></md-progress-circular>
+
+                <md-button class="md-raised md-primary"
+                           ng-disabled="locationForm.$invalid || !locationForm.$dirty || isProcessing"
+                           ng-click="fnSaveLocation(location);">Save
+                </md-button>
+
+                <md-button class="md-warn md-raised" ng-click="fnCloseManageLoc();">Cancel</md-button>
+            </div>
+        </form>
+
+    </md-content>
+</md-sidenav>

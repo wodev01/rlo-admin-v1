@@ -1,0 +1,75 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageUserSwap">
+    <!-- swapping view header -->
+    <md-toolbar class="light-black-bg-1">
+        <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span>{{editUserName}}</span>
+            <md-button class="md-raised md-primary" ng-click="fnCloseManageUser();">
+                Back
+            </md-button>
+        </h1>
+    </md-toolbar>
+
+    <md-content ng-controller="clientUserManageCtrl" ng-init="fnInitUser();" class="md-padding">
+        <form name="userForm" layout="column" novalidate>
+            <md-input-container class="remove-error-space">
+                <label>Name</label>
+                <input name="name" ng-model="user.name" ng-minlength="5"
+                       ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" required>
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Email</label>
+                <input name="email" type="email" ng-model="user.email" ng-minlength="5" required>
+            </md-input-container>
+
+            <md-input-container>
+                <label for="user_role">Role</label>
+                <md-select aria-label="Select Role" ng-model="user.role" placeholder="Select Role" id="user_role">
+                    <md-option value="User">User</md-option>
+                    <md-option value="Admin">Admin</md-option>
+                    <md-option value="LocationManager">LocationManager</md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Default Location</label>
+                <md-select aria-label="Select Location"
+                           ng-model="user.defaultLocation"
+                           placeholder="Default Location">
+                    <md-option ng-repeat="option in locationDDOptions" value="{{option.id}}">
+                        {{option.name}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+
+            <md-input-container>
+                <label>Customer Contact</label>
+                <md-select aria-label="Select Customer Contact"
+                           ng-model="user.customerContact" placeholder="Customer Contact">
+                    <md-option value="false">No - customer emails are not sent to this user</md-option>
+                    <md-option value="true">Yes - customer emails are sent to this user</md-option>
+                </md-select>
+            </md-input-container>
+
+            <div layout="row" layout-margin>
+                <md-checkbox class="md-primary" aria-label="owner" ng-model="user.owner">
+                    Owner (Receives Daily Email)
+                </md-checkbox>
+                <md-checkbox class="md-primary" aria-label="verified" ng-model="user.verified" ng-disabled="true">
+                    Verified
+                </md-checkbox>
+            </div>
+
+            <div layout="row" layout-align="end center">
+                <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
+                                      md-mode="indeterminate"></md-progress-circular>
+
+                <md-button class="md-raised md-primary"
+                           ng-disabled="userForm.$invalid || !userForm.$dirty || isProcessing"
+                           ng-click="fnSaveUser(user);">Save</md-button>
+
+                <md-button class="md-raised md-warn" ng-click="fnCloseManageUser();">Cancel</md-button>
+            </div>
+        </form>
+    </md-content>
+</md-sidenav>

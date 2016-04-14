@@ -1,0 +1,59 @@
+<md-sidenav id="manage-shoploc-sidenav" class="md-sidenav-right md-whiteframe-z2 right-side-nav"
+            md-component-id="manageShopLocationsView">
+    <!-- swapping view header -->
+    <md-toolbar class="light-black-bg-1">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            {{shopLocationObj.name}}
+            <div class="bottom-sheet-demo inset" layout="row" layout-align="end center">
+                <md-button class="md-raised md-primary" ng-click="fnCloseManageShopLocationsSwapView();">Back</md-button>
+                <md-button class="md-icon-button" ng-click="fnOpenBottomSheet();">
+                    <md-icon md-font-set="material-icons">more_vert</md-icon>
+                    <md-tooltip ng-if="$root.isMobile === null" md-direction="top">More</md-tooltip>
+                </md-button>
+            </div>
+        </div>
+    </md-toolbar>
+
+    <div layout="column" md-theme="grey">
+        <md-tabs class="md-primary" md-dynamic-height md-selected="selectedIndex" ng-if="isTabsLoad">
+            <md-tab label="Dashboard" id="dashboard">
+                <div ng-if="selectedIndex == 0"
+                     ng-controller="shopLocationsDashboardCtrl"
+                     ng-include="'views/authenticated/shopLocations/shopLocationsDashboard.html'"></div>
+            </md-tab>
+
+            <md-tab label="Info">
+                <div ng-if="selectedIndex == 1"
+                     ng-controller="shopLocationsInfoCtrl"
+                     ng-include="'views/authenticated/shopLocations/shopLocationsInfo.html'"
+                     ng-init="fnInitShopLocInfo();"></div>
+            </md-tab>
+
+            <md-tab label="Config">
+                <div ng-if="selectedIndex == 2"
+                     ng-controller="shopLocationsConfigCtrl"
+                     ng-include="'views/authenticated/shopLocations/shopLocationsConfig.html'"
+                     ng-init="fnInitShopLocConfig();"></div>
+            </md-tab>
+
+            <md-tab label="Log">
+                <div ng-if="selectedIndex == 3"
+                     ng-controller="shopLocationsLogCtrl"
+                     ng-include="'views/authenticated/shopLocations/shopLocationsLogs.html'"
+                     ng-init="fnInitShopLocLog();"></div>
+            </md-tab>
+
+            <md-tab label="Next Config">
+                <div ng-if="selectedIndex == 4"
+                     ng-controller="shopLocationsNextConfigCtrl"
+                     ng-include="'views/authenticated/shopLocations/shopLocationsNextConfig.html'"
+                     ng-init="fnInitShopLocNextConfig();"></div>
+            </md-tab>
+
+        </md-tabs>
+    </div>
+</md-sidenav>
+
+<!-- include swapping view-->
+<div ng-include="rightManageSegmentSwapView"></div>
+<div ng-include="rightOpenSegmentsSwapView"></div>

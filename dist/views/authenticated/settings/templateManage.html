@@ -1,0 +1,124 @@
+<md-sidenav id="template-side-nav"
+            class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageTemplateSwap">
+
+    <!-- swapping view header -->
+    <md-toolbar  class="light-black-bg-1">
+        <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span>{{editTemplateName}}</span>
+            <md-button ng-click="fnCloseManageTemplate();" class="md-raised md-primary">Back</md-button>
+        </h1>
+    </md-toolbar>
+
+    <md-content ng-controller="templateManageCtrl">
+        <!-- Loader -->
+        <div ng-if="isProcessing" layout="column" layout-align="center center" layout-fill flex>
+            <md-progress-circular class="md-primary" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+        </div>
+
+        <form id="template-form" name="templateForm" layout="column" md-theme="grey" novalidate>
+            <md-content layout-fill>
+                <md-tabs class="md-primary" md-selected="selectedIndex" md-dynamic-height md-enable-disconnect
+                         ng-click="selectedIndex == 3 ? toggleText ===  'Text' ?
+                                fnGetInterpolatedTemplate('html') : fnGetInterpolatedTemplate('text') : '';">
+
+                    <md-tab label="Template Info">
+                        <div class="md-padding" ng-if="selectedIndex == 0" layout="column" layout-fill flex>
+                            <md-input-container class="remove-error-space" flex>
+                                <label>Name</label>
+                                <input name="name" ng-model="template.name" required/>
+                            </md-input-container>
+
+                            <md-input-container class="remove-error-space" flex>
+                                <label>Subject</label>
+                                <input name="subject" ng-model="template.subject" required/>
+                            </md-input-container>
+
+                            <md-input-container class="remove-error-space" flex>
+                                <label>From Address</label>
+                                <input name="from_address" ng-model="template.from_address" required/>
+                            </md-input-container>
+
+                            <md-input-container class="remove-error-space" flex>
+                                <label>From Name</label>
+                                <input name="from_name" ng-model="template.from_name" required/>
+                            </md-input-container>
+
+                            <md-input-container class="remove-error-space" flex>
+                                <label>Reply To Address</label>
+                                <input name="reply_to_address" ng-model="template.reply_to_address"/>
+                            </md-input-container>
+                        </div>
+                    </md-tab>
+
+                    <md-tab label="Template Text">
+                        <div class="tab-container md-padding" layout="column" ng-if="selectedIndex == 1">
+                            <textarea name="template_text"
+                                      layout="column" ng-model="template.text"
+                                      placeholder="Enter template text here."></textarea>
+                        </div>
+                    </md-tab>
+
+                    <md-tab label="Template HTML">
+                        <div class="tab-container md-padding" layout="column" ng-if="selectedIndex == 2">
+                            <wysiwyg-edit content="template.html"></wysiwyg-edit>
+                        </div>
+                    </md-tab>
+
+                    <md-tab label="Template Preview">
+                        <div class="tab-container md-padding" style="padding: 16px !important;" layout-fill flex
+                             ng-if="selectedIndex == 3" ng-click="$event.stopPropagation();">
+                            <!-- Loader -->
+                            <div ng-if="!isInterpolated" layout="column" layout-align="center center" layout-fill flex>
+                                <md-progress-circular class="md-accent" md-diameter="100"
+                                                      md-mode="indeterminate"></md-progress-circular>
+                            </div>
+                            <div ng-if="isInterpolated" layout-fill>
+                                <div ng-if="!isToggled" layout-fill>
+                                    <div bind-html-compile="rendered_template.html" layout-fill></div>
+                                </div>
+                                <div ng-if="isToggled" layout-fill>
+                                    <textarea name="previewText"
+                                              layout="column" ng-model="rendered_template.text"
+                                              layout-fill readonly></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </md-tab>
+                </md-tabs>
+            </md-content>
+
+            <div style="border-top: 1px solid;" layout="column" layout-gt-sm="row" layout-align="end center" md-theme="rlo">
+                <div layout="row" layout-align-sm="center center" layout-align-xs="center center" layout-fill flex>
+                    <md-button class="md-raised md-primary" ng-if="selectedIndex == 3" ng-click="fnTogglePreview();">
+                        Preview {{ toggleText }}
+                    </md-button>
+                </div>
+
+                <div layout="column" layout-gt-sm="row" layout-align-gt-sm="end center">
+                    <div layout="row" layout-align="end center">
+                        <md-button class="md-raised md-primary"
+                                   ng-click="fnSendTestEmail($event);">Send Test Email
+                        </md-button>
+
+                        <md-button class="md-raised md-primary"
+                                   ng-click="fnOpenSetTemplateVariableModal($event);">Set Template Variables
+                        </md-button>
+                    </div>
+                </div>
+
+                <div layout="column" layout-gt-sm="row" layout-align-gt-sm="end center">
+                    <div layout="row" layout-align="end center">
+                        <md-button class="md-raised md-primary"
+                                   ng-disabled="templateForm.$invalid"
+                                   ng-click="fnSaveTemplate(template);">Save
+                        </md-button>
+
+                        <md-button class="md-warn md-raised"
+                                   ng-click="fnCloseManageTemplate();">Cancel
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </md-content>
+</md-sidenav>

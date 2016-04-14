@@ -1,0 +1,21 @@
+<form id="groupForm" name="groupForm" class="md-padding" layout="column" novalidate>
+    <md-input-container class="remove-error-space">
+        <label>Group Name</label>
+        <input name="name" ng-model="group.name" required ng-minlength="5" ng-pattern="/^[a-zA-Z0-9_ ]*$/">
+    </md-input-container>
+
+    <div layout="row" layout-align="end center" md-theme="rlo">
+        <md-progress-circular ng-if="isProcessing" class="md-primary"
+                              md-mode="indeterminate"></md-progress-circular>
+
+        <md-button class="md-raised md-primary"
+                   ng-disabled="groupForm.$invalid || !groupForm.$dirty || isProcessing"
+                   ng-click="fnSaveGroup(group);">Save
+        </md-button>
+
+        <md-button class="md-warn md-raised"
+                   ng-click="fnCloseManageGroupSwap();">Cancel
+        </md-button>
+    </div>
+</form>
+

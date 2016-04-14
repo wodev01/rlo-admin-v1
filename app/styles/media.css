@@ -18,7 +18,8 @@
 
 @media (max-width: 683px) {
     img.rlo-logo{
-      height: 63px;
+        height: 60px;
+        width: 100px;
     }
 }
 

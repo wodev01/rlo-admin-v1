@@ -8,8 +8,7 @@
  * Controller of the rloAdminApp
  */
 app.controller('ForgotPasswordCtrl',
-    function ($scope, $rootScope, $mdDialog, $state,
-              localStorage, toastr) {
+    function ($scope, $rootScope, $mdDialog, $state, toastr) {
 
         $scope.resendEmail = '';
 

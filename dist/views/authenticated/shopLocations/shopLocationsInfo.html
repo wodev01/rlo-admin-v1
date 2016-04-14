@@ -1,0 +1,57 @@
+<md-content class="md-padding" layout="row" layout-sm="column">
+    <div ng-if="isProcessing" layout="column" layout-align="center center" layout-fill flex>
+        <md-progress-circular class="md-accent" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+    </div>
+
+    <div layout-fill flex>
+        <form id="locationsInfoForm" name="locationsInfoForm" layout="column" flex="70" novalidate>
+            <div layout="row" layout-xs="column">
+                <md-input-container flex class="remove-error-space">
+                    <label>Sync App Version</label>
+                    <input name="sync_app_version" ng-model="shopLocationData.currentVersion" ng-disabled="true">
+                </md-input-container>
+
+                <md-input-container flex class="remove-error-space">
+                    <label>Last Inform</label>
+                    <input name="last_inform" ng-model="shopLocationData.lastConfigUpdated" ng-disabled="true">
+                </md-input-container>
+
+                <md-input-container flex class="remove-error-space">
+                    <label>Last Sync</label>
+                    <input name="last_sync" ng-model="shopLocationData.lastConfig.settings['carglyconnect.lastsync']"
+                           ng-disabled="true">
+                </md-input-container>
+
+                <md-input-container flex class="remove-error-space">
+                    <label>SMS</label>
+                    <input name="sms" ng-model="shopLocationData.getSMSInfoNameAndDBHealth" ng-disabled="true">
+                </md-input-container>
+            </div>
+
+            <md-input-container class="remove-error-space">
+                <label>Partner</label>
+                <input name="partner" ng-model="shopLocationData.partner" ng-disabled="true">
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Location</label>
+                <input name="location" ng-model="shopLocationData.name" ng-disabled="true">
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Address</label>
+                <input name="address" ng-model="shopLocationData.address" ng-disabled="true">
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Phone</label>
+                <input name="phone" ng-model="shopLocationData.phone" ng-disabled="true">
+            </md-input-container>
+
+            <md-input-container class="remove-error-space">
+                <label>Subscriptions</label>
+                <input name="subscription" ng-model="shopLocationData.subscriptions" ng-disabled="true">
+            </md-input-container>
+        </form>
+    </div>
+</md-content>
