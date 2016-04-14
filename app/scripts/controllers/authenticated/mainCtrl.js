@@ -20,7 +20,7 @@ app.controller('MainCtrl',
   };
 
   $scope.fnIsActive = function (viewLocation) {
-    return viewLocation === $location.path() ? 'md-warn nd-hue-2' : '';
+    return viewLocation === $location.path() ? 'md-warn' : '';
   };
 
   $scope.fnLogout = function () {
