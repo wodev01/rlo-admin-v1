@@ -31,6 +31,8 @@ app.controller('manageGroupCtrl',
             if (item) {
                 $scope.isAddBtnDisabled = false;
                 $scope.partnerId = item.id;
+            }else{
+                $scope.isAddBtnDisabled = true;
             }
         };
 
