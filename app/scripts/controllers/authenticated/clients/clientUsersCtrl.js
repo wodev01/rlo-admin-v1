@@ -39,16 +39,16 @@ app.controller('clientUsersCtrl',
         $scope.userAction = '<div layout="row">' +
             '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnUserEdit(row, $event);">' +
             '   <md-icon md-font-set="material-icons">edit</md-icon>' +
-            '   <md-tooltip md-direction="top">Edit</md-tooltip></md-button>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Edit</md-tooltip></md-button>' +
             '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnResendConfirmation(row, $event);">' +
             '   <md-icon md-font-set="material-icons">done_all</md-icon>' +
-            '   <md-tooltip md-direction="top">Resend Confirmation</md-tooltip></md-button>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Resend Confirmation</md-tooltip></md-button>' +
             '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnResetPassword(row, $event);">' +
             '   <md-icon md-font-set="material-icons">vpn_key</md-icon>' +
-            '   <md-tooltip md-direction="top">Reset Password</md-tooltip></md-button>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Reset Password</md-tooltip></md-button>' +
             '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnSendWelcomeEmail(row,$event);">' +
             '   <md-icon md-font-set="material-icons">email</md-icon>' +
-            '   <md-tooltip md-direction="top">Send Welcome Email</md-tooltip></md-button>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Send Welcome Email</md-tooltip></md-button>' +
             '</div>';
 
         $scope.userGridOptions = {

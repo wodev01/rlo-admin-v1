@@ -41,14 +41,14 @@ app.controller('clientBillingHistoryCtrl',
             '<div ng-show="{{row.entity.details.messages[0]}}"> ' +
             '   <md-button class="md-icon-button md-warn">' +
             '       <md-icon md-font-set="material-icons">highlight_off</md-icon>' +
-            '       <md-tooltip md-direction="top">{{row.entity.details.messages[0].message}}</md-tooltip>' +
+            '       <md-tooltip ng-if="$root.isMobile === null" md-direction="top">{{row.entity.details.messages[0].message}}</md-tooltip>' +
             '   </md-button>' +
             '</div>{{row.entity.status}}</div>';
 
         $scope.billingHistoryAction = '<div layout="row">' +
             '<md-button ng-if="grid.appScope.isPaid(row)" ng-disabled="grid.appScope.isProcessing" class="md-icon-button md-primary" ng-click="grid.appScope.fnRefund(row,$event)">' +
             '   <md-icon md-font-set="material-icons">payment</md-icon>' +
-            '   <md-tooltip md-direction="top">Refund</md-tooltip>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Refund</md-tooltip>' +
             '</md-button> </div>';
 
         $scope.billingHistoryGridOptions = {

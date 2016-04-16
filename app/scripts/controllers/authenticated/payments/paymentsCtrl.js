@@ -48,7 +48,7 @@ app.controller('paymentsCtrl',
             '<div ng-show="{{row.entity.details.messages[0]}}"> ' +
             '   <md-button class="md-icon-button md-warn">' +
             '       <md-icon md-font-set="material-icons">highlight_off</md-icon>' +
-            '       <md-tooltip md-direction="top">{{row.entity.details.messages[0].message}}</md-tooltip>' +
+            '       <md-tooltip ng-if="$root.isMobile === null" md-direction="top">{{row.entity.details.messages[0].message}}</md-tooltip>' +
             '   </md-button>' +
             '</div>{{row.entity.status}}</div>';
 
@@ -57,12 +57,12 @@ app.controller('paymentsCtrl',
             '           ng-click="grid.appScope.fnOpenClientPaymentPage(row,$event,grid.appScope.clients);" ' +
             '           ng-init="grid.appScope.fnOpenClientBtnInit();">' +
             '   <md-icon md-font-set="material-icons">visibility</md-icon>' +
-            '   <md-tooltip md-direction="top">Open Client</md-tooltip></md-button>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Open Client</md-tooltip></md-button>' +
             '<md-button class="md-icon-button md-primary" ng-if="grid.appScope.isPaid(row)" ' +
             '           ng-disabled="grid.appScope.isProcessing" ' +
             '           ng-click="grid.appScope.fnRefund(row,$event);">' +
             '   <md-icon md-font-set="material-icons">payment</md-icon>' +
-            '   <md-tooltip md-direction="top">Refund</md-tooltip>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Refund</md-tooltip>' +
             '</md-button></div>';
 
         $scope.paymentsGridOptions = {

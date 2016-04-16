@@ -149,7 +149,7 @@ app.controller('clientsCtrl',
         $scope.clientAction = '<div layout="row">' +
             '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnClientEdit(row)">' +
             '   <md-icon md-font-set="material-icons">visibility</md-icon>' +
-            '   <md-tooltip md-direction="top">Open</md-tooltip>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Open</md-tooltip>' +
             '</md-button></div>';
 
         $scope.clientsGridOptions = {

@@ -262,7 +262,6 @@ app.run(function ($rootScope, $mdDialog, $mdSidenav, $cookies, cookieName) {
         },
         BlackBerry: function () {
             return navigator.userAgent.match(/BlackBerry/i) || navigator.platform.match(/BlackBerry/i);
-            ;
         },
         iOS: function () {
             return navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.platform.match(/iPhone|iPad|iPod/i);

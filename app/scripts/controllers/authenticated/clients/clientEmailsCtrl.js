@@ -42,7 +42,7 @@ app.controller('clientEmailsCtrl',
         $scope.clientEmailAction = '<div layout="row">' +
             '   <md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnViewEmailClient(row)">' +
             '   <md-icon md-font-set="material-icons">visibility</md-icon>' +
-            '   <md-tooltip md-direction="top">View</md-tooltip>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">View</md-tooltip>' +
             '</md-button>' +
             '</div>';
 
@@ -63,7 +63,7 @@ app.controller('clientEmailsCtrl',
                 },
                 {field: 'location_name', displayName: 'Location', minWidth: 200, enableHiding: false},
                 {field: 'to_email', displayName: 'Email', minWidth: 200, enableHiding: false},
-                {field: 'state', displayName: 'Status', minWidth: 50, enableHiding: false},
+                {field: 'state', displayName: 'Status', minWidth: 100, enableHiding: false},
                 {
                     field: 'last_event',
                     displayName: 'Modified',

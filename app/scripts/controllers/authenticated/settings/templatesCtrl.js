@@ -62,10 +62,10 @@ app.controller('templatesCtrl',
         $scope.templateAction = '<div layout="row">' +
             '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnEditTemplate(row);">' +
             '   <md-icon md-font-set="material-icons">edit</md-icon>' +
-            '   <md-tooltip md-direction="top">Edit</md-tooltip></md-button>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Edit</md-tooltip></md-button>' +
             '<md-button class="md-icon-button md-warn" ng-click="grid.appScope.fnRemoveTemplate(row,$event);">' +
             '   <md-icon md-font-set="material-icons">delete</md-icon>' +
-            '   <md-tooltip md-direction="top">Delete</md-tooltip></md-button></div>';
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Delete</md-tooltip></md-button></div>';
 
         $scope.templateGridOptions = {
             data: 'templatesData',
