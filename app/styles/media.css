@@ -8,6 +8,10 @@
       height: 55px;
     }
 
+    #client-page section > form > input.filterBox, #shop-location > div > form > input.filterBox {
+        margin-left: -8px;
+    }
+
 }
 
 @media (max-width: 768px) {

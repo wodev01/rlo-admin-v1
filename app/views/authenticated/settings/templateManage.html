@@ -16,8 +16,7 @@
         </div>
 
         <form id="template-form" name="templateForm" layout="column" md-theme="grey" novalidate>
-            <md-content layout-fill>
-                <md-tabs class="md-primary" md-selected="selectedIndex" md-dynamic-height md-enable-disconnect
+            <md-tabs class="md-primary" md-selected="selectedIndex" md-dynamic-height md-enable-disconnect
                          ng-click="selectedIndex == 3 ? toggleText ===  'Text' ?
                                 fnGetInterpolatedTemplate('html') : fnGetInterpolatedTemplate('text') : '';">
 
@@ -85,8 +84,6 @@
                         </div>
                     </md-tab>
                 </md-tabs>
-            </md-content>
-
             <div style="border-top: 1px solid;" layout="column" layout-gt-sm="row" layout-align="end center" md-theme="rlo">
                 <div layout="row" layout-align-sm="center center" layout-align-xs="center center" layout-fill flex>
                     <md-button class="md-raised md-primary" ng-if="selectedIndex == 3" ng-click="fnTogglePreview();">
