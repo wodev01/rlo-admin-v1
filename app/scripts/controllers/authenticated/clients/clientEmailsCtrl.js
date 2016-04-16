@@ -34,6 +34,8 @@ app.controller('clientEmailsCtrl',
                     if (error.status !== 401 && error.status !== 500) {
                         toastr.error('Something goe\'s wrong, getting emails data.');
                     }
+                    $scope.isEmailsMsgShow = true;
+                    $scope.isEmailsDataNotNull = false;
 
                 });
 
