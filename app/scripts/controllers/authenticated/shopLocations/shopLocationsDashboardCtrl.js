@@ -486,7 +486,7 @@ app.controller('shopLocationsDashboardCtrl',
         };
 
         $scope.chartOptions = $scope.chartGroups[$scope.selectedGroupOption.value];
-        $scope.selectedChartType = $scope.chartOptions[6];
+        $scope.selectedChartType = $scope.chartOptions[0];
         $scope.barChartName = $scope.selectedChartType.name;
         $scope.sendJsonToBar = $scope.createJSON[$scope.selectedChartType.value];
 

@@ -15,13 +15,13 @@ app.factory('ErrorMsg',['$state', 'toastr', '$cookies', 'cookieName',
             {
                 case 401:
                     toastr.remove();
-                    toastr.error('Username and password are wrong.');
+                    toastr.error('Access is denied due to invalid credentials.', '401 - Unauthorized');
                     fnLogout();
                     break;
 
                 case 403:
                     toastr.remove();
-                    toastr.error('Do not have permission.');
+                    toastr.error('Do not have permission.', '403 - Forbidden');
                     fnLogout();
                     break;
 
