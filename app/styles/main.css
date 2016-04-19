@@ -194,3 +194,10 @@
     margin-left: 15px;
     z-index: 1;
 }
+
+/*---------- Bar-chart no data message ----------*/
+.bar-data-msg {
+    position: absolute;
+    top: 40%;
+    left: 40%
+}

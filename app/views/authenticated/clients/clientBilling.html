@@ -24,13 +24,11 @@
                     <input name="expires" ng-model="paymentExpiration" ng-disabled="true">
                 </md-input-container>
 
-                <div flex>
+                <div layout="row" layout-xs="column">
                     <md-button class="md-raised md-primary" ng-click="fnOpenClientPaymentInfo($event);">
                         Update Payment Info
                     </md-button>
-                </div>
 
-                <div flex>
                     <md-button class="md-raised md-primary" ng-click="fnOpenClientChargeNow($event);">
                         Charge Now
                     </md-button>

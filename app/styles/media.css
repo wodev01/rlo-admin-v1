@@ -12,6 +12,9 @@
         margin-left: -8px;
     }
 
+    md-toolbar .md-toolbar-tools .text-small-959 {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -30,5 +33,12 @@
 @media (min-width: 599px) {
     #group-member-list button.addMemberBtn {
         margin-right: 0 !important;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    /* All Modal Dialog */
+    md-toolbar .md-toolbar-tools .text-small-599 {
+        font-size: 14px;
     }
 }

@@ -41,7 +41,7 @@ app.controller('clientEmailsCtrl',
 
         };
 
-        $scope.clientEmailAction = '<div layout="row">' +
+        $scope.clientEmailAction = '<div class="ui-grid-cell-contents padding-left-0">' +
             '   <md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnViewEmailClient(row)">' +
             '   <md-icon md-font-set="material-icons">visibility</md-icon>' +
             '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">View</md-tooltip>' +

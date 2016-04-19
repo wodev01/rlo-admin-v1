@@ -83,10 +83,9 @@ app.controller('clientUsersCtrl',
             var confirm = $mdDialog.confirm()
                 .title('Resend Welcome E-mail')
                 .content('Resending welcome email to your mail-id ?')
-                .ariaLabel('Resend')
+                .ariaLabel('Ok')
                 .ok('Resend')
-                .cancel('Cancel')
-                .targetEvent(event);
+                .cancel('Cancel');
 
             $mdDialog.show(confirm)
                 .then(function () {
@@ -100,7 +99,7 @@ app.controller('clientUsersCtrl',
             var confirm = $mdDialog.confirm()
                 .title('Resend Confirmation')
                 .content('Resending confirmation to your email-id ?')
-                .ariaLabel('Resend')
+                .ariaLabel('Ok')
                 .ok('Resend')
                 .cancel('Cancel')
                 .targetEvent(event);
@@ -117,7 +116,7 @@ app.controller('clientUsersCtrl',
             var confirm = $mdDialog.confirm()
                 .title('Reset Password Request')
                 .content('Resetting password to your email-id ?')
-                .ariaLabel('Reset Password')
+                .ariaLabel('Ok')
                 .ok('Reset')
                 .cancel('Cancel')
                 .targetEvent(event);
