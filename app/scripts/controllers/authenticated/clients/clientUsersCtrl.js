@@ -79,13 +79,14 @@ app.controller('clientUsersCtrl',
             }
         };
 
-        $scope.fnSendWelcomeEmail = function (row) {
+        $scope.fnSendWelcomeEmail = function (row, event) {
             var confirm = $mdDialog.confirm()
                 .title('Resend Welcome E-mail')
                 .content('Resending welcome email to your mail-id ?')
                 .ariaLabel('Ok')
                 .ok('Resend')
-                .cancel('Cancel');
+                .cancel('Cancel')
+                .targetEvent(event);
 
             $mdDialog.show(confirm)
                 .then(function () {
