@@ -1214,3 +1214,8 @@ md-dialog[aria-label=Ok] button[aria-label=Reset], md-dialog[aria-label=Ok] butt
     border-color: #5b94e3 !important;
     color: rgba(255, 255, 255, 0.87) !important;
 }
+
+/* Remove outline for repair order list */
+md-list md-list-item > div {
+    outline: none;
+}
