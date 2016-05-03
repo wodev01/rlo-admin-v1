@@ -201,3 +201,22 @@
     top: 40%;
     left: 40%
 }
+
+/*------- START : md-date-time --------*/
+.time-date > .control > .slider > .date-control,
+.time-date > .control > .slider > .time-control{
+    overflow: hidden;
+}
+.time-date > .display > .title,
+.time-date > .control > .slider > .date-control > .days .day-cell:hover,
+.time-date > .control > .slider > .date-control > .days .day-cell:active{
+    background-color: #2D2D2D;
+}
+.time-date > .display > .content,
+.time-date > .control > .slider > .date-control > .days .day-cell.selected{
+    background-color: #5B7BE3;
+}
+.time-date button, .time-date .button{
+    color: #2D2D2D;
+}
+/*------- END : md-date-time --------*/
