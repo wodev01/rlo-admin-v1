@@ -1,4 +1,31 @@
 'use strict';
+app.directive('pageTitle', function ($rootScope, $timeout) {
+    return {
+        link: function (scope, element) {
+            function fnCapitalize(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+            var listener = function (event, toState, toParams) {
+                // Default title
+                var title = 'Rlo training';
+                // Create your own title pattern
+                if (toState.data && toState.data.pageTitle) {
+                    if(toState.data.pageTitle === 'Settings'){
+                        title = fnCapitalize(toParams.settingsName) + ' ' +toState.data.pageTitle + ' - ' + title;
+                    }else{
+                        title = toState.data.pageTitle + ' - ' + title;
+                    }
+                }
+                $timeout(function () {
+                    element.text(title);
+                });
+            };
+            var $stateChangeStart = $rootScope.$on('$stateChangeStart', listener);
+            $rootScope.$on('$destroy', $stateChangeStart);
+        }
+    };
+});
+
 app.directive('locationIndicator', function () {
     return {
         restrict: 'A',

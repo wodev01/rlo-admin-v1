@@ -1069,6 +1069,10 @@ md-input-container.remove-error-space .md-errors-spacer {
     min-height: 0;
 }
 
+.error-msg {
+    color: rgb(213, 0, 0);
+    font-size: 12px;
+}
 /*---------- Custom Table ----------*/
 .custom-table {
     margin: 0;
