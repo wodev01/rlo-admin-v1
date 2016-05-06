@@ -1,7 +1,7 @@
 'use strict';
 app.controller('shopLocationsCtrl',
     function ($scope, $mdSidenav, toastr, $rootScope, $cookies, $state,
-              $mdDialog, $mdBottomSheet, groupService, shopLocationsService) {
+              $mdDialog, $mdBottomSheet, groupService, clientBillingServices, shopLocationsService) {
 
         $scope.rightEditView = 'views/authenticated/shopLocations/manageShopLocations.html';
         $scope.isTabsLoad = false;
@@ -11,8 +11,8 @@ app.controller('shopLocationsCtrl',
         $scope.isMoreShopLocations = false;
 
         $scope.filter = {
-            'filter' : '',
-            'group_id' : ''
+            'filter': '',
+            'group_id': ''
         };
 
         $scope.fnInitShopLocations = function () {
@@ -28,7 +28,7 @@ app.controller('shopLocationsCtrl',
                 });
             });
             $scope.selectGroup = $scope.selectGroupOptions[0].value;
-            $scope.$watch('searchFilter',function(newVal){
+            $scope.$watch('searchFilter', function (newVal) {
                 $scope.searchFilter = newVal;
                 $scope.filter.filter = newVal;
                 $scope.filter.group_id = $scope.selectGroup;
@@ -166,18 +166,23 @@ app.controller('shopLocationsCtrl',
 
         /*----------- Manage Shop Locations ------------*/
         $scope.fnOpenManageShopLocationsSwapView = function (row) {
-            $scope.shopLocationObj = row.entity;
-            shopLocationsService.setShopLocationsObj(row.entity);
-            setTimeout(function () {
-                $scope.rightEditView = '';
-                $scope.$apply();
-                $scope.rightEditView = 'views/authenticated/shopLocations/manageShopLocations.html';
-                $scope.$apply();
-                $scope.isTabsLoad = true;
-                $mdSidenav('manageShopLocationsView').open()
-                    .then(function () {
+            clientBillingServices.fetchClientSubscriptionInfo(row.entity.partnerId)
+                .then(function (res) {
+                    $scope.shopLocationObj = row.entity;
+                    $scope.shopLocationObj.subscription_status = res.subscription_status;
+
+                    shopLocationsService.setShopLocationsObj(row.entity);
+                    setTimeout(function () {
+                        $scope.rightEditView = '';
+                        $scope.$apply();
+                        $scope.rightEditView = 'views/authenticated/shopLocations/manageShopLocations.html';
+                        $scope.$apply();
+                        $scope.isTabsLoad = true;
+                        $mdSidenav('manageShopLocationsView').open()
+                            .then(function () {
+                            });
                     });
-            });
+                });
         };
 
         $scope.fnCloseManageShopLocationsSwapView = function () {
@@ -264,6 +269,19 @@ app.controller('shopLocationsCtrl',
             }, function () {
                 parentElem.css('overflow-y', 'auto');
             });
+        };
+
+        $scope.fnCheckSubscription = function (locationObj, subscription) {
+
+            var hasSubscriptions = true;
+            if (locationObj.subscriptions) {
+                var locSubscriptions = locationObj.subscriptions;
+                /*locSubscriptions.push('rlo_daily_email'); locationObj.subscription_status = 'Active';*/
+                if (locSubscriptions.indexOf(subscription) > -1 && locationObj.subscription_status === 'Active') {
+                    hasSubscriptions = false;
+                }
+            }
+            return hasSubscriptions;
         };
 
     });

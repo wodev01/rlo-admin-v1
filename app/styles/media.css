@@ -4,8 +4,8 @@
         min-width: 100%;
     }
 
-    img.rlo-logo{
-      height: 55px;
+    img.rlo-logo {
+        height: 50px;
     }
 
     #client-page section > form > input.filterBox, #shop-location > div > form > input.filterBox {
@@ -19,12 +19,12 @@
 
 @media (max-width: 768px) {
     .center-form-container {
-      width: 300px;
+        width: 300px;
     }
 }
 
-@media (max-width: 683px) {
-    img.rlo-logo{
+@media (max-width: 659px) {
+    img.rlo-logo {
         height: 60px;
         width: 100px;
     }

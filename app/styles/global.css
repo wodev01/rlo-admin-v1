@@ -1005,7 +1005,7 @@ html, body {
 }
 
 img.rlo-logo {
-    height: 70px;
+    height: 65px;
 }
 
 .img-responsive {
@@ -1211,7 +1211,7 @@ md-dialog[aria-label=Delete] button[aria-label=Delete] {
 md-dialog[aria-label=Ok] button[aria-label=Resend], md-dialog[aria-label=Ok] button[aria-label=Refund],
 md-dialog[aria-label=Ok] button[aria-label=Reset], md-dialog[aria-label=Ok] button[aria-label=Run] {
     background-color: rgb(91, 123, 227) !important;
-    border-color: #5b94e3 !important;
+    border-color: #5B94E3 !important;
     color: rgba(255, 255, 255, 0.87) !important;
 }
 

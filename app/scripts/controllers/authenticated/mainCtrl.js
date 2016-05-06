@@ -40,4 +40,5 @@ app.controller('MainCtrl',
                 $scope.userObj = CarglyPartner.user;
             }
         };
+
     });

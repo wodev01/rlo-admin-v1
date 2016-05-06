@@ -3,12 +3,15 @@
     <!-- swapping view header -->
     <md-toolbar class="light-black-bg-1">
         <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-            {{shopLocationObj.name}}
-            <div class="bottom-sheet-demo inset" layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary" ng-click="fnCloseManageShopLocationsSwapView();">Back</md-button>
+            <span>{{shopLocationObj.name}}</span>
+
+            <div class="bottom-sheet-demo inset padding-right-0" layout="row" layout-align="end center">
                 <md-button class="md-icon-button" ng-click="fnOpenBottomSheet();">
                     <md-icon md-font-set="material-icons">more_vert</md-icon>
                     <md-tooltip ng-if="$root.isMobile === null" md-direction="top">More</md-tooltip>
+                </md-button>
+                <md-button class="md-raised md-primary margin-right-0" ng-click="fnCloseManageShopLocationsSwapView();">
+                    Back
                 </md-button>
             </div>
         </div>
@@ -16,7 +19,8 @@
 
     <div layout="column" md-theme="grey">
         <md-tabs class="md-primary" md-dynamic-height md-selected="selectedIndex" ng-if="isTabsLoad">
-            <md-tab label="Dashboard" id="dashboard">
+            <md-tab label="Dashboard" id="dashboard"
+                    ng-disabled="fnCheckSubscription(shopLocationObj, 'rlo_daily_email');">
                 <div ng-if="selectedIndex == 0"
                      ng-controller="shopLocationsDashboardCtrl"
                      ng-include="'views/authenticated/shopLocations/shopLocationsDashboard.html'"></div>
