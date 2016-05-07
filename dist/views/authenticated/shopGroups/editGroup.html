@@ -2,15 +2,21 @@
     <md-input-container class="remove-error-space">
         <label>Group Name</label>
         <input name="name" ng-model="group.name" required ng-minlength="5" ng-pattern="/^[a-zA-Z0-9_ ]*$/">
+        <div ng-if="groupForm.$submitted || groupForm.name.$touched">
+            <span class="error-msg" ng-if="groupForm.name.$error.required">Name is required.</span>
+            <span class="error-msg" ng-if="groupForm.name.$error.minlength">Name is too short minimum 5 characters required.</span>
+            <span class="error-msg" ng-if="groupForm.name.$error.pattern">This field must contain alphanumeric characters only.</span>
+        </div>
+
     </md-input-container>
 
     <div layout="row" layout-align="end center" md-theme="rlo">
         <md-progress-circular ng-if="isProcessing" class="md-primary"
                               md-mode="indeterminate"></md-progress-circular>
 
-        <md-button class="md-raised md-primary"
-                   ng-disabled="groupForm.$invalid || !groupForm.$dirty || isProcessing"
-                   ng-click="fnSaveGroup(group);">Save
+        <md-button type="submit" class="md-raised md-primary"
+                   ng-disabled="isProcessing"
+                   ng-click="groupForm.$valid && fnSaveGroup(group);">Save
         </md-button>
 
         <md-button class="md-warn md-raised"

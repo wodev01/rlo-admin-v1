@@ -1,44 +1,52 @@
 <md-toolbar layout="row" ng-include="'views/header.html'"></md-toolbar>
-<md-content class="container-bg">
-  <div style="min-height: 20px;">
-      <md-progress-linear class="md-warn" ng-if="user.isProcessing" md-mode="indeterminate"></md-progress-linear>
-  </div>
-  <div class="overflow-auto" layout="column" layout-align="space-between center" flex>
-      <md-content class="md-whiteframe-z1 md-padding center-form-container" layout-margin>
-          <div class="md-display-1 text-center" layout-padding>Sign In</div>
-          <form name="signInForm" layout="column"
-                ng-submit="signInForm.$valid && fnSignInUser(user);" novalidate>
-              <md-input-container class="remove-error-space">
-                  <md-icon class="md-primary margin-top-5">person</md-icon>
-                  <input type="email" name="email" placeholder="Email" ng-model="user.email" required>
-                  <div ng-if="signInForm.$submitted || signInForm.email.$touched">
-                      <span class="error-msg" ng-if="signInForm.email.$error.required">Email is required.</span>
-                      <span class="error-msg" ng-if="signInForm.email.$error.email">This field must be a valid email address.</span>
-                  </div>
-              </md-input-container>
-              <md-input-container class="remove-error-space">
-                  <md-icon class="md-primary margin-top-5">lock</md-icon>
-                  <input type="password" name="password" placeholder="Password"
-                         ng-model="user.password" required/>
-                  <div ng-if="signInForm.$submitted || signInForm.password.$touched">
-                      <span class="error-msg" ng-if="signInForm.password.$error.required">Password is required.</span>
-                  </div>
-              </md-input-container>
-              <div layout="column" layout-align="center center">
-                  <div layout="row">
-                      <md-button type="submit" class="md-raised md-primary"
-                                 ng-disabled="user.isProcessing">
-                          Sign In
-                      </md-button>
-                  </div>
 
-                  <div layout="row">
-                      <md-button class="md-primary" ng-click="fnForgotPassword($event);">
-                          Forgot Your Password ?
-                      </md-button>
-                  </div>
-              </div>
-          </form>
-      </md-content>
-  </div>
+<md-content class="container-bg">
+    <div style="min-height: 20px;">
+        <md-progress-linear class="md-warn" ng-if="user.isProcessing" md-mode="indeterminate"></md-progress-linear>
+    </div>
+
+    <div class="overflow-auto" layout="column" layout-align="space-between center" flex>
+        <md-content class="md-whiteframe-z1 md-padding center-form-container" layout-margin>
+            <div class="md-display-1 text-center" layout-padding>Sign In</div>
+
+            <form name="signInForm" layout="column"
+                  ng-submit="signInForm.$valid && fnSignInUser(user);" novalidate>
+                <md-input-container class="remove-error-space">
+                    <md-icon class="md-primary margin-top-5">person</md-icon>
+                    <input type="email" name="email" placeholder="Email" ng-model="user.email" required>
+
+                    <div ng-if="signInForm.$submitted || signInForm.email.$touched">
+                        <span class="error-msg" ng-if="signInForm.email.$error.required">Email is required.</span>
+                        <span class="error-msg" ng-if="signInForm.email.$error.email">
+                            This field must be a valid email address.</span>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="remove-error-space">
+                    <md-icon class="md-primary margin-top-5">lock</md-icon>
+                    <input type="password" name="password" placeholder="Password"
+                           ng-model="user.password" required/>
+
+                    <div ng-if="signInForm.$submitted || signInForm.password.$touched">
+                        <span class="error-msg" ng-if="signInForm.password.$error.required">Password is required.</span>
+                    </div>
+                </md-input-container>
+
+                <div layout="column" layout-align="center center">
+                    <div layout="row">
+                        <md-button type="submit" class="md-raised md-primary"
+                                   ng-disabled="user.isProcessing">
+                            Sign In
+                        </md-button>
+                    </div>
+
+                    <div layout="row">
+                        <md-button class="md-primary" ng-click="fnForgotPassword($event);">
+                            Forgot Your Password ?
+                        </md-button>
+                    </div>
+                </div>
+            </form>
+        </md-content>
+    </div>
 </md-content>

@@ -12,11 +12,10 @@
         <form id="updateForm" name="updateForm" layout="column" novalidate>
             <md-input-container class="remove-error-space">
                 <label>URL</label>
-                <input name="url" ng-model="update.url" ng-minlength="5"
+                <input name="url" ng-model="update.url"
                        ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required>
                 <div ng-if="updateForm.$submitted || updateForm.url.$touched">
                     <span class="error-msg" ng-if="updateForm.url.$error.required">URL is required.</span>
-                    <span class="error-msg" ng-if="updateForm.url.$error.minlength">URL is too short minimum 5 characters required.</span>
                     <span class="error-msg" ng-if="updateForm.url.$error.pattern">This field must contain valid URL.</span>
                 </div>
             </md-input-container>

@@ -12,10 +12,18 @@
             <md-input-container class="remove-error-space">
                 <label>Client Name</label>
                 <input name="name" ng-model="client.name" ng-minlength="5" required>
+                <div ng-if="newClientForm.$submitted || newClientForm.name.$touched">
+                    <span class="error-msg" ng-if="newClientForm.name.$error.required">Name is required.</span>
+                    <span class="error-msg" ng-if="newClientForm.name.$error.minlength">Name is too short minimum 5 characters required.</span>
+                </div>
             </md-input-container>
             <md-input-container class="remove-error-space">
                 <label>Website</label>
-                <input name="website" ng-model="client.website" required/>
+                <input type="url" name="website" ng-model="client.website" required/>
+                <div ng-if="newClientForm.$submitted || newClientForm.website.$touched">
+                    <span class="error-msg" ng-if="newClientForm.website.$error.required">Website is required.</span>
+                    <span class="error-msg" ng-if="newClientForm.website.$error.url">This field must be a valid url.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
@@ -30,43 +38,67 @@
             <md-input-container class="remove-error-space">
                 <label>Contact Name</label>
                 <input name="contact_name" ng-model="client.contact_name" ng-minlength="5" required/>
+                <div ng-if="newClientForm.$submitted || newClientForm.contact_name.$touched">
+                    <span class="error-msg" ng-if="newClientForm.contact_name.$error.required">Contact name is required.</span>
+                    <span class="error-msg" ng-if="newClientForm.contact_name.$error.minlength">Name is too short minimum 5 characters required.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Contact Phone</label>
                 <input name="contact_phone" ng-model="client.contact_phone" ng-minlength="5"
                        ng-pattern="/^\d+$/" required>
+                <div ng-if="newClientForm.$submitted || newClientForm.contact_phone.$touched">
+                    <span class="error-msg" ng-if="newClientForm.contact_phone.$error.required">Phone is required.</span>
+                    <span class="error-msg" ng-if="newClientForm.contact_phone.$error.minlength">Phone is too short minimum 5 characters required.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Contact Email</label>
                 <input type="email" name="contact_email" ng-model="client.contact_email" ng-minlength="5" required/>
+                <div ng-if="newClientForm.$submitted || newClientForm.contact_email.$touched">
+                    <span class="error-msg" ng-if="newClientForm.contact_email.$error.required">Email is required.</span>
+                    <span class="error-msg" ng-if="newClientForm.contact_email.$error.minlength">Email is too short minimum 5 characters required.</span>
+                    <span class="error-msg" ng-if="newClientForm.contact_email.$error.email">This field must contain valid email address.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Address</label>
                 <input name="address" ng-model="client.address" required/>
+                <div ng-if="newClientForm.$submitted || newClientForm.address.$touched">
+                    <span class="error-msg" ng-if="newClientForm.address.$error.required">Address is required.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>City</label>
                 <input name="city" ng-model="client.city" required/>
+                <div ng-if="newClientForm.$submitted || newClientForm.city.$touched">
+                    <span class="error-msg" ng-if="newClientForm.city.$error.required">City is required.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>State</label>
                 <input name="state" ng-model="client.state" required>
+                <div ng-if="newClientForm.$submitted || newClientForm.state.$touched">
+                    <span class="error-msg" ng-if="newClientForm.state.$error.required">State is required.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Zip</label>
                 <input name="zip" ng-model="client.zip" md-maxlength="15" required/>
+                <div ng-if="newClientForm.$submitted || newClientForm.zip.$touched">
+                    <span class="error-msg" ng-if="newClientForm.zip.$error.required">Zip is required.</span>
+                </div>
             </md-input-container>
 
             <div layout="row" layout-align="end center">
-                <md-button class="md-raised md-primary"
-                           ng-disabled="newClientForm.$invalid"
-                           ng-click="fnSaveClient(client);">Save
+                <md-button type="submit" class="md-raised md-primary"
+                           ng-click="newClientForm.$valid && fnSaveClient(client);">Save
                 </md-button>
 
                 <md-button class="md-warn md-raised"

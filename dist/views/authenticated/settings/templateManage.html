@@ -25,21 +25,33 @@
                             <md-input-container class="remove-error-space">
                                 <label>Name</label>
                                 <input name="name" ng-model="template.name" required/>
+                                <div ng-if="templateForm.$submitted || templateForm.name.$touched">
+                                    <span class="error-msg" ng-if="templateForm.name.$error.required">Name is required.</span>
+                                </div>
                             </md-input-container>
 
                             <md-input-container class="remove-error-space">
                                 <label>Subject</label>
                                 <input name="subject" ng-model="template.subject" required/>
+                                <div ng-if="templateForm.$submitted || templateForm.subject.$touched">
+                                    <span class="error-msg" ng-if="templateForm.subject.$error.required">Subject is required.</span>
+                                </div>
                             </md-input-container>
 
                             <md-input-container class="remove-error-space">
                                 <label>From Address</label>
                                 <input name="from_address" ng-model="template.from_address" required/>
+                                <div ng-if="templateForm.$submitted || templateForm.from_address.$touched">
+                                    <span class="error-msg" ng-if="templateForm.from_address.$error.required">From address is required.</span>
+                                </div>
                             </md-input-container>
 
                             <md-input-container class="remove-error-space">
                                 <label>From Name</label>
                                 <input name="from_name" ng-model="template.from_name" required/>
+                                <div ng-if="templateForm.$submitted || templateForm.from_name.$touched">
+                                    <span class="error-msg" ng-if="templateForm.from_name.$error.required">From name is required.</span>
+                                </div>
                             </md-input-container>
 
                             <md-input-container class="remove-error-space">
@@ -105,9 +117,8 @@
 
                 <div layout="column" layout-gt-sm="row" layout-align-gt-sm="end center">
                     <div layout="row" layout-align="end center">
-                        <md-button class="md-raised md-primary"
-                                   ng-disabled="templateForm.$invalid"
-                                   ng-click="fnSaveTemplate(template);">Save
+                        <md-button type="submit" class="md-raised md-primary"
+                                   ng-click="templateForm.$valid && fnSaveTemplate(template);">Save
                         </md-button>
 
                         <md-button class="md-warn md-raised"

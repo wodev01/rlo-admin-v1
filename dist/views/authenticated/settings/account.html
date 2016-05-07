@@ -9,13 +9,27 @@
         <div layout="column" class="md-padding">
             <md-input-container class="remove-error-space">
                 <label>Business Name</label>
-                <input ng-model="user.businessName" minlength="5" required>
+                <input name="businessName" ng-model="user.businessName" minlength="5" required>
+
+                <div name="businessName" ng-if="partner_form.$submitted || partner_form.businessName.$touched">
+                    <span class="error-msg"
+                          ng-if="partner_form.businessName.$error.required">Business name is required.</span>
+                    <span class="error-msg" ng-if="partner_form.businessName.$error.minlength">
+                        Business name is too short minimum 5 characters required.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Business Website</label>
-                <input ng-model="user.website"
+                <input name="businessUrl" ng-model="user.website"
                        ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required>
+
+                <div ng-if="partner_form.$submitted || partner_form.businessUrl.$touched">
+                    <span class="error-msg" ng-if="partner_form.businessUrl.$error.required">
+                        Business Website is required.</span>
+                    <span class="error-msg" ng-if="partner_form.businessUrl.$error.pattern">
+                        This field must be a valid url.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
@@ -35,9 +49,18 @@
 
             <md-input-container class="remove-error-space">
                 <label>Business Zip</label>
-                <input ng-model="user.zip"
+                <input name="businessZip" ng-model="user.zip"
                        ng-pattern="/^[0-9]+$/"
-                       md-maxlength="10" minlength="5" required>
+                       md-maxlength="20" minlength="5" required>
+
+                <div ng-if="partner_form.$submitted || partner_form.businessZip.$touched">
+                    <span class="error-msg"
+                          ng-if="partner_form.businessZip.$error.required">Business zip is required.</span>
+                    <span class="error-msg" ng-if="partner_form.businessZip.$error.minlength">
+                        Business zip is too short minimum 5 digits required.</span>
+                    <span class="error-msg" ng-if="partner_form.businessZip.$error.pattern">
+                        Only digits allowed.</span>
+                </div>
             </md-input-container>
 
             <md-input-container>
@@ -54,9 +77,19 @@
         <div class="md-padding" layout="column">
             <md-input-container class="remove-error-space">
                 <label>Contact Name</label>
-                <input ng-model="user.contactName"
+                <input name="contactName" ng-model="user.contactName"
                        ng-pattern="/^[A-Za-z ]+$/"
-                       minlength="5" required>
+                       minlength="6" required>
+
+                <div ng-if="partner_form.$submitted || partner_form.contactName.$touched">
+                    <span class="error-msg"
+                          ng-if="partner_form.contactName.$error.required">Contact name is required.</span>
+                    <span class="error-msg" ng-if="partner_form.contactName.$error.minlength">
+                        Contact name is too short minimum 6 characters required.</span>
+                    <span class="error-msg" ng-if="partner_form.contactName.$error.pattern">
+                        This field must contain alphabets only.</span>
+                </div>
+
             </md-input-container>
 
             <md-input-container class="remove-error-space">
@@ -69,24 +102,24 @@
         <div class="md-padding" layout="column">
             <md-input-container class="remove-error-space">
                 <label>API Secret Key</label>
-                <input ng-model="user.paymentProcessingSecretKey" minlength="6">
+                <input ng-model="user.paymentProcessingSecretKey">
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>API Public Key</label>
-                <input ng-model="user.paymentProcessingPublicKey" minlength="5">
+                <input ng-model="user.paymentProcessingPublicKey">
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Account ID</label>
-                <input ng-model="user.paymentProcessingAccountId" minlength="5">
+                <input ng-model="user.paymentProcessingAccountId">
             </md-input-container>
         </div>
 
         <div layout="row">
-            <md-button class="md-raised md-primary"
-                       ng-disabled="partner_form.$invalid"
-                       ng-click="updateUser();">Save
+            <md-button type="submit" class="md-raised md-primary"
+                       ng-disabled="isProcessing"
+                       ng-click="partner_form.$valid && updateUser();">Save
             </md-button>
 
             <md-button class="md-warn md-raised" ng-click="fnCancelAccount();">Cancel</md-button>

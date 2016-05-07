@@ -27,7 +27,7 @@ app.controller('templateManageCtrl',
             localStorage.setItem('preview_values', angular.toJson(JSON.parse(getTemplateObj.preview_values)));
         } else {
             $scope.isInterpolated = true;
-            localStorage.setItem('preview_values', '{}');   
+            localStorage.setItem('preview_values', '{}');
         }
 
         /*---------- Create/Update template ----------*/
@@ -178,22 +178,27 @@ app.controller('templateManageCtrl',
                 controller: testEmailCtrl,
                 locals: {scope_template: $scope.template},
                 template: '<md-dialog aria-label="Test Email dialog" style="min-width: 300px;">' +
-                '   <md-content layout="column" layout-padding>' +
-                '       <div class="md-headline"> Send Test Email </div>' +
-                '       <div layout="column" ng-form="testEmailForm">' +
-                '           <md-input-container class="remove-error-space">' +
-                '               <label> To Address </label>' +
-                '               <input type="email" name="to_address" ng-model="to_address" required />' +
-                '           </md-input-container>' +
-                '       </div>' +
-                '       <md-dialog-actions>' +
-                '           <md-button class="md-raised md-primary"' +
-                '                       ng-disabled="testEmailForm.to_address.$invalid"' +
-                '                       ng-click="fnSendTestEmail(to_address);">Send</md-button>' +
-                '           <md-button class="md-warn md-raised"' +
-                '                       ng-click="fnCloseDialog();">Cancel</md-button>' +
-                '       </md-dialog-actions>' +
-                '    </md-content>' +
+                '   <md-content layout-padding>' +
+                '       <form name="testEmailForm" layout="column" novalidate>' +
+                '           <div class="md-headline"> Send Test Email </div>' +
+                '          <div layout="column">' +
+                '               <md-input-container class="remove-error-space">' +
+                '                   <label> To Address </label>' +
+                '                   <input type="email" name="to_address" ng-model="to_address" required />' +
+                '                   <div ng-if="testEmailForm.$submitted || testEmailForm.to_address.$touched">' +
+                '                       <span class="error-msg" ng-if="testEmailForm.to_address.$error.required">To address is required.</span>' +
+                '                      <span class="error-msg" ng-if="testEmailForm.to_address.$error.email">This field must be a valid email address.</span>' +
+                '                   </div>' +
+                '               </md-input-container>' +
+                '          </div>' +
+                '           <md-dialog-actions>' +
+                '               <md-button class="md-raised md-primary" type="submit"' +
+                '                           ng-click="testEmailForm.$valid && fnSendTestEmail(to_address);">Send</md-button>' +
+                '              <md-button class="md-warn md-raised"' +
+                '                           ng-click="fnCloseDialog();">Cancel</md-button>' +
+                '           </md-dialog-actions>' +
+                '       </form>' +
+                '   </md-content>' +
                 '</md-dialog>',
                 targetEvent: ev
 
