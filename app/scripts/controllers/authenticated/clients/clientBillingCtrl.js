@@ -150,7 +150,6 @@ app.controller('clientBillingCtrl',
 
         /*------------------------ Subscription Information Start --------------------------------------*/
         $scope.isProcessing = false;
-        $scope.isSubInfoBtnDisabled = false;
         $scope.checkboxes = [];
         $scope.subTotal = {}; //subscriptions total
         $scope.grandTotal = 0;
@@ -278,7 +277,6 @@ app.controller('clientBillingCtrl',
             subInfo.subscription_total = angular.copy(grandTotal);
             subInfo.receipt_emails = subInfo.receipt_emails.split(',');
             $scope.isProcessing = true;
-            $scope.isSubInfoBtnDisabled = true;
             clientBillingServices.saveClientSubscriptionInfo(cId, subInfo).then(function (res) {
                 if (!res.status) {
                     toastr.success('Subscription information saved.');
@@ -287,7 +285,6 @@ app.controller('clientBillingCtrl',
                     $rootScope.$broadcast('RefreshClientsGrid');
                 }
                 $scope.isProcessing = false;
-                $scope.isSubInfoBtnDisabled = false;
             });
         };
         /*------------------------ End of Subscription Information Start ----------------------------*/

@@ -49,6 +49,10 @@
                 <md-input-container flex class="remove-error-space">
                     <label>Balance</label>
                     <input name="balance_cents" type="number" ng-model="subscriptionInfo.balance_cents" required>
+                    <div ng-if="subscriptionInfoForm.$submitted || subscriptionInfoForm.balance_cents.$touched">
+                        <span class="error-msg" ng-if="subscriptionInfoForm.balance_cents.$error.required">Balance is required.</span>
+                    </div>
+
                 </md-input-container>
 
                 <md-input-container flex>
@@ -122,9 +126,9 @@
                 <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
                                       md-mode="indeterminate"></md-progress-circular>
 
-                <md-button class="md-raised md-primary"
-                           ng-disabled="subscriptionInfoForm.$invalid || !subscriptionInfoForm.$dirty || isProcessing || isSubInfoBtnDisabled"
-                           ng-click="fnSaveSubscriptionInfo(subscriptionInfo, grandTotal);">
+                <md-button type="submit" class="md-raised md-primary"
+                           ng-disabled="isProcessing"
+                           ng-click="subscriptionInfoForm.$valid && fnSaveSubscriptionInfo(subscriptionInfo, grandTotal);">
                     Save Subscription Info
                 </md-button>
             </div>

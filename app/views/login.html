@@ -19,10 +19,9 @@
               <md-input-container class="remove-error-space">
                   <md-icon class="md-primary margin-top-5">lock</md-icon>
                   <input type="password" name="password" placeholder="Password"
-                         ng-model="user.password" ng-minlength="5" required/>
+                         ng-model="user.password" required/>
                   <div ng-if="signInForm.$submitted || signInForm.password.$touched">
                       <span class="error-msg" ng-if="signInForm.password.$error.required">Password is required.</span>
-                      <span class="error-msg" ng-if="signInForm.password.$error.minlength">Password is too short minimum 5 character required.</span>
                   </div>
               </md-input-container>
               <div layout="column" layout-align="center center">

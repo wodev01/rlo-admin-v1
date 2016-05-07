@@ -14,16 +14,28 @@
                 <label>URL</label>
                 <input name="url" ng-model="update.url" ng-minlength="5"
                        ng-pattern="/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/" required>
+                <div ng-if="updateForm.$submitted || updateForm.url.$touched">
+                    <span class="error-msg" ng-if="updateForm.url.$error.required">URL is required.</span>
+                    <span class="error-msg" ng-if="updateForm.url.$error.minlength">URL is too short minimum 5 characters required.</span>
+                    <span class="error-msg" ng-if="updateForm.url.$error.pattern">This field must contain valid URL.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Signature</label>
                 <input name="signature" ng-model="update.signature" ng-minlength="4" required>
+                <div ng-if="updateForm.$submitted || updateForm.signature.$touched">
+                    <span class="error-msg" ng-if="updateForm.signature.$error.required">Signature is required.</span>
+                    <span class="error-msg" ng-if="updateForm.signature.$error.minlength">Signature is too short minimum 4 characters required.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Version</label>
                 <input name="version" ng-model="update.version" required>
+                <div ng-if="updateForm.$submitted || updateForm.version.$touched">
+                    <span class="error-msg" ng-if="updateForm.version.$error.required">Version is required.</span>
+                </div>
             </md-input-container>
 
             <md-checkbox aria-label="checkbox.label" class="md-primary" ng-model="update.applies_to_location">
@@ -33,8 +45,8 @@
             <div layout="row" layout-align="end center">
                 <md-progress-circular class="md-primary" md-theme="rlo"
                                       ng-if="isProcessing" md-mode="indeterminate"></md-progress-circular>
-                <md-button class="md-raised md-primary" ng-disabled="updateForm.$invalid"
-                           ng-click="fnSaveUpdate(update);">Save
+                <md-button type="submit" class="md-raised md-primary" ng-disabled="isProcessing"
+                           ng-click="updateForm.$valid && fnSaveUpdate(update);">Save
                 </md-button>
 
                 <md-button class="md-warn md-raised" ng-model="cancel" ng-click="fnCloseSwap();">Cancel

@@ -14,11 +14,20 @@
                 <label>Name</label>
                 <input name="name" ng-model="user.name" ng-minlength="5"
                        ng-pattern="/^[A-Za-z\s]{1,}[\.]{0,1}[A-Za-z\s]{0,}$/" required/>
+                <div ng-if="userForm.$submitted || userForm.name.$touched">
+                    <span class="error-msg" ng-if="userForm.name.$error.required">Name is required.</span>
+                    <span class="error-msg" ng-if="userForm.name.$error.minlength">Name is too short minimum 5 characters required.</span>
+                    <span class="error-msg" ng-if="userForm.name.$error.pattern">This field must contain alphabets only.</span>
+                </div>
             </md-input-container>
 
             <md-input-container class="remove-error-space">
                 <label>Email</label>
                 <input name="email" type="email" ng-model="user.email" ng-minlength="5" required/>
+                <div ng-if="userForm.$submitted || userForm.email.$touched">
+                    <span class="error-msg" ng-if="userForm.email.$error.required">Email is required.</span>
+                    <span class="error-msg" ng-if="userForm.email.$error.email">This field must be a valid email address.</span>
+                </div>
             </md-input-container>
 
             <md-input-container>
@@ -57,8 +66,8 @@
                                       ng-if="isProcessing"
                                       md-mode="indeterminate"></md-progress-circular>
 
-                <md-button class="md-raised md-primary"
-                           ng-disabled="userForm.$invalid" ng-click="fnSaveUser(user);">Save
+                <md-button type="submit" class="md-raised md-primary"
+                           ng-disabled="isProcessing" ng-click="userForm.$valid && fnSaveUser(user);">Save
                 </md-button>
 
                 <md-button class="md-raised md-warn" ng-click="fnCloseSwap();">Cancel</md-button>
