@@ -20,11 +20,10 @@
 
             <md-input-container class="remove-error-space">
                 <label>Phone</label>
-                <input name="phone" ng-model="location.phone" ng-minlength="10" ng-maxlength="20" required>
+                <input name="phone" ng-model="location.phone" ng-minlength="10" md-maxlength="20" required>
                 <div ng-if="locationForm.$submitted || locationForm.phone.$touched">
                     <span class="error-msg" ng-if="locationForm.phone.$error.required">Phone is required.</span>
                     <span class="error-msg" ng-if="locationForm.phone.$error.minlength">Phone is too short minimum 10 digits required.</span>
-                    <span class="error-msg" ng-if="locationForm.phone.$error.maxlength">Phone is too big maximum 20 digits required.</span>
                 </div>
             </md-input-container>
 
@@ -55,11 +54,10 @@
             <md-input-container class="remove-error-space">
                 <label>Zip</label>
                 <input name="zip" ng-model="location.zip"
-                       ng-pattern="/^[0-9]+$/" ng-minlength="5" ng-maxlength="20" md-maxlength="10" required>
+                       ng-pattern="/^[0-9]+$/" ng-minlength="5" maxlength="10" md-maxlength="10" required>
                 <div ng-if="locationForm.$submitted || locationForm.zip.$touched">
                     <span class="error-msg" ng-if="locationForm.zip.$error.required">Zip is required.</span>
                     <span class="error-msg" ng-if="locationForm.zip.$error.minlength">Zip is too short minimum 5 digit required.</span>
-                    <span class="error-msg" ng-if="locationForm.zip.$error.maxlength">Zip is too big maximum 20 digit required.</span>
                     <span class="error-msg" ng-if="locationForm.zip.$error.pattern">This field must contain numbers only.</span>
                 </div>
             </md-input-container>

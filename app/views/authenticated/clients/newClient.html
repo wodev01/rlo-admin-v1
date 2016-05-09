@@ -22,7 +22,9 @@
                 <input type="url" name="website" ng-model="client.website" required/>
                 <div ng-if="newClientForm.$submitted || newClientForm.website.$touched">
                     <span class="error-msg" ng-if="newClientForm.website.$error.required">Website is required.</span>
-                    <span class="error-msg" ng-if="newClientForm.website.$error.url">This field must be a valid url.</span>
+                    <span class="error-msg" ng-if="newClientForm.website.$error.url">
+                        This field must be a valid url (Begins with 'http://' or 'https://').
+                    </span>
                 </div>
             </md-input-container>
 
@@ -46,8 +48,7 @@
 
             <md-input-container class="remove-error-space">
                 <label>Contact Phone</label>
-                <input name="contact_phone" ng-model="client.contact_phone" ng-minlength="5"
-                       ng-pattern="/^\d+$/" required>
+                <input name="contact_phone" ng-model="client.contact_phone" ng-minlength="5" required>
                 <div ng-if="newClientForm.$submitted || newClientForm.contact_phone.$touched">
                     <span class="error-msg" ng-if="newClientForm.contact_phone.$error.required">Phone is required.</span>
                     <span class="error-msg" ng-if="newClientForm.contact_phone.$error.minlength">Phone is too short minimum 5 characters required.</span>
@@ -56,10 +57,9 @@
 
             <md-input-container class="remove-error-space">
                 <label>Contact Email</label>
-                <input type="email" name="contact_email" ng-model="client.contact_email" ng-minlength="5" required/>
+                <input type="email" name="contact_email" ng-model="client.contact_email" required/>
                 <div ng-if="newClientForm.$submitted || newClientForm.contact_email.$touched">
                     <span class="error-msg" ng-if="newClientForm.contact_email.$error.required">Email is required.</span>
-                    <span class="error-msg" ng-if="newClientForm.contact_email.$error.minlength">Email is too short minimum 5 characters required.</span>
                     <span class="error-msg" ng-if="newClientForm.contact_email.$error.email">This field must contain valid email address.</span>
                 </div>
             </md-input-container>

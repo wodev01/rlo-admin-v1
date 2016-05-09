@@ -1,6 +1,7 @@
 'use strict';
 app.controller('paymentsCtrl',
-    function ($scope, $rootScope, $mdDialog, $mdSidenav, clientService, clientPaymentsServices, clientBillingServices, toastr) {
+    function ($scope, $rootScope, $mdDialog, $mdSidenav,
+              toastr, groupService, clientService, clientPaymentsServices, clientBillingServices) {
 
         $scope.rightEditView = 'views/authenticated/clients/manageClient.html';
         $scope.isTabsLoad = false;
@@ -12,8 +13,23 @@ app.controller('paymentsCtrl',
             $scope.fnFetchClientPayments();
         };
 
+        $scope.fnFetchGroups = function () {
+            groupService.fetchGroups().then(function (res) {
+                $scope.groups = res;
+                $scope.fnFetchClients();
+            });
+        };
+
         $scope.fnFetchClients = function () {
             clientService.fetchClients().then(function (res) {
+                angular.forEach(res,function(val){
+                    var arrGroupsName = [];
+                    angular.forEach(val.groups,function(val){
+                        var findGroupByIdObj = $.grep($scope.groups, function(e){ return e.id === val; })[0];
+                        if(findGroupByIdObj){arrGroupsName.push(findGroupByIdObj.name);}
+                    });
+                    val.groupsName = arrGroupsName.join();
+                });
                 $scope.clients = res;
             });
         };
@@ -131,7 +147,7 @@ app.controller('paymentsCtrl',
 
         $scope.fnOpenClientBtnInit = function () {
             if (!$scope.isPaymentFailed) {
-                $scope.fnFetchClients();
+                $scope.fnFetchGroups();
                 $scope.isPaymentFailed = true;
             }
         };
