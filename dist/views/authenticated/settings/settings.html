@@ -1,4 +1,4 @@
-<div class="md-padding overflow-auto">
+<div class="md-padding overflow-auto" ng-init="fnInitSettings()">
     <div class="margin-bottom-25" layout="row">
         <div class="md-display-1">Settings</div>
     </div>
@@ -42,7 +42,7 @@
                 </md-tab>
 
                 <md-tab label="Updates" ui-sref="main.settings({settingsName:'updates'})"
-                        ng-if="$root.isSettingsUpdatesTabShown">
+                        ng-disabled="userObj.role !== 'Super'">
                     <div class="settingTab" ng-if="selectedIndex == 4"
                          layout="row" layout-sm="column" layout-padding layout-fill>
                         <div ng-include="'views/authenticated/settings/updates.html'"

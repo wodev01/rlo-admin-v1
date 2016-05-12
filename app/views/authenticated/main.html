@@ -1,7 +1,7 @@
 <md-toolbar class="top-header" ng-init="fnInitMain();">
     <div class="md-toolbar-tools">
-        <md-button ng-click="fnToggleSideNav('left');" hide-gt-sm class="md-icon-button">
-            <md-icon aria-label="Menu">menu</md-icon>
+        <md-button ng-click="fnToggleSideNav('left');" hide-gt-sm class="md-icon-button" aria-label="Toggle Left SideNav">
+            <md-icon md-font-set="fa fa-lg fa-fw fa-bars"></md-icon>
         </md-button>
 
         <div flex>
@@ -9,24 +9,24 @@
         </div>
 
         <div layout="row">
-            <md-button class="md-icon-button" ng-href="http://rlotraining.com/demo/" target="_blank">
-                <md-icon md-font-set="material-icons">play_circle_filled</md-icon>
+            <md-button class="md-icon-button" ng-href="http://rlotraining.com/demo/" target="_blank" aria-label="Watch Video">
+                <md-icon md-font-set="fa fa-lg fa-fw fa-play-circle"></md-icon>
                 <md-tooltip ng-if="$root.isMobile === null" md-direction="left">Watch Video</md-tooltip>
             </md-button>
         </div>
 
         <md-menu md-position-mode="target-right target">
-            <md-button ng-click="$mdOpenMenu($event);">
+            <md-button ng-click="$mdOpenMenu($event);" aria-label="User Name">
                 <span ng-bind="userObj.name"></span>
-                <md-icon md-font-set="material-icons">keyboard_arrow_down</md-icon>
+                <md-icon md-font-set="fa fa-lg fa-fw fa-angle-down" style="font-weight: 900;"></md-icon>
             </md-button>
 
             <md-menu-content width="3">
                 <md-menu-item>
-                    <md-button ng-click="fnStateSettings();">
+                    <md-button ng-click="fnStateSettings();" aria-label="Settings">
                         <div layout="row">
                             <p flex>
-                                <md-icon md-font-set="material-icons">settings</md-icon>
+                                <md-icon class="margin-right-5" md-font-set="fa fa-lg fa-fw fa-cog"></md-icon>
                                 Settings
                             </p>
                         </div>
@@ -34,10 +34,10 @@
                 </md-menu-item>
 
                 <md-menu-item>
-                    <md-button ng-click="fnLogout();">
+                    <md-button ng-click="fnLogout();" aria-label="Sign out">
                         <div layout="row">
                             <p flex>
-                                <md-icon md-font-set="material-icons">power_settings_new</md-icon>
+                                <md-icon class="margin-right-5" md-font-set="fa fa-lg fa-fw fa-power-off"></md-icon>
                                 Sign out
                             </p>
                         </div>
@@ -54,29 +54,21 @@
                 layout="column"
                 md-component-id="left"
                 md-is-locked-open="$mdMedia('gt-sm')">
-        <md-button class="md-accent" ng-class="fnIsActive('/clients')"
+        <md-button class="md-accent" ng-class="fnIsActive('/clients')" aria-label="Clients"
                    ng-click="$root.fnCloseSideNavs();" ui-sref="main.clients">
-            <md-icon md-font-set="material-icons">group</md-icon>
-            Clients
-        </md-button>
+            <md-icon md-font-set="fa fa-lg fa-fw fa-users"></md-icon>&nbsp;Clients</md-button>
 
-        <md-button class="md-accent" ng-class="fnIsActive('/payments')"
+        <md-button class="md-accent" ng-class="fnIsActive('/payments')" aria-label="Payments"
                    ng-click="$root.fnCloseSideNavs();" ui-sref="main.payments">
-            <md-icon md-font-set="material-icons">payment</md-icon>
-            Payments
-        </md-button>
+            <md-icon md-font-set="fa fa-lg fa-fw fa-credit-card"></md-icon>&nbsp;Payments</md-button>
 
-        <md-button class="md-accent" ng-class="fnIsActive('/groups')"
+        <md-button class="md-accent" ng-class="fnIsActive('/groups')" aria-label="Groups"
                    ng-click="$root.fnCloseSideNavs();" ui-sref="main.groups">
-            <md-icon md-font-set="material-icons">group_work</md-icon>
-            Shop Groups
-        </md-button>
+            <md-icon md-font-set="fa fa-lg fa-fw fa-life-ring"></md-icon>&nbsp;Shop Groups</md-button>
 
-        <md-button class="md-accent" ng-class="fnIsActive('/shop-locations')"
+        <md-button class="md-accent" ng-class="fnIsActive('/shop-locations')" aria-label="Shop Locations"
                    ng-click="$root.fnCloseSideNavs();" ui-sref="main.shopLocations">
-            <md-icon md-font-set="material-icons">location_on</md-icon>
-            Shop Locations
-        </md-button>
+            <md-icon md-font-set="fa fa-lg fa-fw fa-map-marker"></md-icon>&nbsp;Shop Locations</md-button>
     </md-sidenav>
     <!-- Left Side Navigation : END-->
 

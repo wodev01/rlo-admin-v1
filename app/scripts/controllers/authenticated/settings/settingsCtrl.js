@@ -38,4 +38,10 @@ app.controller('settingsCtrl',
             }
         };
 
+        $scope.fnInitSettings = function () {
+            if (CarglyPartner.user) {
+                $scope.userObj = CarglyPartner.user;
+            }
+        };
+
     });

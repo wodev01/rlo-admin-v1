@@ -12,7 +12,7 @@
             <form name="signInForm" layout="column"
                   ng-submit="signInForm.$valid && fnSignInUser(user);" novalidate>
                 <md-input-container class="remove-error-space">
-                    <md-icon class="md-primary margin-top-5">person</md-icon>
+                    <md-icon class="md-primary margin-top-10" md-font-set="fa fa-lg fa-fw fa-user"></md-icon>
                     <input type="email" name="email" placeholder="Email" ng-model="user.email" required>
 
                     <div ng-if="signInForm.$submitted || signInForm.email.$touched">
@@ -23,7 +23,7 @@
                 </md-input-container>
 
                 <md-input-container class="remove-error-space">
-                    <md-icon class="md-primary margin-top-5">lock</md-icon>
+                    <md-icon class="md-primary margin-top-10" md-font-set="fa fa-lg fa-fw fa-lock"></md-icon>
                     <input type="password" name="password" placeholder="Password"
                            ng-model="user.password" required/>
 

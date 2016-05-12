@@ -62,23 +62,23 @@ app.controller('paymentsCtrl',
         $scope.isProcessing = false;
         $scope.error_tooltip = '<div layout="row" class="ui-grid-cell-contents">' +
             '<div ng-show="{{row.entity.details.messages[0]}}"> ' +
-            '   <md-button class="md-icon-button md-warn">' +
-            '       <md-icon md-font-set="material-icons">highlight_off</md-icon>' +
-            '       <md-tooltip ng-if="$root.isMobile === null" md-direction="top">{{row.entity.details.messages[0].message}}</md-tooltip>' +
+            '   <md-button class="md-icon-button md-warn" aria-label="Error Message">' +
+            '       <md-icon md-font-set="fa fa-lg fa-fw fa-exclamation-circle"></md-icon>' +
+            '       <md-tooltip ng-if="$root.isMobile === null" md-direction="top" aria-label="Error Message">{{row.entity.details.messages[0].message}}</md-tooltip>' +
             '   </md-button>' +
             '</div>{{row.entity.status}}</div>';
 
         $scope.paymentsAction = '<div layout="row">' +
-            '<md-button class="md-icon-button md-primary" ' +
+            '<md-button class="md-icon-button md-primary" aria-label="Open Client"' +
             '           ng-click="grid.appScope.fnOpenClientPaymentPage(row,$event,grid.appScope.clients);" ' +
             '           ng-init="grid.appScope.fnOpenClientBtnInit();">' +
-            '   <md-icon md-font-set="material-icons">visibility</md-icon>' +
-            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Open Client</md-tooltip></md-button>' +
-            '<md-button class="md-icon-button md-primary" ng-if="grid.appScope.isPaid(row)" ' +
+            '   <md-icon md-font-set="fa fa-lg fa-fw fa-eye"></md-icon>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top" aria-label="Open Client">Open Client</md-tooltip></md-button>' +
+            '<md-button class="md-icon-button md-primary" ng-if="grid.appScope.isPaid(row)" aria-label="Refund"' +
             '           ng-disabled="grid.appScope.isProcessing" ' +
             '           ng-click="grid.appScope.fnRefund(row,$event);">' +
-            '   <md-icon md-font-set="material-icons">payment</md-icon>' +
-            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Refund</md-tooltip>' +
+            '   <md-icon md-font-set="fa fa-lg fa-fw fa-credit-card"></md-icon>' +
+            '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top" aria-label="Refund">Refund</md-tooltip>' +
             '</md-button></div>';
 
         $scope.paymentsGridOptions = {

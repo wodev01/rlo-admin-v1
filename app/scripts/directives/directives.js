@@ -37,23 +37,32 @@ app.directive('pageTitle', function ($rootScope, $timeout) {
             function fnCapitalize(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1);
             }
-            var listener = function (event, toState, toParams) {
+
+            function fnSetPageTitle(state, params){
                 // Default title
                 var title = 'Rlo training';
                 // Create your own title pattern
-                if (toState.data && toState.data.pageTitle) {
-                    if(toState.data.pageTitle === 'Settings'){
-                        title = fnCapitalize(toParams.settingsName) + ' ' +toState.data.pageTitle + ' - ' + title;
+                if (state.data && state.data.pageTitle) {
+                    if(state.data.pageTitle === 'Settings'){
+                        title = fnCapitalize(params.settingsName) + ' ' + state.data.pageTitle + ' - ' + title;
                     }else{
-                        title = toState.data.pageTitle + ' - ' + title;
+                        title = state.data.pageTitle + ' - ' + title;
                     }
                 }
                 $timeout(function () {
                     element.text(title);
                 });
-            };
-            var $stateChangeStart = $rootScope.$on('$stateChangeStart', listener);
+            }
+
+            var $stateChangeStart = $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+                fnSetPageTitle(toState, toParams);
+            });
             $rootScope.$on('$destroy', $stateChangeStart);
+
+            var $stateChangeError = $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams) {
+                fnSetPageTitle(fromState, fromParams);
+            });
+            $rootScope.$on('$destroy', $stateChangeError);
         }
     };
 });

@@ -30,11 +30,11 @@ app.controller('subscriptionsCtrl',
         });
 
         $scope.subscriptionAction = '<div layout="row">' +
-            '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnSubscriptionEdit(row,$event)">' +
-            '   <md-icon md-font-set="material-icons">edit</md-icon>' +
+            '<md-button class="md-icon-button md-primary" aria-label="Edit" ng-click="grid.appScope.fnSubscriptionEdit(row,$event)">' +
+            '   <md-icon md-font-set="fa fa-lg fa-fw fa-pencil"></md-icon>' +
             '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Edit</md-tooltip></md-button>' +
-            '<md-button class="md-icon-button md-warn" ng-click="grid.appScope.fnSubscriptionDelete(row,$event)">' +
-            '   <md-icon md-font-set="material-icons">delete</md-icon>' +
+            '<md-button class="md-icon-button md-warn" aria-label="Delete" ng-click="grid.appScope.fnSubscriptionDelete(row,$event)">' +
+            '   <md-icon md-font-set="fa fa-lg fa-fw fa-trash"></md-icon>' +
             '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Delete</md-tooltip>' +
             '</md-button></div>';
 

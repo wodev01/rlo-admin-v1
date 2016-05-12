@@ -100,8 +100,8 @@ app.controller('shopLocationsCtrl',
             '     data-obj="row.entity"></div>';
 
         $scope.shopLocationsAction = '<div layout="row">' +
-            '<md-button class="md-icon-button md-primary" ng-click="grid.appScope.fnShopLocationsEdit(row, $event);">' +
-            '   <md-icon md-font-set="material-icons">visibility</md-icon>' +
+            '<md-button class="md-icon-button md-primary" aria-label="Open" ng-click="grid.appScope.fnShopLocationsEdit(row, $event);">' +
+            '   <md-icon md-font-set="fa fa-lg fa-fw fa-eye"></md-icon>' +
             '   <md-tooltip ng-if="$root.isMobile === null" md-direction="top">Open</md-tooltip>' +
             '</md-button></div>';
 
