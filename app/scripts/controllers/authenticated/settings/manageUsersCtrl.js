@@ -36,7 +36,6 @@ app.controller('manageUsersCtrl',
                     $rootScope.$broadcast('refreshUsers');
                     $scope.fnCloseSwap();
                 }else{
-                    toastr.error('User can\'t saved. Repeated email or invalid information.');
                     $scope.isProcessing = false;
                 }
             });

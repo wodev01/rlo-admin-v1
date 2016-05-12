@@ -25,9 +25,16 @@ app.factory('ErrorMsg',['$state', 'toastr', '$cookies', 'cookieName',
                     fnLogout();
                     break;
 
+                case 409:
+                    toastr.remove();
+                    toastr.error('The email address provided is already associated with another partner account.',
+                        '409 - Conflict');
+                    break;
+
                 case 500:
+                    toastr.remove();
                     toastr.error('An unexpected error has occurred. Please refresh the page and try again.',
-                        'STATUS CODE: 500');
+                        '500 - Internal Server Error');
                     break;
 
                 default:

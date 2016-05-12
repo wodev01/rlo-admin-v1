@@ -35,7 +35,6 @@ app.controller('clientUserManageCtrl',
                         $rootScope.fnCloseManageUser();
                         $scope.isProcessing = false;
                     }, function (error) {
-                        toastr.error('User can\'t saved. Repeated email or invalid information.');
                         $scope.isProcessing = false;
                     });
 
@@ -48,7 +47,6 @@ app.controller('clientUserManageCtrl',
                         $rootScope.fnCloseManageUser();
 
                     }, function (error) {
-                        toastr.error('User can\'t saved. Repeated email or invalid information.');
                         $scope.isProcessing = false;
                     });
             }
