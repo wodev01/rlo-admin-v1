@@ -25,12 +25,11 @@ app.controller('manageUpdatesCtrl',
                     if(id === null){$scope.fnResetForm();}
                     $scope.isProcessing = false;
                     $scope.updateForm.$invalid = false;
-                    $scope.$parent.fnCloseSwap();
                     $rootScope.$broadcast('refreshUpdates');
                 }else{
                     toastr.error('Update not saved');
                 }
-                $rootScope.fnCloseManageUpdate();
+                $scope.$parent.fnCloseSwap();
             });
         };
 

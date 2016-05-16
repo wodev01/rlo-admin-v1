@@ -154,14 +154,16 @@ app.controller('shopLocationsCtrl',
 
         /*-------------- Load More Shop-locations ---------------*/
         $scope.fnLoadMoreShopLocations = function () {
-            $scope.isMoreShopLocations = true;
-            shopLocationsService.fetchMoreShopLocations()
-                .then(function (response) {
-                    $scope.shopLocationsData = $scope.shopLocationsData.concat(response.data);
-                    $scope.isPagingCursor =
-                        response.headers['x-paging-cursor'] ? false : true;
-                    $scope.isMoreShopLocations = false;
-                });
+            if (!$scope.isMoreShopLocations) {
+                $scope.isMoreShopLocations = true;
+                shopLocationsService.fetchMoreShopLocations()
+                    .then(function (response) {
+                        $scope.shopLocationsData = $scope.shopLocationsData.concat(response.data);
+                        $scope.isPagingCursor =
+                            response.headers['x-paging-cursor'] ? false : true;
+                        $scope.isMoreShopLocations = false;
+                    });
+            }
         };
 
         /*----------- Manage Shop Locations ------------*/

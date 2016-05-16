@@ -20,7 +20,7 @@ app.controller('clientUpdateManageCtrl',
         $scope.fnFetchUpdatesDefinitions = function () {
             updateService.fetchUpdatesDefinitions().then(function (res) {
                 $scope.updatesDefinitions = res;
-                $scope.updatesDefinitionObj = res[0];
+                $scope.update.update_definition_id = res[0].id;
                 $scope.isAppliesToLocation = res[0].applies_to_location ? true : false;
             });
         };

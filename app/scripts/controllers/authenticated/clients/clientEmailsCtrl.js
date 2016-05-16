@@ -111,25 +111,26 @@ app.controller('clientEmailsCtrl',
 
         /*---------- Load more emails data ----------*/
         $scope.fnShowMoreEmails = function () {
-            $scope.pagingOptions.page_num += 1;
-            $scope.isMoreEmailData = true;
-            $scope.isPagingData = true;
+            if (!$scope.isMoreEmailData) {
+                $scope.pagingOptions.page_num += 1;
+                $scope.isMoreEmailData = true;
+                $scope.isPagingData = true;
 
-            clientEmailService.fetchClientEmails(partnerId, $scope.pagingOptions)
-                .then(function (data) {
-                    if (data.length !== 0) {
-                        $scope.clientEmailsData = $scope.clientEmailsData.concat(data);
-                        $scope.isMoreEmailData = false;
-                    } else {
-                        $scope.isPagingData = false;
-                    }
-                }, function (error) {
-                    if (error.status !== 401 && error.status !== 500) {
-                        toastr.error('Something goe\'s wrong, getting emails data.');
-                    }
+                clientEmailService.fetchClientEmails(partnerId, $scope.pagingOptions)
+                    .then(function (data) {
+                        if (data.length !== 0) {
+                            $scope.clientEmailsData = $scope.clientEmailsData.concat(data);
+                            $scope.isMoreEmailData = false;
+                        } else {
+                            $scope.isPagingData = false;
+                        }
+                    }, function (error) {
+                        if (error.status !== 401 && error.status !== 500) {
+                            toastr.error('Something goe\'s wrong, getting emails data.');
+                        }
 
-                });
-
+                    });
+            }
         };
 
         /*---------- Initialization ----------*/

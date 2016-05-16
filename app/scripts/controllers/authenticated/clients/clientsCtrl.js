@@ -203,15 +203,18 @@ app.controller('clientsCtrl',
 
         // Load more clients functionality.
         $scope.fnLoadMoreClients = function () {
-            $scope.isMoreClients = true;
-            clientService.fetchMoreClients()
-                .then(function (responseObj) {
-                    $scope.clientsData = $scope.clientsData.concat(responseObj.data);
-                    $scope.isPagingCursor = responseObj.headers['x-paging-cursor'] ? false : true;
-                    $scope.isMoreClients = false;
-                }, function (error) {
-                    toastr.error('Failed retrieving more clients data.', 'STATUS CODE: ' + error.status);
-                });
+            if (!$scope.isMoreClients) {
+                $scope.isMoreClients = true;
+
+                clientService.fetchMoreClients()
+                    .then(function (responseObj) {
+                        $scope.clientsData = $scope.clientsData.concat(responseObj.data);
+                        $scope.isPagingCursor = responseObj.headers['x-paging-cursor'] ? false : true;
+                        $scope.isMoreClients = false;
+                    }, function (error) {
+                        toastr.error('Failed retrieving more clients data.', 'STATUS CODE: ' + error.status);
+                    });
+            }
         };
 
         $scope.groups = [];

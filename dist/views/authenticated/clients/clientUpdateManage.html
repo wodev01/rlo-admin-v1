@@ -1,8 +1,9 @@
 <md-sidenav class="md-sidenav-right md-whiteframe-z2 right-side-nav" md-component-id="manageUpdateSwap">
     <!-- swapping view header -->
     <md-toolbar class="light-black-bg-1">
-        <h1 class="md-toolbar-tools" layout="row" layout-align="space-between center">
+        <h1 class="md-toolbar-tools" layout="row">
             <span>{{updateHeading}}</span>
+            <span flex></span>
             <md-button class="md-raised md-primary" ng-click="fnCloseManageUpdate();">Back</md-button>
         </h1>
     </md-toolbar>
@@ -12,11 +13,10 @@
             <md-input-container>
                 <label>Update Definition</label>
                 <md-select aria-label="Select Timezone"
-                           ng-model="updatesDefinitionObj"
+                           ng-model="update.update_definition_id"
                            ng-change="fnUpdatesDefinitionsDDChange(updatesDefinitionObj);"
-                           ng-selected="$first"
                            placeholder="Update Definition">
-                    <md-option ng-repeat="option in updatesDefinitions" ng-value="option">
+                    <md-option ng-repeat="option in updatesDefinitions" ng-value="option.id">
                         {{option.type + ' ' + option.version}}
                     </md-option>
                 </md-select>
