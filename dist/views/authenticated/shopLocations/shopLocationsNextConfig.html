@@ -44,6 +44,7 @@
                         <div class="padding-top-15" layout="row" layout-align="space-around center" layout-fill>
                             <md-checkbox aria-label="checkbox.label" class="md-primary"
                                          ng-disabled="isResetBtnShow"
+                                         ng-init="isChecked = nextConfig[ncKey] == '' ? true: false"
                                          ng-change="fnCheckboxChange(isChecked,nextConfig,ncKey,ncVal);"
                                          ng-model="isChecked"></md-checkbox>
                         </div>

@@ -21,6 +21,7 @@
     <div layout="row" layout-xs="column" layout-align="space-between center">
         <md-input-container>
             <md-select aria-label="Select Update Page Size" ng-model="paginationOptions.pageSize"
+                       ng-disabled="!isDataNotNull && !isMsgShow"
                        ng-change="fnUpdatesPageSizeChange(paginationOptions);">
                 <md-option ng-repeat="pageSize in pagingOptions" ng-value="pageSize">
                     {{pageSize}}

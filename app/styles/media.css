@@ -15,6 +15,12 @@
     md-toolbar .md-toolbar-tools .text-small-959 {
         font-size: 16px;
     }
+
+    /* Dashboard 2nd row */
+    md-toolbar .md-toolbar-tools.toolbar-content-height {
+        height: 70px;
+        max-height: 70px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -40,5 +46,11 @@
     /* All Modal Dialog */
     md-toolbar .md-toolbar-tools .text-small-599 {
         font-size: 14px;
+    }
+
+    /* Dashboard 2nd row */
+    md-toolbar .md-toolbar-tools.toolbar-content-height {
+        height: 100px;
+        max-height: 100px;
     }
 }

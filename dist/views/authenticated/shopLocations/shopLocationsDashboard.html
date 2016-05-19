@@ -15,18 +15,22 @@
     <!-- 1st Row : Summary Section -->
     <section id="summary-section" class="margin-bottom-10 md-whiteframe-1dp" layout="column">
         <md-toolbar class="md-primary md-hue-1" md-theme="grey">
-            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-                <span class="md-title text-small-599 text-small-959">Summary</span>
+            <div class="md-toolbar-tools toolbar-content-height">
+                <div layout="column" layout-gt-xs="row" layout-align="center center" flex>
+                    <span class="md-title text-small-599 text-small-959">Summary</span>
 
-                <md-input-container class="md-body-1">
-                    <md-select aria-label="Summary Options"
-                               ng-model="selectedSummaryOption"
-                               ng-change="fnSummaryOptionChanged(selectedSummaryOption, selectedLocationOption);">
-                        <md-option ng-repeat="option in summaryDDOptions" ng-value="option.value" ng-selected="$first">
-                            {{option.name}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
+                    <span flex></span>
+                    <md-input-container class="md-body-1 margin-0">
+                        <md-select aria-label="Summary Options"
+                                   ng-model="selectedSummaryOption"
+                                   ng-change="fnSummaryOptionChanged(selectedSummaryOption, selectedLocationOption);">
+                            <md-option ng-repeat="option in summaryDDOptions" ng-value="option.value"
+                                       ng-selected="$first">
+                                {{option.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
             </div>
         </md-toolbar>
 
@@ -365,28 +369,32 @@
     <section id="monthly-barchart-section" class="margin-bottom-10 md-whiteframe-1dp" layout="column">
         <!--Monthly Bar Chart-->
         <md-toolbar class="md-primary md-hue-1" md-theme="grey">
-            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-                <span class="md-title text-small-599 text-small-959" flex="33">{{barChartName}} By Month</span>
+            <div class="md-toolbar-tools toolbar-content-height">
+                <div layout="column" layout-gt-xs="row" layout-align="center center" flex>
+                    <span class="md-title text-small-599 text-small-959" flex="33">{{barChartName}} By Month</span>
 
-                <div layout="row" layout-align="end center" flex>
-                    <md-input-container class="md-body-1">
-                        <md-select aria-label="Group Type" ng-model="selectedGroupOption"
-                                   ng-change="fnChangeGroup(selectedGroupOption);">
-                            <md-option ng-repeat="group in chartGroupsOptions" ng-selected="$first"
-                                       ng-value="group">{{group.name}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
+                    <span flex></span>
 
-                    <span hide show-gt-sm>&nbsp;&nbsp;</span>
-                    <md-input-container ng-if="sendJsonToBar.length !== 0" class="md-body-1">
-                        <md-select aria-label="Chart Type" ng-model="selectedChartType"
-                                   ng-change="fnGenerateBarChart(selectedChartType, selectedLocationOption);">
-                            <md-option ng-repeat="chart in chartOptions" ng-value="chart"
-                                       ng-selected="$first">{{chart.name}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
+                    <div layout="column" layout-gt-sm="row" layout-align="end center">
+                        <md-input-container class="md-body-1 margin-0">
+                            <md-select aria-label="Group Type" ng-model="selectedGroupOption"
+                                       ng-change="fnChangeGroup(selectedGroupOption);">
+                                <md-option ng-repeat="group in chartGroupsOptions" ng-selected="$first"
+                                           ng-value="group">{{group.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <span hide show-gt-sm>&nbsp;&nbsp;</span>
+                        <md-input-container ng-if="sendJsonToBar.length !== 0" class="md-body-1 margin-0">
+                            <md-select aria-label="Chart Type" ng-model="selectedChartType"
+                                       ng-change="fnGenerateBarChart(selectedChartType, selectedLocationOption);">
+                                <md-option ng-repeat="chart in chartOptions" ng-value="chart"
+                                           ng-selected="$first">{{chart.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
                 </div>
             </div>
         </md-toolbar>
@@ -487,18 +495,21 @@
         <!--Employee Performance Bar Chart-->
 
         <md-toolbar class="md-primary md-hue-1" md-theme="grey">
-            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-                <span class="md-title text-small-599 text-small-959">Employee Performance</span>
+            <div class="md-toolbar-tools toolbar-content-height">
+                <div layout="column" layout-gt-xs="row" layout-align="center center" flex>
+                    <span class="md-title text-small-599 text-small-959">Employee Performance</span>
 
-                <md-input-container class="md-body-1">
-                    <md-select aria-label="Group Type" ng-model="selectedEmpPerformanceOption"
-                               ng-change="fnGenerateBarEmpPerChart(selectedEmpPerformanceOption);">
-                        <md-option ng-repeat="empType in empPerformanceDDOptions" ng-value="empType.value"
-                                   ng-selected="$first">
-                            {{empType.name}}
-                        </md-option>
-                    </md-select>
-                </md-input-container>
+                    <span flex></span>
+                    <md-input-container class="md-body-1 margin-0">
+                        <md-select aria-label="Group Type" ng-model="selectedEmpPerformanceOption"
+                                   ng-change="fnGenerateBarEmpPerChart(selectedEmpPerformanceOption);">
+                            <md-option ng-repeat="empType in empPerformanceDDOptions" ng-value="empType.value"
+                                       ng-selected="$first">
+                                {{empType.name}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
             </div>
         </md-toolbar>
 
@@ -524,21 +535,24 @@
         <div class="custBarContainer margin-bottom-10 md-whiteframe-1dp" flex flex-gt-sm="70">
             <!--Daily Bar Chart-->
             <md-toolbar class="md-primary md-hue-1" md-theme="grey">
-                <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-                    <span class="md-title text-small-599 text-small-959">
-                        Customer Report for {{custRepoBarChartName}}
-                    </span>
+                <div class="md-toolbar-tools toolbar-content-height">
+                    <div layout="column" layout-gt-xs="row" layout-align="center center" flex>
+                        <span class="md-title text-small-599 text-small-959">
+                            Customer Report for {{custRepoBarChartName}}
+                        </span>
 
-                    <md-input-container class="md-body-1">
-                        <md-select aria-label="Customer Type"
-                                   ng-model="selectedCustRepoOptions"
-                                   ng-change="fnGenerateCustomerReportBarChart(selectedCustRepoOptions);">
-                            <md-option ng-repeat="custType in custRepoOptions" ng-value="custType.value"
-                                       ng-selected="$first">
-                                {{custType.name}}
-                            </md-option>
-                        </md-select>
-                    </md-input-container>
+                        <span flex></span>
+                        <md-input-container class="md-body-1 margin-0">
+                            <md-select aria-label="Customer Type"
+                                       ng-model="selectedCustRepoOptions"
+                                       ng-change="fnGenerateCustomerReportBarChart(selectedCustRepoOptions);">
+                                <md-option ng-repeat="custType in custRepoOptions" ng-value="custType.value"
+                                           ng-selected="$first">
+                                    {{custType.name}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
                 </div>
             </md-toolbar>
 
