@@ -2,7 +2,8 @@
 app.controller('manageUpdatesCtrl',
     function ($scope, $rootScope, toastr, updateService) {
 
-        $scope.update = updateService.getUpdateObj().id ? angular.copy(updateService.getUpdateObj()) : {applies_to_location: false};
+        $scope.update =
+            updateService.getUpdateObj().id ? angular.copy(updateService.getUpdateObj()) : {applies_to_location: false};
         $scope.isProcessing = false;
 
         function isEmpty(obj) {
@@ -35,4 +36,5 @@ app.controller('manageUpdatesCtrl',
                 $scope.$parent.fnCloseSwap();
             });
         };
+
     });

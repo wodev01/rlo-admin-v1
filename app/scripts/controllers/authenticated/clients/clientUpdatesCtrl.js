@@ -4,10 +4,12 @@ app.controller('clientUpdatesCtrl',
 
         $scope.client = clientService.getClientObj().id ? angular.copy(clientService.getClientObj()) : {};
         var partnerId = $scope.client.id;
+
         $rootScope.rightUpdateSwapView = 'views/authenticated/clients/clientUpdateManage.html';
         $scope.updatesDefinitions = [];
         $rootScope.isFetchUpdateDefinitions = false;
         $scope.intLocIndex = 0;
+        $scope.isProcessingRunUpdate = false;
 
         $scope.fnNewUpdateView = function () {
             $rootScope.updateHeading = 'New Update';
@@ -218,6 +220,8 @@ app.controller('clientUpdatesCtrl',
         $scope.$watch('intLocIndex', function (current) {
             if (current !== 0) {
                 $scope.fnRunUpdate(current - 1);
+            } else {
+                $scope.isProcessingRunUpdate = false;
             }
         });
 
@@ -231,8 +235,8 @@ app.controller('clientUpdatesCtrl',
                 .targetEvent(event);
 
             $mdDialog.show(confirm).then(function () {
+                $scope.isProcessingRunUpdate = true;
                 $scope.intLocIndex = $scope.locations.length;
-
             }, function () {
             });
         };

@@ -3,8 +3,14 @@
         <div class="md-display-1">Updates</div>
 
         <div layout="row" layout-align="end center">
+            <md-progress-circular class="md-primary" md-mode="indeterminate" ng-if="isProcessingRunUpdate">
+            </md-progress-circular>
+
             <md-button class="md-raised md-primary" ng-click="fnNewUpdateView();">New Update</md-button>
-            <md-button class="md-raised md-primary margin-right-0" ng-click="fnRunUpdateNow($event);">
+
+            <md-button class="md-raised md-primary margin-right-0"
+                       ng-disabled="isProcessingRunUpdate"
+                       ng-click="fnRunUpdateNow($event);">
                 Update Now
             </md-button>
         </div>

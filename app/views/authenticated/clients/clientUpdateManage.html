@@ -13,10 +13,10 @@
             <md-input-container>
                 <label>Update Definition</label>
                 <md-select aria-label="Select Timezone"
-                           ng-model="update.update_definition_id"
-                           ng-change="fnUpdatesDefinitionsDDChange(updatesDefinitionObj);"
+                           ng-model="update.updateObj"
+                           ng-change="fnUpdatesDefinitionsDDChange(update.updateObj);"
                            placeholder="Update Definition">
-                    <md-option ng-repeat="option in updatesDefinitions" ng-value="option.id">
+                    <md-option ng-repeat="option in updatesDefinitions" ng-value="option">
                         {{option.type + ' ' + option.version}}
                     </md-option>
                 </md-select>
@@ -26,7 +26,6 @@
                 <label>Location</label>
                 <md-select aria-label="Select Timezone"
                            ng-model="update.location_id"
-                           ng-selected="$first"
                            placeholder="Location">
                     <md-option ng-repeat="option in locationsDD" ng-value="option.id">
                         {{option.name}}
@@ -38,7 +37,7 @@
                 <md-progress-circular md-theme="rlo" ng-if="isProcessing" class="md-primary"
                                       md-mode="indeterminate"></md-progress-circular>
 
-                <md-button class="md-raised md-primary" ng-disabled="updateForm.$invalid || isProcessing"
+                <md-button class="md-raised md-primary" ng-disabled="isProcessing || updatesDefinitions.length == 0"
                            ng-click="fnSaveUpdate(update);">Save
                 </md-button>
 
