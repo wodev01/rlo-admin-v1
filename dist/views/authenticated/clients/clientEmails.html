@@ -12,9 +12,8 @@
 
     <!--UI Grid-->
     <div ng-if="isEmailsDataNotNull"
-         ui-grid="clientEmailsGridOptions"
          ng-style="$root.fnReturnGridHeight(clientEmailsData.length);"
-         ng-cloak ui-grid-selection ui-grid-auto-resize>
+         ui-grid="clientEmailsGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-resize-columns>
     </div>
     <div ng-if="isEmailsDataNotNull" layout="row" layout-align="center center" layout-margin ng-cloak>
         <div ng-if="isPagingData">

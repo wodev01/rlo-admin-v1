@@ -14,7 +14,7 @@
 
     <!-- UI-Grid -->
     <div ng-if="isDataNotNull && !isProcessing && !isMsg"
-         ui-grid="billingHistoryGridOptions" ui-grid-selection ui-grid-auto-resize
-         ng-style="$root.fnReturnGridHeight(billingHistoryData.length);"></div>
+         ng-style="$root.fnReturnGridHeight(billingHistoryData.length);"
+         ui-grid="billingHistoryGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-resize-columns></div>
 
 </md-content>

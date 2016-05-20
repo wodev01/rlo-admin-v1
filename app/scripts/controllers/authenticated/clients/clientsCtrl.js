@@ -177,7 +177,8 @@ app.controller('clientsCtrl',
                     cellTemplate: $scope.clientAction,
                     width: 50,
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResizing: false
                 }
             ],
             onRegisterApi: function (gridApi) {

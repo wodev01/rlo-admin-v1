@@ -18,8 +18,9 @@
     </div>
 
     <!-- Grid Section -->
-    <div ng-if="isGroupsData" ng-style="$root.fnReturnGridHeight(groupsData.length);"
-         ui-grid="groupsGridOptions" ui-grid-selection ui-grid-auto-resize ng-cloak>
+    <div ng-if="isGroupsData"
+         ng-style="$root.fnReturnGridHeight(groupsData.length);"
+         ui-grid="groupsGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-resize-columns>
     </div>
 
 </div>

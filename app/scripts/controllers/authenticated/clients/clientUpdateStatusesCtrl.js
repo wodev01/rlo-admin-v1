@@ -82,13 +82,6 @@ app.controller('clientUpdateStatusesCtrl',
                         $scope.isMsgShow = true;
                     }
                     $scope.setPagingData(data);
-                    /*if ($scope.isMsgShow) {
-                     setTimeout(function () {
-                     $('#client-update-statuses-tab .ui-grid-viewport ')
-                     .text('No update statuses available.')
-                     .css({'text-align': 'center', 'height': '50px', 'overflow': 'hidden'});
-                     }, 1000);
-                     }*/
                 });
             }
         };
@@ -139,7 +132,7 @@ app.controller('clientUpdateStatusesCtrl',
                     field: 'created',
                     displayName: 'Created',
                     cellFilter: 'date:\'MM/dd/yyyy h:mm a\'',
-                    minWidth: 180
+                    minWidth: 160
                 },
                 {field: 'update_type', displayName: 'Type', minWidth: 100},
                 {field: 'update_url', displayName: 'URL', minWidth: 200},

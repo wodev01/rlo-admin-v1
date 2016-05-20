@@ -60,7 +60,7 @@ app.controller('clientEmailsCtrl',
                     field: 'sent',
                     displayName: 'Sent',
                     cellFilter: 'date:\'MM/dd/yyyy h:mm a\'',
-                    minWidth: 200,
+                    minWidth: 160,
                     enableHiding: false
                 },
                 {field: 'location_name', displayName: 'Location', minWidth: 200, enableHiding: false},
@@ -70,7 +70,7 @@ app.controller('clientEmailsCtrl',
                     field: 'last_event',
                     displayName: 'Modified',
                     cellFilter: 'date:\'MM/dd/yyyy h:mm a\'',
-                    minWidth: 200,
+                    minWidth: 160,
                     enableHiding: false
                 },
                 {
@@ -79,7 +79,8 @@ app.controller('clientEmailsCtrl',
                     cellTemplate: $scope.clientEmailAction,
                     width: '50',
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResizing: false
                 }
             ]
         };

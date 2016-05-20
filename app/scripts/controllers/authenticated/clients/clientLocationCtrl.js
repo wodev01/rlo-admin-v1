@@ -63,11 +63,12 @@ app.controller('clientLocationCtrl',
                     cellTemplate: $scope.colorIndicator,
                     width: 50,
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResizing: false
                 },
                 {field: 'name', displayName: 'Name', minWidth: 200, enableHiding: false},
                 {field: 'address', displayName: 'Address', minWidth: 200, enableHiding: false},
-                {field: 'city', displayName: 'City', minWidth: 100, enableHiding: false},
+                {field: 'city', displayName: 'City', minWidth: 150, enableHiding: false},
                 {field: 'state', displayName: 'State', minWidth: 90, enableHiding: false},
                 {field: 'zip', displayName: 'Zip', minWidth: 100, enableHiding: false},
                 {
@@ -76,7 +77,8 @@ app.controller('clientLocationCtrl',
                     cellTemplate: $scope.locationAction,
                     width: 50,
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResizing: false
                 }
             ]  ,
             onRegisterApi: function (gridApi) {

@@ -37,8 +37,8 @@
 
     <!-- Grid Section -->
     <div class="margin-bottom-10" ng-if="isClientsData"
-         ui-grid="clientsGridOptions" ui-grid-selection ui-grid-auto-resize
-         ng-style="$root.fnReturnGridHeight(clientsData.length);" ng-cloak>
+         ng-style="$root.fnReturnGridHeight(clientsData.length);"
+         ui-grid="clientsGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-resize-columns>
     </div>
 
     <div ng-if="isClientsData"

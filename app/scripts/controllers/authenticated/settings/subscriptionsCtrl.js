@@ -56,12 +56,13 @@ app.controller('subscriptionsCtrl',
                     enableHiding: false
                 },
                 {
-                    name: 'Action',
+                    name: 'action',
                     displayName: '',
                     cellTemplate: $scope.subscriptionAction,
                     width: 100,
                     enableColumnMenu: false,
-                    enableSorting: false
+                    enableSorting: false,
+                    enableColumnResizing: false
                 }
             ] ,
             onRegisterApi: function (gridApi) {

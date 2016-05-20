@@ -129,14 +129,15 @@ app.controller('manageGroupCtrl',
                 enableRowSelection: true,
                 enableRowHeaderSelection: false,
                 columnDefs: [
-                    {field: 'partner', displayName: 'Member Name', enableHiding: false},
+                    {field: 'partner', displayName: 'Member Name', minWidth: 200, enableHiding: false},
                     {
                         name: 'action',
                         displayName: '',
                         cellTemplate: $scope.groupMembersAction,
                         width: 50,
                         enableSorting: false,
-                        enableColumnMenu: false
+                        enableColumnMenu: false,
+                        enableColumnResize: false
                     }
                 ],
                 onRegisterApi: function (gridApi) {

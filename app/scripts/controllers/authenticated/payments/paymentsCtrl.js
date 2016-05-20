@@ -93,11 +93,11 @@ app.controller('paymentsCtrl',
                 {
                     field: 'date',
                     displayName: 'Date',
-                    minWidth: 180,
+                    minWidth: 160,
                     enableHiding: false,
                     cellFilter: 'date:\'MM/dd/yyyy h:mm a\''
                 },
-                {field: 'invoice_num', displayName: 'Invoice #', enableHiding: false, minWidth: 100},
+                {field: 'invoice_num', displayName: 'Invoice #', enableHiding: false, minWidth: 200},
                 {field: 'description', displayName: 'Description', enableHiding: false, minWidth: 200},
                 {
                     name: 'status',
@@ -119,7 +119,8 @@ app.controller('paymentsCtrl',
                     cellTemplate: $scope.paymentsAction,
                     width: 100,
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResizing: false
                 }
             ],
             onRegisterApi: function (gridApi) {

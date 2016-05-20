@@ -146,7 +146,7 @@ app.controller('clientUpdatesCtrl',
                     field: 'created',
                     displayName: 'Created',
                     cellFilter: 'date:\'MM/dd/yyyy h:mm a\'',
-                    minWidth: 180,
+                    minWidth: 160,
                     enableHiding: false
                 },
                 {field: 'update_type', displayName: 'Type', minWidth: 100, enableHiding: false},
@@ -159,7 +159,8 @@ app.controller('clientUpdatesCtrl',
                     cellTemplate: $scope.updateAction,
                     width: 50,
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResizing: false
                 }
             ],
             onRegisterApi: function (gridApi) {

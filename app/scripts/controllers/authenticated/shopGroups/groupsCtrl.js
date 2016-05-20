@@ -39,14 +39,15 @@ app.controller('groupsCtrl',
             enableRowSelection: true,
             enableRowHeaderSelection: false,
             columnDefs: [
-                {field: 'name', displayName: 'Group Name', enableHiding: false},
+                {field: 'name', displayName: 'Group Name', minWidth: 200, enableHiding: false},
                 {
                     name: 'action',
                     displayName: '',
                     cellTemplate: $scope.groupsAction,
                     width: 100,
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResize: false
                 }
             ],
             onRegisterApi: function (gridApi) {

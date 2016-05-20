@@ -37,8 +37,8 @@
 
         <!-- Grid Section -->
         <div ng-if="isGroupMembersLoad && groupsMembersData.length !== 0"
-             ui-grid="groupMembersGridOptions" ui-grid-selection ui-grid-auto-resize
-             ng-style="$root.fnReturnGridHeight(groupsMembersData.length);"></div>
+             ng-style="$root.fnReturnGridHeight(groupsMembersData.length);"
+             ui-grid="groupMembersGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-resize-columns></div>
 
     </section>
 </md-content>

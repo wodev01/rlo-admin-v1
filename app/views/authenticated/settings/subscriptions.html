@@ -17,8 +17,8 @@
 
     <!-- Grid Section -->
     <div ng-if="isDataNotNull"
-         ui-grid="subscriptionGridOptions" ui-grid-selection ui-grid-auto-resize
-         ng-style="$root.fnReturnGridHeight(subscriptionsData.length);"></div>
+         ng-style="$root.fnReturnGridHeight(subscriptionsData.length);"
+         ui-grid="subscriptionGridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-resize-columns></div>
 
 </div>
 

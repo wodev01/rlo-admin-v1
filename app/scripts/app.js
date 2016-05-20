@@ -20,6 +20,7 @@ var app = angular
         'ui.grid.autoResize',
         'ui.grid.pagination',
         'ui.grid.exporter',
+        'ui.grid.resizeColumns',
         'ngWYSIWYG',
         'angular-bind-html-compile',
         'angular.filter',

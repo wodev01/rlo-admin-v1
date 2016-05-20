@@ -75,16 +75,17 @@ app.controller('templatesCtrl',
             enableRowSelection: true,
             enableRowHeaderSelection: false,
             columnDefs: [
-                {field: 'name', displayName: 'Name', minWidth:150, enableHiding: false},
-                {field: 'subject', displayName: 'Subject', minWidth:200, enableHiding: false},
-                {field: 'from_name', displayName: 'From Name', minWidth:150, enableHiding: false},
+                {field: 'name', displayName: 'Name', minWidth: 200, enableHiding: false},
+                {field: 'subject', displayName: 'Subject', minWidth: 250, enableHiding: false},
+                {field: 'from_name', displayName: 'From Name', minWidth: 150, enableHiding: false},
                 {
                     name: 'action',
                     displayName: '',
                     width: 100,
                     enableSorting: false,
                     enableColumnMenu: false,
-                    cellTemplate: $scope.templateAction
+                    cellTemplate: $scope.templateAction,
+                    enableColumnResizing: false
                 }
             ],
             onRegisterApi: function (gridApi) {

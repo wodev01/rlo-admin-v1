@@ -119,11 +119,12 @@ app.controller('shopLocationsCtrl',
                     cellTemplate: $scope.colorIndicator,
                     width: 50,
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResize: false
                 },
-                {field: 'name', displayName: 'Location', minWidth: 100, enableHiding: false},
-                {field: 'subscriptions', displayName: 'Subscriptions', minWidth: 100, enableHiding: false},
-                {field: 'phone', displayName: 'Phone', minWidth: 100, enableHiding: false},
+                {field: 'name', displayName: 'Location', minWidth: 200, enableHiding: false},
+                {field: 'subscriptions', displayName: 'Subscriptions', minWidth: 200, enableHiding: false},
+                {field: 'phone', displayName: 'Phone', minWidth: 150, enableHiding: false},
                 {field: 'currentVersion', displayName: 'Sync app’s version', minWidth: 100, enableHiding: false},
                 {
                     name: 'action',
@@ -131,7 +132,8 @@ app.controller('shopLocationsCtrl',
                     cellTemplate: $scope.shopLocationsAction,
                     width: 50,
                     enableSorting: false,
-                    enableColumnMenu: false
+                    enableColumnMenu: false,
+                    enableColumnResize: false
                 }
             ],
             onRegisterApi: function (gridApi) {
