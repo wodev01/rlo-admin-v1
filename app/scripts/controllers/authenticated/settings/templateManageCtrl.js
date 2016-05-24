@@ -11,6 +11,7 @@ app.controller('templateManageCtrl',
         $scope.toggleText = 'Text';
         $scope.isInterpolated = $scope.isToggled = false;
         $scope.selectedIndex = 0;
+        $scope.isProcessing = false;
 
         var templateObj = {
             'name': '',
@@ -38,6 +39,8 @@ app.controller('templateManageCtrl',
                 template.preview_values = angular.toJson(preview_values);
             }
 
+            $scope.isProcessing = true;
+
             if (!template.id) { // id generated when creating template
                 /*---------- Create template ----------*/
 
@@ -47,10 +50,12 @@ app.controller('templateManageCtrl',
                             toastr.success('Template created successfully...');
                         }
                         $rootScope.fnCloseManageTemplate();
+                        $scope.isProcessing = false;
                         $rootScope.$broadcast('refreshTemplatesGrid');
 
                     }, function (error) {
                         toastr.error('Error creating template. Please try again...', 'STATUS CODE: ' + error.status);
+                        $scope.isProcessing = false;
                         $rootScope.fnCloseManageTemplate();
 
                     });
@@ -64,10 +69,12 @@ app.controller('templateManageCtrl',
                             toastr.success('Template updated successfully...');
                         }
                         $rootScope.fnCloseManageTemplate();
+                        $scope.isProcessing = false;
                         $rootScope.$broadcast('refreshTemplatesGrid');
 
                     }, function (error) {
                         toastr.error('Error updating template. Please try again...', 'STATUS CODE: ' + error.status);
+                        $scope.isProcessing = false;
                         $rootScope.fnCloseManageTemplate();
 
                     });
@@ -181,7 +188,7 @@ app.controller('templateManageCtrl',
                 '   <md-content layout-padding>' +
                 '       <form name="testEmailForm" layout="column" novalidate>' +
                 '           <div class="md-headline"> Send Test Email </div>' +
-                '          <div layout="column">' +
+                '           <div layout="column">' +
                 '               <md-input-container class="remove-error-space">' +
                 '                   <label> To Address </label>' +
                 '                   <input type="email" name="to_address" ng-model="to_address" required />' +
@@ -190,11 +197,11 @@ app.controller('templateManageCtrl',
                 '                      <span class="error-msg" ng-if="testEmailForm.to_address.$error.email">This field must be a valid email address.</span>' +
                 '                   </div>' +
                 '               </md-input-container>' +
-                '          </div>' +
-                '           <md-dialog-actions>' +
+                '           </div>' +
+                '           <md-dialog-actions class="padding-right-0">' +
                 '               <md-button class="md-raised md-primary" type="submit"' +
                 '                           ng-click="testEmailForm.$valid && fnSendTestEmail(to_address);">Send</md-button>' +
-                '              <md-button class="md-warn md-raised"' +
+                '               <md-button class="md-warn md-raised"' +
                 '                           ng-click="fnCloseDialog();">Cancel</md-button>' +
                 '           </md-dialog-actions>' +
                 '       </form>' +

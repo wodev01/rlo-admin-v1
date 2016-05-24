@@ -38,18 +38,16 @@
             </md-input-container>
 
             <div layout="row" layout-align="end center">
-                <md-progress-circular class="md-primary"
-                                      ng-if="isProcessing"
+                <md-progress-circular class="md-primary" ng-if="isProcessing"
                                       md-mode="indeterminate"></md-progress-circular>
+
                 <md-button type="submit" class="md-raised md-primary"
                            ng-disabled="isProcessing"
                            ng-click="subscriptionForm.$valid && fnSaveSubscription(subscription, editSubscriptionName);">Save
                 </md-button>
-                <md-button class="md-warn md-raised" ng-click="fnCloseSwap();">Cancel</md-button>
+
+                <md-button class="md-warn md-raised margin-right-0" ng-click="fnCloseSwap();">Cancel</md-button>
             </div>
         </form>
     </md-content>
 </md-sidenav>
-
-
-

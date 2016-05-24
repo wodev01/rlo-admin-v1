@@ -51,11 +51,12 @@
             <div layout="row" layout-align="end center">
                 <md-progress-circular class="md-primary" md-theme="rlo"
                                       ng-if="isProcessing" md-mode="indeterminate"></md-progress-circular>
+
                 <md-button type="submit" class="md-raised md-primary" ng-disabled="isProcessing"
                            ng-click="updateForm.$valid && fnSaveUpdate(update);">Save
                 </md-button>
 
-                <md-button class="md-warn md-raised" ng-model="cancel" ng-click="fnCloseSwap();">Cancel
+                <md-button class="md-warn md-raised margin-right-0" ng-model="cancel" ng-click="fnCloseSwap();">Cancel
                 </md-button>
             </div>
         </form>

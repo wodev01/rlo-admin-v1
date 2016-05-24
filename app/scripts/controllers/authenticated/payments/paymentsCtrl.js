@@ -103,15 +103,16 @@ app.controller('paymentsCtrl',
                     name: 'status',
                     displayName: 'Status',
                     cellTemplate: $scope.error_tooltip,
-                    minWidth: 150,
-                    enableHiding: false
+                    minWidth: 130,
+                    enableSorting: false,
+                    enableColumnMenu: false
                 },
                 {
                     field: 'amount_cents',
                     displayName: 'Amount',
                     enableHiding: false,
                     cellFilter: 'CentToDollar | currency',
-                    minWidth: 120
+                    minWidth: 100
                 },
                 {
                     name: 'action',

@@ -1209,6 +1209,10 @@ md-input-container.remove-error-space .md-errors-spacer {
     line-height: 3em;
 }
 
+.ui-grid-menu-button {
+    height: 20px;
+}
+
 /*---------- md-dialog delete button ----------*/
 md-dialog[aria-label=Delete] button[aria-label=Delete] {
     background-color: rgb(198, 40, 40) !important;
@@ -1224,7 +1228,7 @@ md-dialog[aria-label=Ok] button[aria-label=Reset], md-dialog[aria-label=Ok] butt
 }
 
 /* Remove outline for repair order list */
-md-list md-list-item > div {
+md-list md-list-item > div, textarea {
     outline: none;
 }
 

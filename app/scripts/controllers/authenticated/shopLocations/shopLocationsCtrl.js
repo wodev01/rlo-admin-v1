@@ -234,7 +234,7 @@ app.controller('shopLocationsCtrl',
                 '       <div layout="row" layout-align="end center">' +
                 '           <md-button class="md-raised md-primary"' +
                 '                       ng-click="fnSendDailyEmail();">Send</md-button>' +
-                '           <md-button class="md-raised md-warn" style="margin:0px 10px !important;"' +
+                '           <md-button class="md-raised md-warn margin-right-0"' +
                 '                       ng-click="fnCloseDialog();">Cancel</md-button>' +
                 '       </div>' +
                 '    </md-content>' +

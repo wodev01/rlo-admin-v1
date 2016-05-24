@@ -33,7 +33,7 @@
                 </div>
             </md-input-container>
 
-            <md-dialog-actions>
+            <md-dialog-actions class="padding-right-0">
                 <div ng-if="isProcessing">
                     <div layout="row" layout-sm="column" layout-align="left center" md-theme="rlo">
                         <md-progress-circular class="md-primary" md-mode="indeterminate"></md-progress-circular>
@@ -43,9 +43,8 @@
                            ng-disabled="isProcessing"
                            ng-click="invoiceForm.$valid && fnSaveInvoice(invoice);">Charge Now
                 </md-button>
-                <md-button class="md-warn md-raised" ng-click="fnCancel();">Cancel</md-button>
+                <md-button class="md-warn md-raised margin-right-0" ng-click="fnCancel();">Cancel</md-button>
             </md-dialog-actions>
         </form>
     </md-content>
-
 </md-dialog>
