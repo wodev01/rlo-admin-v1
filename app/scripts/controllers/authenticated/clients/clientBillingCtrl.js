@@ -7,6 +7,7 @@ app.controller('clientBillingCtrl',
         var cId = $scope.client.id;
 
         $scope.isSubscriptionDefLoaded = false;
+        $scope.subscriptionInfo = {};
 
         $scope.fnCreateSubDD = function () {
             $scope.selectStatusOptions = [
@@ -66,7 +67,7 @@ app.controller('clientBillingCtrl',
 
             var updateClientPaymentInfoCtrl = ['$scope', '$rootScope', function ($scope, $rootScope) {
                 ChargeIO.init({
-                    publicKey: CarglyPartner.user.paymentProcessingPublicKey
+                    public_key: CarglyPartner.user.paymentProcessingPublicKey
                 });
 
                 $scope.isProcessing = false;

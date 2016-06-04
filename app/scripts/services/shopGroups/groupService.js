@@ -14,7 +14,7 @@ app.factory('groupService',['$q', 'ErrorMsg',
                 },
                 error:function(error) {
                     ErrorMsg.CheckStatusCode(error.status);
-                    defer.resolve(error);
+                    defer.reject(error);
                 }
             });
             return defer.promise;

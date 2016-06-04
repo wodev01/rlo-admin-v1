@@ -1,7 +1,7 @@
 <md-content id="dashboard-tab" class="md-padding overflow-hidden" ng-init="fnInitDashboard();">
     <!-- Location Drop-down -->
     <div layout="row">
-        <md-input-container>
+        <md-input-container md-theme="rlo">
             <label>Locations</label>
             <md-select ng-model="selectedLocationOption"
                        ng-change="fnLocationChange(selectedLocationOption);">
@@ -20,7 +20,7 @@
                     <span class="md-title text-small-599 text-small-959">Summary</span>
 
                     <span flex></span>
-                    <md-input-container class="md-body-1 margin-0">
+                    <md-input-container class="md-body-1 margin-0" md-theme="rlo">
                         <md-select aria-label="Summary Options"
                                    ng-model="selectedSummaryOption"
                                    ng-change="fnSummaryOptionChanged(selectedSummaryOption, selectedLocationOption);">
@@ -375,7 +375,7 @@
 
                     <span flex></span>
 
-                    <div layout="column" layout-gt-sm="row" layout-align="end center">
+                    <div layout="column" layout-gt-sm="row" layout-align="end center" md-theme="rlo">
                         <md-input-container class="md-body-1 margin-0">
                             <md-select aria-label="Group Type" ng-model="selectedGroupOption"
                                        ng-change="fnChangeGroup(selectedGroupOption);">
@@ -500,7 +500,7 @@
                     <span class="md-title text-small-599 text-small-959">Employee Performance</span>
 
                     <span flex></span>
-                    <md-input-container class="md-body-1 margin-0">
+                    <md-input-container class="md-body-1 margin-0" md-theme="rlo">
                         <md-select aria-label="Group Type" ng-model="selectedEmpPerformanceOption"
                                    ng-change="fnGenerateBarEmpPerChart(selectedEmpPerformanceOption);">
                             <md-option ng-repeat="empType in empPerformanceDDOptions" ng-value="empType.value"
@@ -542,7 +542,7 @@
                         </span>
 
                         <span flex></span>
-                        <md-input-container class="md-body-1 margin-0">
+                        <md-input-container class="md-body-1 margin-0" md-theme="rlo">
                             <md-select aria-label="Customer Type"
                                        ng-model="selectedCustRepoOptions"
                                        ng-change="fnGenerateCustomerReportBarChart(selectedCustRepoOptions);">
