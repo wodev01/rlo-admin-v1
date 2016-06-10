@@ -1018,6 +1018,11 @@ img.rlo-logo {
     height: auto;
 }
 
+.leftLabel {
+    font-weight: bold;
+    margin-right: 3px;
+}
+
 .container-bg {
     background: url('../images/blurry-cars.jpg');
     background-size: cover;

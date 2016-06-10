@@ -96,6 +96,7 @@ app.controller('shopLocationsDashboardCtrl',
 
         /*---------- Location change event ----------*/
         $scope.fnLocationChange = function (selectedLocationOption) {
+            $scope.selectedLocationOption = selectedLocationOption;
             $scope.currentDate = moment().toDate();
 
             console.log('Summary-Section: Call for /reports/daily_summary API');
