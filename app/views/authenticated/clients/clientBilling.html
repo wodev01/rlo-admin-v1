@@ -48,7 +48,7 @@
 
                 <md-input-container flex class="remove-error-space">
                     <label>Balance</label>
-                    <input name="balance_cents" type="number" min="0" ng-model="subscriptionInfo.balance_cents" required>
+                    <input name="balance_cents" type="number" ng-model="subscriptionInfo.balance_cents" required>
                     <div ng-if="subscriptionInfoForm.$submitted || subscriptionInfoForm.balance_cents.$touched">
                         <span class="error-msg" ng-if="subscriptionInfoForm.balance_cents.$error.required">Balance is required.</span>
                     </div>

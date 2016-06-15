@@ -9,6 +9,8 @@ app.controller('shopLocationsCtrl',
         $scope.selectedLocationId = '';
         $scope.isPagingCursor = false;
         $scope.isMoreShopLocations = false;
+        $scope.shopLocationsDetails = {};
+        var validSubscription = false;
 
         $scope.filter = {
             'filter': '',
@@ -170,10 +172,20 @@ app.controller('shopLocationsCtrl',
 
         /*----------- Manage Shop Locations ------------*/
         $scope.fnOpenManageShopLocationsSwapView = function (row) {
+            validSubscription = false;
             clientBillingServices.fetchClientSubscriptionInfo(row.entity.partnerId)
                 .then(function (res) {
                     $scope.shopLocationObj = row.entity;
                     $scope.shopLocationObj.subscription_status = res.subscription_status;
+                    $scope.shopLocationsDetails = res;
+
+                    angular.forEach($scope.shopLocationsDetails.locations,function(locations){
+                        angular.forEach(locations.subscriptions,function(location){
+                            if(location == 'rlo_daily_email'){
+                                validSubscription = true;
+                            }
+                        });
+                    });
 
                     shopLocationsService.setShopLocationsObj(row.entity);
                     setTimeout(function () {
@@ -275,15 +287,10 @@ app.controller('shopLocationsCtrl',
             });
         };
 
-        $scope.fnCheckSubscription = function (locationObj, subscription) {
-
+        $scope.fnCheckSubscription = function (locationObj) {
             var hasSubscriptions = true;
-            if (locationObj.subscriptions) {
-                var locSubscriptions = locationObj.subscriptions;
-                /*locSubscriptions.push('rlo_daily_email'); locationObj.subscription_status = 'Active';*/
-                if (locSubscriptions.indexOf(subscription) > -1 && locationObj.subscription_status === 'Active') {
-                    hasSubscriptions = false;
-                }
+            if (validSubscription || locationObj.subscription_status != 'Disabled') {
+                hasSubscriptions = false;
             }
             return hasSubscriptions;
         };

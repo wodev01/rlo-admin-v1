@@ -19,7 +19,6 @@
             <input name="searchFilter" class="filterBox margin-right-0"
                    ng-model="searchFilter"
                    placeholder="Search..."
-                   ng-change="onSearchTextChanged(searchFilter);"
                    ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }"
                    ng-keyup="$root.fnCancelSearchFilter($event, this);" layout-margin />
         </form>
