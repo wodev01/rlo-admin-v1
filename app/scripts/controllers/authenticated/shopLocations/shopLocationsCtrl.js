@@ -9,8 +9,6 @@ app.controller('shopLocationsCtrl',
         $scope.selectedLocationId = '';
         $scope.isPagingCursor = false;
         $scope.isMoreShopLocations = false;
-        $scope.shopLocationsDetails = {};
-        var validSubscription = false;
 
         $scope.filter = {
             'filter': '',
@@ -172,20 +170,10 @@ app.controller('shopLocationsCtrl',
 
         /*----------- Manage Shop Locations ------------*/
         $scope.fnOpenManageShopLocationsSwapView = function (row) {
-            validSubscription = false;
             clientBillingServices.fetchClientSubscriptionInfo(row.entity.partnerId)
                 .then(function (res) {
                     $scope.shopLocationObj = row.entity;
-                    $scope.shopLocationObj.subscription_status = res.subscription_status;
-                    $scope.shopLocationsDetails = res;
-
-                    angular.forEach($scope.shopLocationsDetails.locations,function(locations){
-                        angular.forEach(locations.subscriptions,function(location){
-                            if(location == 'rlo_daily_email'){
-                                validSubscription = true;
-                            }
-                        });
-                    });
+                    $scope.shopLocationObj.subscription_info = res;
 
                     shopLocationsService.setShopLocationsObj(row.entity);
                     setTimeout(function () {
@@ -287,12 +275,17 @@ app.controller('shopLocationsCtrl',
             });
         };
 
-        $scope.fnCheckSubscription = function (locationObj) {
-            var hasSubscriptions = true;
-            if (validSubscription || locationObj.subscription_status != 'Disabled') {
-                hasSubscriptions = false;
+        $scope.fnCheckSubscription = function (subscription_info, subscription) {
+            var isTabDisabled = true;
+            if(subscription_info.subscription_status != 'Disabled'){
+                angular.forEach(subscription_info.locations,function(locations){
+                    var subIndex = locations.subscriptions.indexOf(subscription);
+                    if(subIndex > -1){
+                        isTabDisabled = false;
+                    }
+                });
             }
-            return hasSubscriptions;
+            return isTabDisabled;
         };
 
     });

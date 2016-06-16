@@ -20,7 +20,7 @@
     <div layout="column" md-theme="grey">
         <md-tabs class="md-primary" md-dynamic-height md-selected="selectedIndex" ng-if="isTabsLoad">
             <md-tab label="Dashboard" id="dashboard"
-                    ng-disabled="fnCheckSubscription(shopLocationObj);">
+                    ng-disabled="fnCheckSubscription(shopLocationObj.subscription_info, 'rlo_daily_email');">
                 <div ng-if="selectedIndex == 0"
                      ng-controller="shopLocationsDashboardCtrl"
                      ng-include="'views/authenticated/shopLocations/shopLocationsDashboard.html'"></div>
